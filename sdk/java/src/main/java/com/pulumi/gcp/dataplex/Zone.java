@@ -52,6 +52,7 @@ import javax.annotation.Nullable;
  *     public static void stack(Context ctx) {
  *         var basic = new Lake(&#34;basic&#34;, LakeArgs.builder()        
  *             .location(&#34;us-west1&#34;)
+ *             .name(&#34;lake&#34;)
  *             .description(&#34;Lake for DCL&#34;)
  *             .displayName(&#34;Lake for DCL&#34;)
  *             .labels(Map.of(&#34;my-lake&#34;, &#34;exists&#34;))
@@ -64,6 +65,7 @@ import javax.annotation.Nullable;
  *                 .build())
  *             .lake(basic.name())
  *             .location(&#34;us-west1&#34;)
+ *             .name(&#34;zone&#34;)
  *             .resourceSpec(ZoneResourceSpecArgs.builder()
  *                 .locationType(&#34;MULTI_REGION&#34;)
  *                 .build())

@@ -57,8 +57,12 @@ import javax.annotation.Nullable;
  *             .region(&#34;us-central1&#34;)
  *             .namePrefix(&#34;my-certificate-&#34;)
  *             .description(&#34;a description&#34;)
- *             .privateKey(Files.readString(Paths.get(&#34;path/to/private.key&#34;)))
- *             .certificate(Files.readString(Paths.get(&#34;path/to/certificate.crt&#34;)))
+ *             .privateKey(StdFunctions.file(FileArgs.builder()
+ *                 .input(&#34;path/to/private.key&#34;)
+ *                 .build()).result())
+ *             .certificate(StdFunctions.file(FileArgs.builder()
+ *                 .input(&#34;path/to/certificate.crt&#34;)
+ *                 .build()).result())
  *             .build());
  * 
  *     }
@@ -71,10 +75,10 @@ import javax.annotation.Nullable;
  * import com.pulumi.Context;
  * import com.pulumi.Pulumi;
  * import com.pulumi.core.Output;
- * import com.pulumi.gcp.compute.RegionSslCertificate;
- * import com.pulumi.gcp.compute.RegionSslCertificateArgs;
  * import com.pulumi.random.RandomId;
  * import com.pulumi.random.RandomIdArgs;
+ * import com.pulumi.gcp.compute.RegionSslCertificate;
+ * import com.pulumi.gcp.compute.RegionSslCertificateArgs;
  * import java.util.List;
  * import java.util.ArrayList;
  * import java.util.Map;
@@ -88,26 +92,34 @@ import javax.annotation.Nullable;
  *     }
  * 
  *     public static void stack(Context ctx) {
- *         var default_ = new RegionSslCertificate(&#34;default&#34;, RegionSslCertificateArgs.builder()        
- *             .region(&#34;us-central1&#34;)
- *             .privateKey(Files.readString(Paths.get(&#34;path/to/private.key&#34;)))
- *             .certificate(Files.readString(Paths.get(&#34;path/to/certificate.crt&#34;)))
- *             .build());
- * 
  *         var certificate = new RandomId(&#34;certificate&#34;, RandomIdArgs.builder()        
  *             .byteLength(4)
  *             .prefix(&#34;my-certificate-&#34;)
  *             .keepers(Map.ofEntries(
- *                 Map.entry(&#34;private_key&#34;, computeFileBase64Sha256(&#34;path/to/private.key&#34;)),
- *                 Map.entry(&#34;certificate&#34;, computeFileBase64Sha256(&#34;path/to/certificate.crt&#34;))
+ *                 Map.entry(&#34;privateKey&#34;, StdFunctions.filebase64sha256(Filebase64sha256Args.builder()
+ *                     .input(&#34;path/to/private.key&#34;)
+ *                     .build()).result()),
+ *                 Map.entry(&#34;certificate&#34;, StdFunctions.filebase64sha256(Filebase64sha256Args.builder()
+ *                     .input(&#34;path/to/certificate.crt&#34;)
+ *                     .build()).result())
  *             ))
+ *             .build());
+ * 
+ *         var default_ = new RegionSslCertificate(&#34;default&#34;, RegionSslCertificateArgs.builder()        
+ *             .region(&#34;us-central1&#34;)
+ *             .name(certificate.hex())
+ *             .privateKey(StdFunctions.file(FileArgs.builder()
+ *                 .input(&#34;path/to/private.key&#34;)
+ *                 .build()).result())
+ *             .certificate(StdFunctions.file(FileArgs.builder()
+ *                 .input(&#34;path/to/certificate.crt&#34;)
+ *                 .build()).result())
  *             .build());
  * 
  *     }
  * }
  * ```
  * ### Region Ssl Certificate Target Https Proxies
- * 
  * ```java
  * package generated_program;
  * 
@@ -140,50 +152,58 @@ import javax.annotation.Nullable;
  *     }
  * 
  *     public static void stack(Context ctx) {
- *         var defaultRegionSslCertificate = new RegionSslCertificate(&#34;defaultRegionSslCertificate&#34;, RegionSslCertificateArgs.builder()        
+ *         var default_ = new RegionSslCertificate(&#34;default&#34;, RegionSslCertificateArgs.builder()        
  *             .region(&#34;us-central1&#34;)
  *             .namePrefix(&#34;my-certificate-&#34;)
- *             .privateKey(Files.readString(Paths.get(&#34;path/to/private.key&#34;)))
- *             .certificate(Files.readString(Paths.get(&#34;path/to/certificate.crt&#34;)))
+ *             .privateKey(StdFunctions.file(FileArgs.builder()
+ *                 .input(&#34;path/to/private.key&#34;)
+ *                 .build()).result())
+ *             .certificate(StdFunctions.file(FileArgs.builder()
+ *                 .input(&#34;path/to/certificate.crt&#34;)
+ *                 .build()).result())
  *             .build());
  * 
- *         var defaultRegionHealthCheck = new RegionHealthCheck(&#34;defaultRegionHealthCheck&#34;, RegionHealthCheckArgs.builder()        
+ *         var defaultResource4 = new RegionHealthCheck(&#34;defaultResource4&#34;, RegionHealthCheckArgs.builder()        
  *             .region(&#34;us-central1&#34;)
+ *             .name(&#34;http-health-check&#34;)
  *             .httpHealthCheck(RegionHealthCheckHttpHealthCheckArgs.builder()
  *                 .port(80)
  *                 .build())
  *             .build());
  * 
- *         var defaultRegionBackendService = new RegionBackendService(&#34;defaultRegionBackendService&#34;, RegionBackendServiceArgs.builder()        
+ *         var defaultResource3 = new RegionBackendService(&#34;defaultResource3&#34;, RegionBackendServiceArgs.builder()        
  *             .region(&#34;us-central1&#34;)
+ *             .name(&#34;backend-service&#34;)
  *             .protocol(&#34;HTTP&#34;)
  *             .loadBalancingScheme(&#34;INTERNAL_MANAGED&#34;)
  *             .timeoutSec(10)
- *             .healthChecks(defaultRegionHealthCheck.id())
+ *             .healthChecks(defaultResource4.id())
  *             .build());
  * 
- *         var defaultRegionUrlMap = new RegionUrlMap(&#34;defaultRegionUrlMap&#34;, RegionUrlMapArgs.builder()        
+ *         var defaultResource2 = new RegionUrlMap(&#34;defaultResource2&#34;, RegionUrlMapArgs.builder()        
  *             .region(&#34;us-central1&#34;)
+ *             .name(&#34;url-map&#34;)
  *             .description(&#34;a description&#34;)
- *             .defaultService(defaultRegionBackendService.id())
+ *             .defaultService(defaultResource3.id())
  *             .hostRules(RegionUrlMapHostRuleArgs.builder()
  *                 .hosts(&#34;mysite.com&#34;)
  *                 .pathMatcher(&#34;allpaths&#34;)
  *                 .build())
  *             .pathMatchers(RegionUrlMapPathMatcherArgs.builder()
  *                 .name(&#34;allpaths&#34;)
- *                 .defaultService(defaultRegionBackendService.id())
+ *                 .defaultService(defaultResource3.id())
  *                 .pathRules(RegionUrlMapPathMatcherPathRuleArgs.builder()
  *                     .paths(&#34;/*&#34;)
- *                     .service(defaultRegionBackendService.id())
+ *                     .service(defaultResource3.id())
  *                     .build())
  *                 .build())
  *             .build());
  * 
- *         var defaultRegionTargetHttpsProxy = new RegionTargetHttpsProxy(&#34;defaultRegionTargetHttpsProxy&#34;, RegionTargetHttpsProxyArgs.builder()        
+ *         var defaultResource = new RegionTargetHttpsProxy(&#34;defaultResource&#34;, RegionTargetHttpsProxyArgs.builder()        
  *             .region(&#34;us-central1&#34;)
- *             .urlMap(defaultRegionUrlMap.id())
- *             .sslCertificates(defaultRegionSslCertificate.id())
+ *             .name(&#34;test-proxy&#34;)
+ *             .urlMap(defaultResource2.id())
+ *             .sslCertificates(default_.id())
  *             .build());
  * 
  *     }

@@ -60,13 +60,13 @@ import javax.annotation.Nullable;
  * 
  *     public static void stack(Context ctx) {
  *         var default_ = new ConnectionProfile(&#34;default&#34;, ConnectionProfileArgs.builder()        
- *             .connectionProfileId(&#34;my-profile&#34;)
  *             .displayName(&#34;Connection profile&#34;)
+ *             .location(&#34;us-central1&#34;)
+ *             .connectionProfileId(&#34;my-profile&#34;)
  *             .gcsProfile(ConnectionProfileGcsProfileArgs.builder()
  *                 .bucket(&#34;my-bucket&#34;)
  *                 .rootPath(&#34;/path&#34;)
  *                 .build())
- *             .location(&#34;us-central1&#34;)
  *             .build());
  * 
  *     }
@@ -80,6 +80,7 @@ import javax.annotation.Nullable;
  * import com.pulumi.Pulumi;
  * import com.pulumi.core.Output;
  * import com.pulumi.gcp.compute.Network;
+ * import com.pulumi.gcp.compute.NetworkArgs;
  * import com.pulumi.gcp.datastream.PrivateConnection;
  * import com.pulumi.gcp.datastream.PrivateConnectionArgs;
  * import com.pulumi.gcp.datastream.inputs.PrivateConnectionVpcPeeringConfigArgs;
@@ -100,7 +101,9 @@ import javax.annotation.Nullable;
  *     }
  * 
  *     public static void stack(Context ctx) {
- *         var defaultNetwork = new Network(&#34;defaultNetwork&#34;);
+ *         var default_ = new Network(&#34;default&#34;, NetworkArgs.builder()        
+ *             .name(&#34;my-network&#34;)
+ *             .build());
  * 
  *         var privateConnection = new PrivateConnection(&#34;privateConnection&#34;, PrivateConnectionArgs.builder()        
  *             .displayName(&#34;Connection profile&#34;)
@@ -108,12 +111,12 @@ import javax.annotation.Nullable;
  *             .privateConnectionId(&#34;my-connection&#34;)
  *             .labels(Map.of(&#34;key&#34;, &#34;value&#34;))
  *             .vpcPeeringConfig(PrivateConnectionVpcPeeringConfigArgs.builder()
- *                 .vpc(defaultNetwork.id())
+ *                 .vpc(default_.id())
  *                 .subnet(&#34;10.0.0.0/29&#34;)
  *                 .build())
  *             .build());
  * 
- *         var defaultConnectionProfile = new ConnectionProfile(&#34;defaultConnectionProfile&#34;, ConnectionProfileArgs.builder()        
+ *         var defaultResource = new ConnectionProfile(&#34;defaultResource&#34;, ConnectionProfileArgs.builder()        
  *             .displayName(&#34;Connection profile&#34;)
  *             .location(&#34;us-central1&#34;)
  *             .connectionProfileId(&#34;my-profile&#34;)
@@ -135,8 +138,8 @@ import javax.annotation.Nullable;
  * import com.pulumi.core.Output;
  * import com.pulumi.gcp.datastream.ConnectionProfile;
  * import com.pulumi.gcp.datastream.ConnectionProfileArgs;
- * import com.pulumi.gcp.datastream.inputs.ConnectionProfileForwardSshConnectivityArgs;
  * import com.pulumi.gcp.datastream.inputs.ConnectionProfileGcsProfileArgs;
+ * import com.pulumi.gcp.datastream.inputs.ConnectionProfileForwardSshConnectivityArgs;
  * import java.util.List;
  * import java.util.ArrayList;
  * import java.util.Map;
@@ -151,20 +154,20 @@ import javax.annotation.Nullable;
  * 
  *     public static void stack(Context ctx) {
  *         var default_ = new ConnectionProfile(&#34;default&#34;, ConnectionProfileArgs.builder()        
- *             .connectionProfileId(&#34;my-profile&#34;)
  *             .displayName(&#34;Connection profile&#34;)
- *             .forwardSshConnectivity(ConnectionProfileForwardSshConnectivityArgs.builder()
- *                 .hostname(&#34;google.com&#34;)
- *                 .password(&#34;swordfish&#34;)
- *                 .port(8022)
- *                 .username(&#34;my-user&#34;)
- *                 .build())
+ *             .location(&#34;us-central1&#34;)
+ *             .connectionProfileId(&#34;my-profile&#34;)
  *             .gcsProfile(ConnectionProfileGcsProfileArgs.builder()
  *                 .bucket(&#34;my-bucket&#34;)
  *                 .rootPath(&#34;/path&#34;)
  *                 .build())
+ *             .forwardSshConnectivity(ConnectionProfileForwardSshConnectivityArgs.builder()
+ *                 .hostname(&#34;google.com&#34;)
+ *                 .username(&#34;my-user&#34;)
+ *                 .port(8022)
+ *                 .password(&#34;swordfish&#34;)
+ *                 .build())
  *             .labels(Map.of(&#34;key&#34;, &#34;value&#34;))
- *             .location(&#34;us-central1&#34;)
  *             .build());
  * 
  *     }
@@ -204,6 +207,7 @@ import javax.annotation.Nullable;
  * 
  *     public static void stack(Context ctx) {
  *         var instance = new DatabaseInstance(&#34;instance&#34;, DatabaseInstanceArgs.builder()        
+ *             .name(&#34;my-instance&#34;)
  *             .databaseVersion(&#34;POSTGRES_14&#34;)
  *             .region(&#34;us-central1&#34;)
  *             .settings(DatabaseInstanceSettingsArgs.builder()
@@ -232,6 +236,7 @@ import javax.annotation.Nullable;
  * 
  *         var db = new Database(&#34;db&#34;, DatabaseArgs.builder()        
  *             .instance(instance.name())
+ *             .name(&#34;db&#34;)
  *             .build());
  * 
  *         var pwd = new RandomPassword(&#34;pwd&#34;, RandomPasswordArgs.builder()        
@@ -240,6 +245,7 @@ import javax.annotation.Nullable;
  *             .build());
  * 
  *         var user = new User(&#34;user&#34;, UserArgs.builder()        
+ *             .name(&#34;user&#34;)
  *             .instance(instance.name())
  *             .password(pwd.result())
  *             .build());

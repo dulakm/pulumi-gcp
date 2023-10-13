@@ -67,6 +67,7 @@ import javax.annotation.Nullable;
  *             .build());
  * 
  *         var serviceRange = new GlobalAddress(&#34;serviceRange&#34;, GlobalAddressArgs.builder()        
+ *             .name(&#34;address&#34;)
  *             .purpose(&#34;VPC_PEERING&#34;)
  *             .addressType(&#34;INTERNAL&#34;)
  *             .prefixLength(16)
@@ -80,6 +81,7 @@ import javax.annotation.Nullable;
  *             .build());
  * 
  *         var instance = new Instance(&#34;instance&#34;, InstanceArgs.builder()        
+ *             .name(&#34;test-instance&#34;)
  *             .authorizedNetwork(privateServiceConnection.network())
  *             .nodeConfig(InstanceNodeConfigArgs.builder()
  *                 .cpuCount(1)

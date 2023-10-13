@@ -30,7 +30,6 @@ import javax.annotation.Nullable;
  * 
  * ## Example Usage
  * ### Dlp Deidentify Template Basic
- * 
  * ```java
  * package generated_program;
  * 
@@ -55,6 +54,9 @@ import javax.annotation.Nullable;
  * 
  *     public static void stack(Context ctx) {
  *         var basic = new PreventionDeidentifyTemplate(&#34;basic&#34;, PreventionDeidentifyTemplateArgs.builder()        
+ *             .parent(&#34;projects/my-project-name&#34;)
+ *             .description(&#34;Description&#34;)
+ *             .displayName(&#34;Displayname&#34;)
  *             .deidentifyConfig(PreventionDeidentifyTemplateDeidentifyConfigArgs.builder()
  *                 .infoTypeTransformations(PreventionDeidentifyTemplateDeidentifyConfigInfoTypeTransformationsArgs.builder()
  *                     .transformations(                    
@@ -92,10 +94,12 @@ import javax.annotation.Nullable;
  *                                     .build())
  *                             .primitiveTransformation(PreventionDeidentifyTemplateDeidentifyConfigInfoTypeTransformationsTransformationPrimitiveTransformationArgs.builder()
  *                                 .characterMaskConfig(PreventionDeidentifyTemplateDeidentifyConfigInfoTypeTransformationsTransformationPrimitiveTransformationCharacterMaskConfigArgs.builder()
- *                                     .charactersToIgnore(%!v(PANIC=Format method: runtime error: invalid memory address or nil pointer dereference))
  *                                     .maskingCharacter(&#34;X&#34;)
  *                                     .numberToMask(4)
  *                                     .reverseOrder(true)
+ *                                     .charactersToIgnores(PreventionDeidentifyTemplateDeidentifyConfigInfoTypeTransformationsTransformationPrimitiveTransformationCharacterMaskConfigCharactersToIgnoreArgs.builder()
+ *                                         .commonCharactersToIgnore(&#34;PUNCTUATION&#34;)
+ *                                         .build())
  *                                     .build())
  *                                 .build())
  *                             .build(),
@@ -107,9 +111,9 @@ import javax.annotation.Nullable;
  *                                 .replaceConfig(PreventionDeidentifyTemplateDeidentifyConfigInfoTypeTransformationsTransformationPrimitiveTransformationReplaceConfigArgs.builder()
  *                                     .newValue(PreventionDeidentifyTemplateDeidentifyConfigInfoTypeTransformationsTransformationPrimitiveTransformationReplaceConfigNewValueArgs.builder()
  *                                         .dateValue(PreventionDeidentifyTemplateDeidentifyConfigInfoTypeTransformationsTransformationPrimitiveTransformationReplaceConfigNewValueDateValueArgs.builder()
- *                                             .day(1)
- *                                             .month(1)
  *                                             .year(2020)
+ *                                             .month(1)
+ *                                             .day(1)
  *                                             .build())
  *                                         .build())
  *                                     .build())
@@ -137,9 +141,6 @@ import javax.annotation.Nullable;
  *                             .build())
  *                     .build())
  *                 .build())
- *             .description(&#34;Description&#34;)
- *             .displayName(&#34;Displayname&#34;)
- *             .parent(&#34;projects/my-project-name&#34;)
  *             .build());
  * 
  *     }
@@ -170,14 +171,17 @@ import javax.annotation.Nullable;
  * 
  *     public static void stack(Context ctx) {
  *         var basic = new PreventionDeidentifyTemplate(&#34;basic&#34;, PreventionDeidentifyTemplateArgs.builder()        
+ *             .parent(&#34;projects/my-project-name&#34;)
+ *             .description(&#34;Description&#34;)
+ *             .displayName(&#34;Displayname&#34;)
  *             .deidentifyConfig(PreventionDeidentifyTemplateDeidentifyConfigArgs.builder()
  *                 .imageTransformations(PreventionDeidentifyTemplateDeidentifyConfigImageTransformationsArgs.builder()
  *                     .transforms(                    
  *                         PreventionDeidentifyTemplateDeidentifyConfigImageTransformationsTransformArgs.builder()
  *                             .redactionColor(PreventionDeidentifyTemplateDeidentifyConfigImageTransformationsTransformRedactionColorArgs.builder()
+ *                                 .red(0.5)
  *                                 .blue(1)
  *                                 .green(0.2)
- *                                 .red(0.5)
  *                                 .build())
  *                             .selectedInfoTypes(PreventionDeidentifyTemplateDeidentifyConfigImageTransformationsTransformSelectedInfoTypesArgs.builder()
  *                                 .infoTypes(PreventionDeidentifyTemplateDeidentifyConfigImageTransformationsTransformSelectedInfoTypesInfoTypeArgs.builder()
@@ -194,9 +198,6 @@ import javax.annotation.Nullable;
  *                             .build())
  *                     .build())
  *                 .build())
- *             .description(&#34;Description&#34;)
- *             .displayName(&#34;Displayname&#34;)
- *             .parent(&#34;projects/my-project-name&#34;)
  *             .build());
  * 
  *     }

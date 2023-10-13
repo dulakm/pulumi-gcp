@@ -55,7 +55,6 @@ import javax.annotation.Nullable;
  * import com.pulumi.gcp.gkeonprem.inputs.BareMetalAdminClusterStorageLvpShareConfigLvpConfigArgs;
  * import com.pulumi.gcp.gkeonprem.inputs.BareMetalAdminClusterStorageLvpNodeMountsConfigArgs;
  * import com.pulumi.gcp.gkeonprem.inputs.BareMetalAdminClusterNodeAccessConfigArgs;
- * import com.pulumi.resources.CustomResourceOptions;
  * import java.util.List;
  * import java.util.ArrayList;
  * import java.util.Map;
@@ -70,6 +69,7 @@ import javax.annotation.Nullable;
  * 
  *     public static void stack(Context ctx) {
  *         var admin_cluster_basic = new BareMetalAdminCluster(&#34;admin-cluster-basic&#34;, BareMetalAdminClusterArgs.builder()        
+ *             .name(&#34;my-cluster&#34;)
  *             .location(&#34;us-west1&#34;)
  *             .bareMetalVersion(&#34;1.13.4&#34;)
  *             .networkConfig(BareMetalAdminClusterNetworkConfigArgs.builder()
@@ -126,9 +126,7 @@ import javax.annotation.Nullable;
  *             .nodeAccessConfig(BareMetalAdminClusterNodeAccessConfigArgs.builder()
  *                 .loginUser(&#34;root&#34;)
  *                 .build())
- *             .build(), CustomResourceOptions.builder()
- *                 .provider(google_beta)
- *                 .build());
+ *             .build());
  * 
  *     }
  * }
@@ -162,7 +160,6 @@ import javax.annotation.Nullable;
  * import com.pulumi.gcp.gkeonprem.inputs.BareMetalAdminClusterMaintenanceConfigArgs;
  * import com.pulumi.gcp.gkeonprem.inputs.BareMetalAdminClusterClusterOperationsArgs;
  * import com.pulumi.gcp.gkeonprem.inputs.BareMetalAdminClusterProxyArgs;
- * import com.pulumi.resources.CustomResourceOptions;
  * import java.util.List;
  * import java.util.ArrayList;
  * import java.util.Map;
@@ -177,6 +174,7 @@ import javax.annotation.Nullable;
  * 
  *     public static void stack(Context ctx) {
  *         var admin_cluster_basic = new BareMetalAdminCluster(&#34;admin-cluster-basic&#34;, BareMetalAdminClusterArgs.builder()        
+ *             .name(&#34;my-cluster&#34;)
  *             .location(&#34;us-west1&#34;)
  *             .description(&#34;test description&#34;)
  *             .bareMetalVersion(&#34;1.13.4&#34;)
@@ -266,9 +264,7 @@ import javax.annotation.Nullable;
  *                 .uri(&#34;test proxy uri&#34;)
  *                 .noProxies(&#34;127.0.0.1&#34;)
  *                 .build())
- *             .build(), CustomResourceOptions.builder()
- *                 .provider(google_beta)
- *                 .build());
+ *             .build());
  * 
  *     }
  * }

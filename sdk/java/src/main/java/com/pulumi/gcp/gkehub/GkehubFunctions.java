@@ -46,9 +46,9 @@ public final class GkehubFunctions {
      * 
      *     public static void stack(Context ctx) {
      *         final var policy = GkehubFunctions.getFeatureIamPolicy(GetFeatureIamPolicyArgs.builder()
-     *             .project(google_gke_hub_feature.feature().project())
-     *             .location(google_gke_hub_feature.feature().location())
-     *             .name(google_gke_hub_feature.feature().name())
+     *             .project(feature.project())
+     *             .location(feature.location())
+     *             .name(feature.name())
      *             .build());
      * 
      *     }
@@ -85,9 +85,9 @@ public final class GkehubFunctions {
      * 
      *     public static void stack(Context ctx) {
      *         final var policy = GkehubFunctions.getFeatureIamPolicy(GetFeatureIamPolicyArgs.builder()
-     *             .project(google_gke_hub_feature.feature().project())
-     *             .location(google_gke_hub_feature.feature().location())
-     *             .name(google_gke_hub_feature.feature().name())
+     *             .project(feature.project())
+     *             .location(feature.location())
+     *             .name(feature.name())
      *             .build());
      * 
      *     }
@@ -124,9 +124,9 @@ public final class GkehubFunctions {
      * 
      *     public static void stack(Context ctx) {
      *         final var policy = GkehubFunctions.getFeatureIamPolicy(GetFeatureIamPolicyArgs.builder()
-     *             .project(google_gke_hub_feature.feature().project())
-     *             .location(google_gke_hub_feature.feature().location())
-     *             .name(google_gke_hub_feature.feature().name())
+     *             .project(feature.project())
+     *             .location(feature.location())
+     *             .name(feature.name())
      *             .build());
      * 
      *     }
@@ -163,9 +163,9 @@ public final class GkehubFunctions {
      * 
      *     public static void stack(Context ctx) {
      *         final var policy = GkehubFunctions.getFeatureIamPolicy(GetFeatureIamPolicyArgs.builder()
-     *             .project(google_gke_hub_feature.feature().project())
-     *             .location(google_gke_hub_feature.feature().location())
-     *             .name(google_gke_hub_feature.feature().name())
+     *             .project(feature.project())
+     *             .location(feature.location())
+     *             .name(feature.name())
      *             .build());
      * 
      *     }
@@ -202,8 +202,8 @@ public final class GkehubFunctions {
      * 
      *     public static void stack(Context ctx) {
      *         final var policy = GkehubFunctions.getMembershipIamPolicy(GetMembershipIamPolicyArgs.builder()
-     *             .project(google_gke_hub_membership.membership().project())
-     *             .membershipId(google_gke_hub_membership.membership().membership_id())
+     *             .project(membership.project())
+     *             .membershipId(membership.membershipId())
      *             .build());
      * 
      *     }
@@ -240,8 +240,8 @@ public final class GkehubFunctions {
      * 
      *     public static void stack(Context ctx) {
      *         final var policy = GkehubFunctions.getMembershipIamPolicy(GetMembershipIamPolicyArgs.builder()
-     *             .project(google_gke_hub_membership.membership().project())
-     *             .membershipId(google_gke_hub_membership.membership().membership_id())
+     *             .project(membership.project())
+     *             .membershipId(membership.membershipId())
      *             .build());
      * 
      *     }
@@ -278,8 +278,8 @@ public final class GkehubFunctions {
      * 
      *     public static void stack(Context ctx) {
      *         final var policy = GkehubFunctions.getMembershipIamPolicy(GetMembershipIamPolicyArgs.builder()
-     *             .project(google_gke_hub_membership.membership().project())
-     *             .membershipId(google_gke_hub_membership.membership().membership_id())
+     *             .project(membership.project())
+     *             .membershipId(membership.membershipId())
      *             .build());
      * 
      *     }
@@ -316,8 +316,8 @@ public final class GkehubFunctions {
      * 
      *     public static void stack(Context ctx) {
      *         final var policy = GkehubFunctions.getMembershipIamPolicy(GetMembershipIamPolicyArgs.builder()
-     *             .project(google_gke_hub_membership.membership().project())
-     *             .membershipId(google_gke_hub_membership.membership().membership_id())
+     *             .project(membership.project())
+     *             .membershipId(membership.membershipId())
      *             .build());
      * 
      *     }
@@ -354,8 +354,8 @@ public final class GkehubFunctions {
      * 
      *     public static void stack(Context ctx) {
      *         final var policy = GkehubFunctions.getScopeIamPolicy(GetScopeIamPolicyArgs.builder()
-     *             .project(google_gke_hub_scope.scope().project())
-     *             .scopeId(google_gke_hub_scope.scope().scope_id())
+     *             .project(scope.project())
+     *             .scopeId(scope.scopeId())
      *             .build());
      * 
      *     }
@@ -392,8 +392,8 @@ public final class GkehubFunctions {
      * 
      *     public static void stack(Context ctx) {
      *         final var policy = GkehubFunctions.getScopeIamPolicy(GetScopeIamPolicyArgs.builder()
-     *             .project(google_gke_hub_scope.scope().project())
-     *             .scopeId(google_gke_hub_scope.scope().scope_id())
+     *             .project(scope.project())
+     *             .scopeId(scope.scopeId())
      *             .build());
      * 
      *     }
@@ -430,8 +430,8 @@ public final class GkehubFunctions {
      * 
      *     public static void stack(Context ctx) {
      *         final var policy = GkehubFunctions.getScopeIamPolicy(GetScopeIamPolicyArgs.builder()
-     *             .project(google_gke_hub_scope.scope().project())
-     *             .scopeId(google_gke_hub_scope.scope().scope_id())
+     *             .project(scope.project())
+     *             .scopeId(scope.scopeId())
      *             .build());
      * 
      *     }
@@ -468,8 +468,8 @@ public final class GkehubFunctions {
      * 
      *     public static void stack(Context ctx) {
      *         final var policy = GkehubFunctions.getScopeIamPolicy(GetScopeIamPolicyArgs.builder()
-     *             .project(google_gke_hub_scope.scope().project())
-     *             .scopeId(google_gke_hub_scope.scope().scope_id())
+     *             .project(scope.project())
+     *             .scopeId(scope.scopeId())
      *             .build());
      * 
      *     }

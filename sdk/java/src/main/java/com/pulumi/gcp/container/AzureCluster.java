@@ -63,15 +63,16 @@ import javax.annotation.Nullable;
  * 
  *     public static void stack(Context ctx) {
  *         final var versions = ContainerFunctions.getAzureVersions(GetAzureVersionsArgs.builder()
- *             .location(&#34;us-west1&#34;)
  *             .project(&#34;my-project-name&#34;)
+ *             .location(&#34;us-west1&#34;)
  *             .build());
  * 
  *         var basic = new AzureClient(&#34;basic&#34;, AzureClientArgs.builder()        
  *             .applicationId(&#34;12345678-1234-1234-1234-123456789111&#34;)
  *             .location(&#34;us-west1&#34;)
- *             .project(&#34;my-project-name&#34;)
+ *             .name(&#34;client-name&#34;)
  *             .tenantId(&#34;12345678-1234-1234-1234-123456789111&#34;)
+ *             .project(&#34;my-project-name&#34;)
  *             .build());
  * 
  *         var primary = new AzureCluster(&#34;primary&#34;, AzureClusterArgs.builder()        
@@ -93,13 +94,14 @@ import javax.annotation.Nullable;
  *                 .project(&#34;my-project-number&#34;)
  *                 .build())
  *             .location(&#34;us-west1&#34;)
+ *             .name(&#34;name&#34;)
  *             .networking(AzureClusterNetworkingArgs.builder()
  *                 .podAddressCidrBlocks(&#34;10.200.0.0/16&#34;)
  *                 .serviceAddressCidrBlocks(&#34;10.32.0.0/24&#34;)
  *                 .virtualNetworkId(&#34;/subscriptions/12345678-1234-1234-1234-123456789111/resourceGroups/my--dev-byo/providers/Microsoft.Network/virtualNetworks/my--dev-vnet&#34;)
  *                 .build())
- *             .project(&#34;my-project-name&#34;)
  *             .resourceGroupId(&#34;/subscriptions/12345678-1234-1234-1234-123456789111/resourceGroups/my--dev-cluster&#34;)
+ *             .project(&#34;my-project-name&#34;)
  *             .build());
  * 
  *     }
@@ -126,7 +128,6 @@ import javax.annotation.Nullable;
  * import com.pulumi.gcp.container.inputs.AzureClusterNetworkingArgs;
  * import com.pulumi.gcp.container.inputs.AzureClusterLoggingConfigArgs;
  * import com.pulumi.gcp.container.inputs.AzureClusterLoggingConfigComponentConfigArgs;
- * import com.pulumi.resources.CustomResourceOptions;
  * import java.util.List;
  * import java.util.ArrayList;
  * import java.util.Map;
@@ -148,11 +149,10 @@ import javax.annotation.Nullable;
  *         var basic = new AzureClient(&#34;basic&#34;, AzureClientArgs.builder()        
  *             .applicationId(&#34;12345678-1234-1234-1234-123456789111&#34;)
  *             .location(&#34;us-west1&#34;)
+ *             .name(&#34;client-name&#34;)
  *             .tenantId(&#34;12345678-1234-1234-1234-123456789111&#34;)
  *             .project(&#34;my-project-name&#34;)
- *             .build(), CustomResourceOptions.builder()
- *                 .provider(google_beta)
- *                 .build());
+ *             .build());
  * 
  *         var primary = new AzureCluster(&#34;primary&#34;, AzureClusterArgs.builder()        
  *             .authorization(AzureClusterAuthorizationArgs.builder()
@@ -173,6 +173,7 @@ import javax.annotation.Nullable;
  *                 .project(&#34;my-project-number&#34;)
  *                 .build())
  *             .location(&#34;us-west1&#34;)
+ *             .name(&#34;name&#34;)
  *             .networking(AzureClusterNetworkingArgs.builder()
  *                 .podAddressCidrBlocks(&#34;10.200.0.0/16&#34;)
  *                 .serviceAddressCidrBlocks(&#34;10.32.0.0/24&#34;)
@@ -187,9 +188,7 @@ import javax.annotation.Nullable;
  *                         &#34;workloads&#34;)
  *                     .build())
  *                 .build())
- *             .build(), CustomResourceOptions.builder()
- *                 .provider(google_beta)
- *                 .build());
+ *             .build());
  * 
  *     }
  * }

@@ -59,6 +59,7 @@ import javax.annotation.Nullable;
  * 
  *     public static void stack(Context ctx) {
  *         var featurestore = new AiFeatureStore(&#34;featurestore&#34;, AiFeatureStoreArgs.builder()        
+ *             .name(&#34;terraform&#34;)
  *             .labels(Map.of(&#34;foo&#34;, &#34;bar&#34;))
  *             .region(&#34;us-central1&#34;)
  *             .onlineServingConfig(AiFeatureStoreOnlineServingConfigArgs.builder()
@@ -70,6 +71,7 @@ import javax.annotation.Nullable;
  *             .build());
  * 
  *         var entity = new AiFeatureStoreEntityType(&#34;entity&#34;, AiFeatureStoreEntityTypeArgs.builder()        
+ *             .name(&#34;terraform&#34;)
  *             .labels(Map.of(&#34;foo&#34;, &#34;bar&#34;))
  *             .description(&#34;test description&#34;)
  *             .featurestore(featurestore.id())
@@ -112,7 +114,6 @@ import javax.annotation.Nullable;
  * import com.pulumi.gcp.vertex.inputs.AiFeatureStoreEntityTypeMonitoringConfigSnapshotAnalysisArgs;
  * import com.pulumi.gcp.vertex.inputs.AiFeatureStoreEntityTypeMonitoringConfigCategoricalThresholdConfigArgs;
  * import com.pulumi.gcp.vertex.inputs.AiFeatureStoreEntityTypeMonitoringConfigNumericalThresholdConfigArgs;
- * import com.pulumi.resources.CustomResourceOptions;
  * import java.util.List;
  * import java.util.ArrayList;
  * import java.util.Map;
@@ -127,6 +128,7 @@ import javax.annotation.Nullable;
  * 
  *     public static void stack(Context ctx) {
  *         var featurestore = new AiFeatureStore(&#34;featurestore&#34;, AiFeatureStoreArgs.builder()        
+ *             .name(&#34;terraform2&#34;)
  *             .labels(Map.of(&#34;foo&#34;, &#34;bar&#34;))
  *             .region(&#34;us-central1&#34;)
  *             .onlineServingConfig(AiFeatureStoreOnlineServingConfigArgs.builder()
@@ -135,11 +137,10 @@ import javax.annotation.Nullable;
  *             .encryptionSpec(AiFeatureStoreEncryptionSpecArgs.builder()
  *                 .kmsKeyName(&#34;kms-name&#34;)
  *                 .build())
- *             .build(), CustomResourceOptions.builder()
- *                 .provider(google_beta)
- *                 .build());
+ *             .build());
  * 
  *         var entity = new AiFeatureStoreEntityType(&#34;entity&#34;, AiFeatureStoreEntityTypeArgs.builder()        
+ *             .name(&#34;terraform2&#34;)
  *             .labels(Map.of(&#34;foo&#34;, &#34;bar&#34;))
  *             .featurestore(featurestore.id())
  *             .monitoringConfig(AiFeatureStoreEntityTypeMonitoringConfigArgs.builder()
@@ -155,9 +156,7 @@ import javax.annotation.Nullable;
  *                     .build())
  *                 .build())
  *             .offlineStorageTtlDays(30)
- *             .build(), CustomResourceOptions.builder()
- *                 .provider(google_beta)
- *                 .build());
+ *             .build());
  * 
  *     }
  * }

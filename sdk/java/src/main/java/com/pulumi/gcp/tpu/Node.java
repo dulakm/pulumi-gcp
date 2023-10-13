@@ -56,6 +56,7 @@ import javax.annotation.Nullable;
  *         final var available = TpuFunctions.getTensorflowVersions();
  * 
  *         var tpu = new Node(&#34;tpu&#34;, NodeArgs.builder()        
+ *             .name(&#34;test-tpu&#34;)
  *             .zone(&#34;us-central1-b&#34;)
  *             .acceleratorType(&#34;v3-8&#34;)
  *             .tensorflowVersion(available.applyValue(getTensorflowVersionsResult -&gt; getTensorflowVersionsResult.versions()[0]))
@@ -103,6 +104,7 @@ import javax.annotation.Nullable;
  *             .build());
  * 
  *         var serviceRange = new GlobalAddress(&#34;serviceRange&#34;, GlobalAddressArgs.builder()        
+ *             .name(&#34;my-global-address&#34;)
  *             .purpose(&#34;VPC_PEERING&#34;)
  *             .addressType(&#34;INTERNAL&#34;)
  *             .prefixLength(16)
@@ -116,6 +118,7 @@ import javax.annotation.Nullable;
  *             .build());
  * 
  *         var tpu = new Node(&#34;tpu&#34;, NodeArgs.builder()        
+ *             .name(&#34;test-tpu&#34;)
  *             .zone(&#34;us-central1-b&#34;)
  *             .acceleratorType(&#34;v3-8&#34;)
  *             .tensorflowVersion(available.applyValue(getTensorflowVersionsResult -&gt; getTensorflowVersionsResult.versions()[0]))

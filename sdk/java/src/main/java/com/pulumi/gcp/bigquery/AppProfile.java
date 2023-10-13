@@ -51,6 +51,7 @@ import javax.annotation.Nullable;
  * 
  *     public static void stack(Context ctx) {
  *         var instance = new Instance(&#34;instance&#34;, InstanceArgs.builder()        
+ *             .name(&#34;bt-instance&#34;)
  *             .clusters(            
  *                 InstanceClusterArgs.builder()
  *                     .clusterId(&#34;cluster-1&#34;)
@@ -110,6 +111,7 @@ import javax.annotation.Nullable;
  * 
  *     public static void stack(Context ctx) {
  *         var instance = new Instance(&#34;instance&#34;, InstanceArgs.builder()        
+ *             .name(&#34;bt-instance&#34;)
  *             .clusters(InstanceClusterArgs.builder()
  *                 .clusterId(&#34;cluster-1&#34;)
  *                 .zone(&#34;us-central1-b&#34;)
@@ -158,6 +160,7 @@ import javax.annotation.Nullable;
  * 
  *     public static void stack(Context ctx) {
  *         var instance = new Instance(&#34;instance&#34;, InstanceArgs.builder()        
+ *             .name(&#34;bt-instance&#34;)
  *             .clusters(            
  *                 InstanceClusterArgs.builder()
  *                     .clusterId(&#34;cluster-1&#34;)

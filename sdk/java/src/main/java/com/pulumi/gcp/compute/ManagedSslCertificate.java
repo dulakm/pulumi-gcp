@@ -47,7 +47,6 @@ import javax.annotation.Nullable;
  * 
  * ## Example Usage
  * ### Managed Ssl Certificate Basic
- * 
  * ```java
  * package generated_program;
  * 
@@ -82,49 +81,55 @@ import javax.annotation.Nullable;
  *     }
  * 
  *     public static void stack(Context ctx) {
- *         var defaultManagedSslCertificate = new ManagedSslCertificate(&#34;defaultManagedSslCertificate&#34;, ManagedSslCertificateArgs.builder()        
+ *         var default_ = new ManagedSslCertificate(&#34;default&#34;, ManagedSslCertificateArgs.builder()        
+ *             .name(&#34;test-cert&#34;)
  *             .managed(ManagedSslCertificateManagedArgs.builder()
  *                 .domains(&#34;sslcert.tf-test.club.&#34;)
  *                 .build())
  *             .build());
  * 
- *         var defaultHttpHealthCheck = new HttpHealthCheck(&#34;defaultHttpHealthCheck&#34;, HttpHealthCheckArgs.builder()        
+ *         var defaultResource4 = new HttpHealthCheck(&#34;defaultResource4&#34;, HttpHealthCheckArgs.builder()        
+ *             .name(&#34;http-health-check&#34;)
  *             .requestPath(&#34;/&#34;)
  *             .checkIntervalSec(1)
  *             .timeoutSec(1)
  *             .build());
  * 
- *         var defaultBackendService = new BackendService(&#34;defaultBackendService&#34;, BackendServiceArgs.builder()        
+ *         var defaultResource3 = new BackendService(&#34;defaultResource3&#34;, BackendServiceArgs.builder()        
+ *             .name(&#34;backend-service&#34;)
  *             .portName(&#34;http&#34;)
  *             .protocol(&#34;HTTP&#34;)
  *             .timeoutSec(10)
- *             .healthChecks(defaultHttpHealthCheck.id())
+ *             .healthChecks(defaultResource4.id())
  *             .build());
  * 
- *         var defaultURLMap = new URLMap(&#34;defaultURLMap&#34;, URLMapArgs.builder()        
+ *         var defaultResource2 = new URLMap(&#34;defaultResource2&#34;, URLMapArgs.builder()        
+ *             .name(&#34;url-map&#34;)
  *             .description(&#34;a description&#34;)
- *             .defaultService(defaultBackendService.id())
+ *             .defaultService(defaultResource3.id())
  *             .hostRules(URLMapHostRuleArgs.builder()
  *                 .hosts(&#34;sslcert.tf-test.club&#34;)
  *                 .pathMatcher(&#34;allpaths&#34;)
  *                 .build())
  *             .pathMatchers(URLMapPathMatcherArgs.builder()
  *                 .name(&#34;allpaths&#34;)
- *                 .defaultService(defaultBackendService.id())
+ *                 .defaultService(defaultResource3.id())
  *                 .pathRules(URLMapPathMatcherPathRuleArgs.builder()
  *                     .paths(&#34;/*&#34;)
- *                     .service(defaultBackendService.id())
+ *                     .service(defaultResource3.id())
  *                     .build())
  *                 .build())
  *             .build());
  * 
- *         var defaultTargetHttpsProxy = new TargetHttpsProxy(&#34;defaultTargetHttpsProxy&#34;, TargetHttpsProxyArgs.builder()        
- *             .urlMap(defaultURLMap.id())
- *             .sslCertificates(defaultManagedSslCertificate.id())
+ *         var defaultResource = new TargetHttpsProxy(&#34;defaultResource&#34;, TargetHttpsProxyArgs.builder()        
+ *             .name(&#34;test-proxy&#34;)
+ *             .urlMap(defaultResource2.id())
+ *             .sslCertificates(default_.id())
  *             .build());
  * 
- *         var defaultGlobalForwardingRule = new GlobalForwardingRule(&#34;defaultGlobalForwardingRule&#34;, GlobalForwardingRuleArgs.builder()        
- *             .target(defaultTargetHttpsProxy.id())
+ *         var defaultResource5 = new GlobalForwardingRule(&#34;defaultResource5&#34;, GlobalForwardingRuleArgs.builder()        
+ *             .name(&#34;forwarding-rule&#34;)
+ *             .target(defaultResource.id())
  *             .portRange(443)
  *             .build());
  * 

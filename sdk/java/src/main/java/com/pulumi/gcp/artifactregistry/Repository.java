@@ -55,10 +55,10 @@ import javax.annotation.Nullable;
  * 
  *     public static void stack(Context ctx) {
  *         var my_repo = new Repository(&#34;my-repo&#34;, RepositoryArgs.builder()        
- *             .description(&#34;example docker repository&#34;)
- *             .format(&#34;DOCKER&#34;)
  *             .location(&#34;us-central1&#34;)
  *             .repositoryId(&#34;my-repository&#34;)
+ *             .description(&#34;example docker repository&#34;)
+ *             .format(&#34;DOCKER&#34;)
  *             .build());
  * 
  *     }
@@ -88,13 +88,13 @@ import javax.annotation.Nullable;
  * 
  *     public static void stack(Context ctx) {
  *         var my_repo = new Repository(&#34;my-repo&#34;, RepositoryArgs.builder()        
+ *             .location(&#34;us-central1&#34;)
+ *             .repositoryId(&#34;my-repository&#34;)
  *             .description(&#34;example docker repository&#34;)
+ *             .format(&#34;DOCKER&#34;)
  *             .dockerConfig(RepositoryDockerConfigArgs.builder()
  *                 .immutableTags(true)
  *                 .build())
- *             .format(&#34;DOCKER&#34;)
- *             .location(&#34;us-central1&#34;)
- *             .repositoryId(&#34;my-repository&#34;)
  *             .build());
  * 
  *     }
@@ -107,13 +107,12 @@ import javax.annotation.Nullable;
  * import com.pulumi.Context;
  * import com.pulumi.Pulumi;
  * import com.pulumi.core.Output;
+ * import com.pulumi.gcp.artifactregistry.Repository;
+ * import com.pulumi.gcp.artifactregistry.RepositoryArgs;
  * import com.pulumi.gcp.organizations.OrganizationsFunctions;
  * import com.pulumi.gcp.organizations.inputs.GetProjectArgs;
  * import com.pulumi.gcp.kms.CryptoKeyIAMMember;
  * import com.pulumi.gcp.kms.CryptoKeyIAMMemberArgs;
- * import com.pulumi.gcp.artifactregistry.Repository;
- * import com.pulumi.gcp.artifactregistry.RepositoryArgs;
- * import com.pulumi.resources.CustomResourceOptions;
  * import java.util.List;
  * import java.util.ArrayList;
  * import java.util.Map;
@@ -127,6 +126,14 @@ import javax.annotation.Nullable;
  *     }
  * 
  *     public static void stack(Context ctx) {
+ *         var my_repo = new Repository(&#34;my-repo&#34;, RepositoryArgs.builder()        
+ *             .location(&#34;us-central1&#34;)
+ *             .repositoryId(&#34;my-repository&#34;)
+ *             .description(&#34;example docker repository with cmek&#34;)
+ *             .format(&#34;DOCKER&#34;)
+ *             .kmsKeyName(&#34;kms-key&#34;)
+ *             .build());
+ * 
  *         final var project = OrganizationsFunctions.getProject();
  * 
  *         var cryptoKey = new CryptoKeyIAMMember(&#34;cryptoKey&#34;, CryptoKeyIAMMemberArgs.builder()        
@@ -134,16 +141,6 @@ import javax.annotation.Nullable;
  *             .role(&#34;roles/cloudkms.cryptoKeyEncrypterDecrypter&#34;)
  *             .member(String.format(&#34;serviceAccount:service-%s@gcp-sa-artifactregistry.iam.gserviceaccount.com&#34;, project.applyValue(getProjectResult -&gt; getProjectResult.number())))
  *             .build());
- * 
- *         var my_repo = new Repository(&#34;my-repo&#34;, RepositoryArgs.builder()        
- *             .location(&#34;us-central1&#34;)
- *             .repositoryId(&#34;my-repository&#34;)
- *             .description(&#34;example docker repository with cmek&#34;)
- *             .format(&#34;DOCKER&#34;)
- *             .kmsKeyName(&#34;kms-key&#34;)
- *             .build(), CustomResourceOptions.builder()
- *                 .dependsOn(cryptoKey)
- *                 .build());
  * 
  *     }
  * }
@@ -158,7 +155,6 @@ import javax.annotation.Nullable;
  * import com.pulumi.gcp.artifactregistry.Repository;
  * import com.pulumi.gcp.artifactregistry.RepositoryArgs;
  * import com.pulumi.gcp.artifactregistry.inputs.RepositoryVirtualRepositoryConfigArgs;
- * import com.pulumi.resources.CustomResourceOptions;
  * import java.util.List;
  * import java.util.ArrayList;
  * import java.util.Map;
@@ -192,9 +188,7 @@ import javax.annotation.Nullable;
  *                     .priority(1)
  *                     .build())
  *                 .build())
- *             .build(), CustomResourceOptions.builder()
- *                 .dependsOn()
- *                 .build());
+ *             .build());
  * 
  *     }
  * }
@@ -224,9 +218,10 @@ import javax.annotation.Nullable;
  * 
  *     public static void stack(Context ctx) {
  *         var my_repo = new Repository(&#34;my-repo&#34;, RepositoryArgs.builder()        
+ *             .location(&#34;us-central1&#34;)
+ *             .repositoryId(&#34;my-repository&#34;)
  *             .description(&#34;example remote docker repository&#34;)
  *             .format(&#34;DOCKER&#34;)
- *             .location(&#34;us-central1&#34;)
  *             .mode(&#34;REMOTE_REPOSITORY&#34;)
  *             .remoteRepositoryConfig(RepositoryRemoteRepositoryConfigArgs.builder()
  *                 .description(&#34;docker hub&#34;)
@@ -234,7 +229,6 @@ import javax.annotation.Nullable;
  *                     .publicRepository(&#34;DOCKER_HUB&#34;)
  *                     .build())
  *                 .build())
- *             .repositoryId(&#34;my-repository&#34;)
  *             .build());
  * 
  *     }
@@ -252,7 +246,6 @@ import javax.annotation.Nullable;
  * import com.pulumi.gcp.artifactregistry.inputs.RepositoryCleanupPolicyArgs;
  * import com.pulumi.gcp.artifactregistry.inputs.RepositoryCleanupPolicyConditionArgs;
  * import com.pulumi.gcp.artifactregistry.inputs.RepositoryCleanupPolicyMostRecentVersionsArgs;
- * import com.pulumi.resources.CustomResourceOptions;
  * import java.util.List;
  * import java.util.ArrayList;
  * import java.util.Map;
@@ -306,9 +299,7 @@ import javax.annotation.Nullable;
  *                         .keepCount(5)
  *                         .build())
  *                     .build())
- *             .build(), CustomResourceOptions.builder()
- *                 .provider(google_beta)
- *                 .build());
+ *             .build());
  * 
  *     }
  * }

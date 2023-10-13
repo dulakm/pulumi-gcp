@@ -50,6 +50,7 @@ import javax.annotation.Nullable;
  *     public static void stack(Context ctx) {
  *         var default_ = new Project(&#34;default&#34;, ProjectArgs.builder()        
  *             .projectId(&#34;your-project-id&#34;)
+ *             .name(&#34;your-project-id&#34;)
  *             .orgId(&#34;123456789&#34;)
  *             .build());
  * 
@@ -87,10 +88,10 @@ import javax.annotation.Nullable;
  * 
  *     public static void stack(Context ctx) {
  *         var basic = new ProjectBucketConfig(&#34;basic&#34;, ProjectBucketConfigArgs.builder()        
- *             .bucketId(&#34;custom-bucket&#34;)
- *             .location(&#34;global&#34;)
  *             .project(&#34;project_id&#34;)
+ *             .location(&#34;global&#34;)
  *             .retentionDays(30)
+ *             .bucketId(&#34;custom-bucket&#34;)
  *             .build());
  * 
  *     }
@@ -120,11 +121,11 @@ import javax.annotation.Nullable;
  * 
  *     public static void stack(Context ctx) {
  *         var analytics_enabled_bucket = new ProjectBucketConfig(&#34;analytics-enabled-bucket&#34;, ProjectBucketConfigArgs.builder()        
- *             .bucketId(&#34;custom-bucket&#34;)
- *             .enableAnalytics(true)
- *             .location(&#34;global&#34;)
  *             .project(&#34;project_id&#34;)
+ *             .location(&#34;global&#34;)
  *             .retentionDays(30)
+ *             .enableAnalytics(true)
+ *             .bucketId(&#34;custom-bucket&#34;)
  *             .build());
  * 
  *     }
@@ -149,7 +150,6 @@ import javax.annotation.Nullable;
  * import com.pulumi.gcp.logging.ProjectBucketConfig;
  * import com.pulumi.gcp.logging.ProjectBucketConfigArgs;
  * import com.pulumi.gcp.logging.inputs.ProjectBucketConfigCmekSettingsArgs;
- * import com.pulumi.resources.CustomResourceOptions;
  * import java.util.List;
  * import java.util.ArrayList;
  * import java.util.Map;
@@ -168,10 +168,12 @@ import javax.annotation.Nullable;
  *             .build());
  * 
  *         var keyring = new KeyRing(&#34;keyring&#34;, KeyRingArgs.builder()        
+ *             .name(&#34;keyring-example&#34;)
  *             .location(&#34;us-central1&#34;)
  *             .build());
  * 
  *         var key = new CryptoKey(&#34;key&#34;, CryptoKeyArgs.builder()        
+ *             .name(&#34;crypto-key-example&#34;)
  *             .keyRing(keyring.id())
  *             .rotationPeriod(&#34;100000s&#34;)
  *             .build());
@@ -190,9 +192,7 @@ import javax.annotation.Nullable;
  *             .cmekSettings(ProjectBucketConfigCmekSettingsArgs.builder()
  *                 .kmsKeyName(key.id())
  *                 .build())
- *             .build(), CustomResourceOptions.builder()
- *                 .dependsOn(cryptoKeyBinding)
- *                 .build());
+ *             .build());
  * 
  *     }
  * }

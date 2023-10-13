@@ -54,6 +54,7 @@ public final class DnsFunctions {
      * 
      *     public static void stack(Context ctx) {
      *         var foo = new ManagedZone(&#34;foo&#34;, ManagedZoneArgs.builder()        
+     *             .name(&#34;foobar&#34;)
      *             .dnsName(&#34;foo.bar.&#34;)
      *             .dnssecConfig(ManagedZoneDnssecConfigArgs.builder()
      *                 .state(&#34;on&#34;)
@@ -105,6 +106,7 @@ public final class DnsFunctions {
      * 
      *     public static void stack(Context ctx) {
      *         var foo = new ManagedZone(&#34;foo&#34;, ManagedZoneArgs.builder()        
+     *             .name(&#34;foobar&#34;)
      *             .dnsName(&#34;foo.bar.&#34;)
      *             .dnssecConfig(ManagedZoneDnssecConfigArgs.builder()
      *                 .state(&#34;on&#34;)
@@ -156,6 +158,7 @@ public final class DnsFunctions {
      * 
      *     public static void stack(Context ctx) {
      *         var foo = new ManagedZone(&#34;foo&#34;, ManagedZoneArgs.builder()        
+     *             .name(&#34;foobar&#34;)
      *             .dnsName(&#34;foo.bar.&#34;)
      *             .dnssecConfig(ManagedZoneDnssecConfigArgs.builder()
      *                 .state(&#34;on&#34;)
@@ -207,6 +210,7 @@ public final class DnsFunctions {
      * 
      *     public static void stack(Context ctx) {
      *         var foo = new ManagedZone(&#34;foo&#34;, ManagedZoneArgs.builder()        
+     *             .name(&#34;foobar&#34;)
      *             .dnsName(&#34;foo.bar.&#34;)
      *             .dnssecConfig(ManagedZoneDnssecConfigArgs.builder()
      *                 .state(&#34;on&#34;)
@@ -449,8 +453,8 @@ public final class DnsFunctions {
      * 
      *     public static void stack(Context ctx) {
      *         final var policy = DnsFunctions.getManagedZoneIamPolicy(GetManagedZoneIamPolicyArgs.builder()
-     *             .project(google_dns_managed_zone.default().project())
-     *             .managedZone(google_dns_managed_zone.default().name())
+     *             .project(default_.project())
+     *             .managedZone(default_.name())
      *             .build());
      * 
      *     }
@@ -487,8 +491,8 @@ public final class DnsFunctions {
      * 
      *     public static void stack(Context ctx) {
      *         final var policy = DnsFunctions.getManagedZoneIamPolicy(GetManagedZoneIamPolicyArgs.builder()
-     *             .project(google_dns_managed_zone.default().project())
-     *             .managedZone(google_dns_managed_zone.default().name())
+     *             .project(default_.project())
+     *             .managedZone(default_.name())
      *             .build());
      * 
      *     }
@@ -525,8 +529,8 @@ public final class DnsFunctions {
      * 
      *     public static void stack(Context ctx) {
      *         final var policy = DnsFunctions.getManagedZoneIamPolicy(GetManagedZoneIamPolicyArgs.builder()
-     *             .project(google_dns_managed_zone.default().project())
-     *             .managedZone(google_dns_managed_zone.default().name())
+     *             .project(default_.project())
+     *             .managedZone(default_.name())
      *             .build());
      * 
      *     }
@@ -563,8 +567,8 @@ public final class DnsFunctions {
      * 
      *     public static void stack(Context ctx) {
      *         final var policy = DnsFunctions.getManagedZoneIamPolicy(GetManagedZoneIamPolicyArgs.builder()
-     *             .project(google_dns_managed_zone.default().project())
-     *             .managedZone(google_dns_managed_zone.default().name())
+     *             .project(default_.project())
+     *             .managedZone(default_.name())
      *             .build());
      * 
      *     }

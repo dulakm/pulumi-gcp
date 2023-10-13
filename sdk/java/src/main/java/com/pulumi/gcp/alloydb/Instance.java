@@ -40,16 +40,15 @@ import javax.annotation.Nullable;
  * import com.pulumi.gcp.alloydb.Cluster;
  * import com.pulumi.gcp.alloydb.ClusterArgs;
  * import com.pulumi.gcp.alloydb.inputs.ClusterInitialUserArgs;
- * import com.pulumi.gcp.compute.GlobalAddress;
- * import com.pulumi.gcp.compute.GlobalAddressArgs;
- * import com.pulumi.gcp.servicenetworking.Connection;
- * import com.pulumi.gcp.servicenetworking.ConnectionArgs;
  * import com.pulumi.gcp.alloydb.Instance;
  * import com.pulumi.gcp.alloydb.InstanceArgs;
  * import com.pulumi.gcp.alloydb.inputs.InstanceMachineConfigArgs;
  * import com.pulumi.gcp.organizations.OrganizationsFunctions;
  * import com.pulumi.gcp.organizations.inputs.GetProjectArgs;
- * import com.pulumi.resources.CustomResourceOptions;
+ * import com.pulumi.gcp.compute.GlobalAddress;
+ * import com.pulumi.gcp.compute.GlobalAddressArgs;
+ * import com.pulumi.gcp.servicenetworking.Connection;
+ * import com.pulumi.gcp.servicenetworking.ConnectionArgs;
  * import java.util.List;
  * import java.util.ArrayList;
  * import java.util.Map;
@@ -63,44 +62,43 @@ import javax.annotation.Nullable;
  *     }
  * 
  *     public static void stack(Context ctx) {
- *         final var defaultNetwork = ComputeFunctions.getNetwork(GetNetworkArgs.builder()
+ *         final var default = ComputeFunctions.getNetwork(GetNetworkArgs.builder()
  *             .name(&#34;alloydb-network&#34;)
  *             .build());
  * 
- *         var defaultCluster = new Cluster(&#34;defaultCluster&#34;, ClusterArgs.builder()        
+ *         var defaultResource2 = new Cluster(&#34;defaultResource2&#34;, ClusterArgs.builder()        
  *             .clusterId(&#34;alloydb-cluster&#34;)
  *             .location(&#34;us-central1&#34;)
- *             .network(defaultNetwork.applyValue(getNetworkResult -&gt; getNetworkResult.id()))
+ *             .network(default_.id())
  *             .initialUser(ClusterInitialUserArgs.builder()
  *                 .password(&#34;alloydb-cluster&#34;)
  *                 .build())
  *             .build());
  * 
- *         var privateIpAlloc = new GlobalAddress(&#34;privateIpAlloc&#34;, GlobalAddressArgs.builder()        
- *             .addressType(&#34;INTERNAL&#34;)
- *             .purpose(&#34;VPC_PEERING&#34;)
- *             .prefixLength(16)
- *             .network(defaultNetwork.applyValue(getNetworkResult -&gt; getNetworkResult.id()))
- *             .build());
- * 
- *         var vpcConnection = new Connection(&#34;vpcConnection&#34;, ConnectionArgs.builder()        
- *             .network(defaultNetwork.applyValue(getNetworkResult -&gt; getNetworkResult.id()))
- *             .service(&#34;servicenetworking.googleapis.com&#34;)
- *             .reservedPeeringRanges(privateIpAlloc.name())
- *             .build());
- * 
- *         var defaultInstance = new Instance(&#34;defaultInstance&#34;, InstanceArgs.builder()        
- *             .cluster(defaultCluster.name())
+ *         var defaultResource = new Instance(&#34;defaultResource&#34;, InstanceArgs.builder()        
+ *             .cluster(defaultResource2.name())
  *             .instanceId(&#34;alloydb-instance&#34;)
  *             .instanceType(&#34;PRIMARY&#34;)
  *             .machineConfig(InstanceMachineConfigArgs.builder()
  *                 .cpuCount(2)
  *                 .build())
- *             .build(), CustomResourceOptions.builder()
- *                 .dependsOn(vpcConnection)
- *                 .build());
+ *             .build());
  * 
  *         final var project = OrganizationsFunctions.getProject();
+ * 
+ *         var privateIpAlloc = new GlobalAddress(&#34;privateIpAlloc&#34;, GlobalAddressArgs.builder()        
+ *             .name(&#34;alloydb-cluster&#34;)
+ *             .addressType(&#34;INTERNAL&#34;)
+ *             .purpose(&#34;VPC_PEERING&#34;)
+ *             .prefixLength(16)
+ *             .network(default_.id())
+ *             .build());
+ * 
+ *         var vpcConnection = new Connection(&#34;vpcConnection&#34;, ConnectionArgs.builder()        
+ *             .network(default_.id())
+ *             .service(&#34;servicenetworking.googleapis.com&#34;)
+ *             .reservedPeeringRanges(privateIpAlloc.name())
+ *             .build());
  * 
  *     }
  * }

@@ -42,8 +42,9 @@ import javax.annotation.Nullable;
  * 
  *     public static void stack(Context ctx) {
  *         var primary = new NetworkFirewallPolicy(&#34;primary&#34;, NetworkFirewallPolicyArgs.builder()        
- *             .description(&#34;Sample global network firewall policy&#34;)
+ *             .name(&#34;policy&#34;)
  *             .project(&#34;my-project-name&#34;)
+ *             .description(&#34;Sample global network firewall policy&#34;)
  *             .build());
  * 
  *     }

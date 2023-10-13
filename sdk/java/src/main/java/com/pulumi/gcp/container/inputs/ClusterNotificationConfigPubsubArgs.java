@@ -34,28 +34,6 @@ public final class ClusterNotificationConfigPubsubArgs extends com.pulumi.resour
 
     /**
      * Choose what type of notifications you want to receive. If no filters are applied, you&#39;ll receive all notification types. Structure is documented below.
-     * ```java
-     * package generated_program;
-     * 
-     * import com.pulumi.Context;
-     * import com.pulumi.Pulumi;
-     * import com.pulumi.core.Output;
-     * import java.util.List;
-     * import java.util.ArrayList;
-     * import java.util.Map;
-     * import java.io.File;
-     * import java.nio.file.Files;
-     * import java.nio.file.Paths;
-     * 
-     * public class App {
-     *     public static void main(String[] args) {
-     *         Pulumi.run(App::stack);
-     *     }
-     * 
-     *     public static void stack(Context ctx) {
-     *     }
-     * }
-     * ```
      * 
      */
     @Import(name="filter")
@@ -63,28 +41,6 @@ public final class ClusterNotificationConfigPubsubArgs extends com.pulumi.resour
 
     /**
      * @return Choose what type of notifications you want to receive. If no filters are applied, you&#39;ll receive all notification types. Structure is documented below.
-     * ```java
-     * package generated_program;
-     * 
-     * import com.pulumi.Context;
-     * import com.pulumi.Pulumi;
-     * import com.pulumi.core.Output;
-     * import java.util.List;
-     * import java.util.ArrayList;
-     * import java.util.Map;
-     * import java.io.File;
-     * import java.nio.file.Files;
-     * import java.nio.file.Paths;
-     * 
-     * public class App {
-     *     public static void main(String[] args) {
-     *         Pulumi.run(App::stack);
-     *     }
-     * 
-     *     public static void stack(Context ctx) {
-     *     }
-     * }
-     * ```
      * 
      */
     public Optional<Output<ClusterNotificationConfigPubsubFilterArgs>> filter() {
@@ -155,28 +111,6 @@ public final class ClusterNotificationConfigPubsubArgs extends com.pulumi.resour
 
         /**
          * @param filter Choose what type of notifications you want to receive. If no filters are applied, you&#39;ll receive all notification types. Structure is documented below.
-         * ```java
-         * package generated_program;
-         * 
-         * import com.pulumi.Context;
-         * import com.pulumi.Pulumi;
-         * import com.pulumi.core.Output;
-         * import java.util.List;
-         * import java.util.ArrayList;
-         * import java.util.Map;
-         * import java.io.File;
-         * import java.nio.file.Files;
-         * import java.nio.file.Paths;
-         * 
-         * public class App {
-         *     public static void main(String[] args) {
-         *         Pulumi.run(App::stack);
-         *     }
-         * 
-         *     public static void stack(Context ctx) {
-         *     }
-         * }
-         * ```
          * 
          * @return builder
          * 
@@ -188,28 +122,6 @@ public final class ClusterNotificationConfigPubsubArgs extends com.pulumi.resour
 
         /**
          * @param filter Choose what type of notifications you want to receive. If no filters are applied, you&#39;ll receive all notification types. Structure is documented below.
-         * ```java
-         * package generated_program;
-         * 
-         * import com.pulumi.Context;
-         * import com.pulumi.Pulumi;
-         * import com.pulumi.core.Output;
-         * import java.util.List;
-         * import java.util.ArrayList;
-         * import java.util.Map;
-         * import java.io.File;
-         * import java.nio.file.Files;
-         * import java.nio.file.Paths;
-         * 
-         * public class App {
-         *     public static void main(String[] args) {
-         *         Pulumi.run(App::stack);
-         *     }
-         * 
-         *     public static void stack(Context ctx) {
-         *     }
-         * }
-         * ```
          * 
          * @return builder
          * 

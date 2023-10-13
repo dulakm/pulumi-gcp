@@ -241,7 +241,7 @@ import javax.annotation.Nullable;
  *         var notificationChannel = new NotificationChannel(&#34;notificationChannel&#34;, NotificationChannelArgs.builder()        
  *             .displayName(&#34;Example Notification Channel&#34;)
  *             .type(&#34;email&#34;)
- *             .labels(Map.of(&#34;email_address&#34;, &#34;address@example.com&#34;))
+ *             .labels(Map.of(&#34;emailAddress&#34;, &#34;address@example.com&#34;))
  *             .build());
  * 
  *         var budget = new Budget(&#34;budget&#34;, BudgetArgs.builder()        

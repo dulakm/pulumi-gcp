@@ -95,13 +95,13 @@ import javax.annotation.Nullable;
  *             .datasetId(&#34;example_dataset&#34;)
  *             .build());
  * 
- *         var publicDataset = new Dataset(&#34;publicDataset&#34;, DatasetArgs.builder()        
+ *         var public_ = new Dataset(&#34;public&#34;, DatasetArgs.builder()        
  *             .datasetId(&#34;example_dataset2&#34;)
  *             .build());
  * 
- *         var publicTable = new Table(&#34;publicTable&#34;, TableArgs.builder()        
+ *         var publicResource = new Table(&#34;publicResource&#34;, TableArgs.builder()        
  *             .deletionProtection(false)
- *             .datasetId(publicDataset.datasetId())
+ *             .datasetId(public_.datasetId())
  *             .tableId(&#34;example_table&#34;)
  *             .view(TableViewArgs.builder()
  *                 .query(&#34;SELECT state FROM [lookerdata:cdc.project_tycho_reports]&#34;)
@@ -112,9 +112,9 @@ import javax.annotation.Nullable;
  *         var access = new DatasetAccess(&#34;access&#34;, DatasetAccessArgs.builder()        
  *             .datasetId(private_.datasetId())
  *             .view(DatasetAccessViewArgs.builder()
- *                 .projectId(publicTable.project())
- *                 .datasetId(publicDataset.datasetId())
- *                 .tableId(publicTable.tableId())
+ *                 .projectId(publicResource.project())
+ *                 .datasetId(public_.datasetId())
+ *                 .tableId(publicResource.tableId())
  *                 .build())
  *             .build());
  * 
@@ -198,13 +198,13 @@ import javax.annotation.Nullable;
  *     }
  * 
  *     public static void stack(Context ctx) {
- *         var publicDataset = new Dataset(&#34;publicDataset&#34;, DatasetArgs.builder()        
+ *         var public_ = new Dataset(&#34;public&#34;, DatasetArgs.builder()        
  *             .datasetId(&#34;public_dataset&#34;)
  *             .description(&#34;This dataset is public&#34;)
  *             .build());
  * 
- *         var publicRoutine = new Routine(&#34;publicRoutine&#34;, RoutineArgs.builder()        
- *             .datasetId(publicDataset.datasetId())
+ *         var publicResource = new Routine(&#34;publicResource&#34;, RoutineArgs.builder()        
+ *             .datasetId(public_.datasetId())
  *             .routineId(&#34;public_routine&#34;)
  *             .routineType(&#34;TABLE_VALUED_FUNCTION&#34;)
  *             .language(&#34;SQL&#34;)
@@ -238,9 +238,9 @@ import javax.annotation.Nullable;
  *         var authorizedRoutine = new DatasetAccess(&#34;authorizedRoutine&#34;, DatasetAccessArgs.builder()        
  *             .datasetId(private_.datasetId())
  *             .routine(DatasetAccessRoutineArgs.builder()
- *                 .projectId(publicRoutine.project())
- *                 .datasetId(publicRoutine.datasetId())
- *                 .routineId(publicRoutine.routineId())
+ *                 .projectId(publicResource.project())
+ *                 .datasetId(publicResource.datasetId())
+ *                 .routineId(publicResource.routineId())
  *                 .build())
  *             .build());
  * 

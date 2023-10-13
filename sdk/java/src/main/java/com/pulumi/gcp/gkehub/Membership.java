@@ -54,17 +54,18 @@ import javax.annotation.Nullable;
  * 
  *     public static void stack(Context ctx) {
  *         var primary = new Cluster(&#34;primary&#34;, ClusterArgs.builder()        
- *             .initialNodeCount(1)
+ *             .name(&#34;basiccluster&#34;)
  *             .location(&#34;us-central1-a&#34;)
+ *             .initialNodeCount(1)
  *             .build());
  * 
  *         var membership = new Membership(&#34;membership&#34;, MembershipArgs.builder()        
+ *             .membershipId(&#34;basic&#34;)
  *             .endpoint(MembershipEndpointArgs.builder()
  *                 .gkeCluster(MembershipEndpointGkeClusterArgs.builder()
  *                     .resourceLink(primary.id().applyValue(id -&gt; String.format(&#34;//container.googleapis.com/%s&#34;, id)))
  *                     .build())
  *                 .build())
- *             .membershipId(&#34;basic&#34;)
  *             .build());
  * 
  *     }
@@ -99,6 +100,7 @@ import javax.annotation.Nullable;
  * 
  *     public static void stack(Context ctx) {
  *         var primary = new Cluster(&#34;primary&#34;, ClusterArgs.builder()        
+ *             .name(&#34;basiccluster&#34;)
  *             .location(&#34;us-central1-a&#34;)
  *             .initialNodeCount(1)
  *             .workloadIdentityConfig(ClusterWorkloadIdentityConfigArgs.builder()

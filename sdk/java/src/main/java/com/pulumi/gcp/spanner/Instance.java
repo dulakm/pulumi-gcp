@@ -53,8 +53,8 @@ import javax.annotation.Nullable;
  *         var example = new Instance(&#34;example&#34;, InstanceArgs.builder()        
  *             .config(&#34;regional-us-central1&#34;)
  *             .displayName(&#34;Test Spanner Instance&#34;)
- *             .labels(Map.of(&#34;foo&#34;, &#34;bar&#34;))
  *             .numNodes(2)
+ *             .labels(Map.of(&#34;foo&#34;, &#34;bar&#34;))
  *             .build());
  * 
  *     }
@@ -85,8 +85,8 @@ import javax.annotation.Nullable;
  *         var example = new Instance(&#34;example&#34;, InstanceArgs.builder()        
  *             .config(&#34;regional-us-central1&#34;)
  *             .displayName(&#34;Test Spanner Instance&#34;)
- *             .labels(Map.of(&#34;foo&#34;, &#34;bar&#34;))
  *             .processingUnits(200)
+ *             .labels(Map.of(&#34;foo&#34;, &#34;bar&#34;))
  *             .build());
  * 
  *     }
@@ -117,8 +117,8 @@ import javax.annotation.Nullable;
  *         var example = new Instance(&#34;example&#34;, InstanceArgs.builder()        
  *             .config(&#34;nam-eur-asia1&#34;)
  *             .displayName(&#34;Multi Regional Instance&#34;)
- *             .labels(Map.of(&#34;foo&#34;, &#34;bar&#34;))
  *             .numNodes(2)
+ *             .labels(Map.of(&#34;foo&#34;, &#34;bar&#34;))
  *             .build());
  * 
  *     }

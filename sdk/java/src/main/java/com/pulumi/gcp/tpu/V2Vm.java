@@ -27,7 +27,6 @@ import javax.annotation.Nullable;
  * import com.pulumi.gcp.tpu.inputs.GetV2RuntimeVersionsArgs;
  * import com.pulumi.gcp.tpu.V2Vm;
  * import com.pulumi.gcp.tpu.V2VmArgs;
- * import com.pulumi.resources.CustomResourceOptions;
  * import java.util.List;
  * import java.util.ArrayList;
  * import java.util.Map;
@@ -44,11 +43,10 @@ import javax.annotation.Nullable;
  *         final var available = TpuFunctions.getV2RuntimeVersions();
  * 
  *         var tpu = new V2Vm(&#34;tpu&#34;, V2VmArgs.builder()        
+ *             .name(&#34;test-tpu&#34;)
  *             .zone(&#34;us-central1-c&#34;)
  *             .runtimeVersion(&#34;tpu-vm-tf-2.13.0&#34;)
- *             .build(), CustomResourceOptions.builder()
- *                 .provider(google_beta)
- *                 .build());
+ *             .build());
  * 
  *     }
  * }
@@ -65,7 +63,6 @@ import javax.annotation.Nullable;
  * import com.pulumi.gcp.tpu.inputs.GetV2AcceleratorTypesArgs;
  * import com.pulumi.gcp.tpu.V2Vm;
  * import com.pulumi.gcp.tpu.V2VmArgs;
- * import com.pulumi.resources.CustomResourceOptions;
  * import java.util.List;
  * import java.util.ArrayList;
  * import java.util.Map;
@@ -79,18 +76,17 @@ import javax.annotation.Nullable;
  *     }
  * 
  *     public static void stack(Context ctx) {
- *         final var availableV2RuntimeVersions = TpuFunctions.getV2RuntimeVersions();
+ *         final var available = TpuFunctions.getV2RuntimeVersions();
  * 
- *         final var availableV2AcceleratorTypes = TpuFunctions.getV2AcceleratorTypes();
+ *         final var availableData = TpuFunctions.getV2AcceleratorTypes();
  * 
  *         var tpu = new V2Vm(&#34;tpu&#34;, V2VmArgs.builder()        
+ *             .name(&#34;test-tpu&#34;)
  *             .zone(&#34;us-central1-c&#34;)
  *             .description(&#34;Text description of the TPU.&#34;)
  *             .runtimeVersion(&#34;tpu-vm-tf-2.13.0&#34;)
  *             .acceleratorType(&#34;v2-8&#34;)
- *             .build(), CustomResourceOptions.builder()
- *                 .provider(google_beta)
- *                 .build());
+ *             .build());
  * 
  *     }
  * }

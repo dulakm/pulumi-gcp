@@ -59,6 +59,7 @@ import javax.annotation.Nullable;
  * 
  *     public static void stack(Context ctx) {
  *         var primary = new Cluster(&#34;primary&#34;, ClusterArgs.builder()        
+ *             .name(&#34;basic-cluster&#34;)
  *             .location(&#34;us-central1&#34;)
  *             .initialNodeCount(1)
  *             .workloadIdentityConfig(ClusterWorkloadIdentityConfigArgs.builder()
@@ -72,6 +73,7 @@ import javax.annotation.Nullable;
  *             .build());
  * 
  *         var basic = new BackupPlan(&#34;basic&#34;, BackupPlanArgs.builder()        
+ *             .name(&#34;basic-plan&#34;)
  *             .cluster(primary.id())
  *             .location(&#34;us-central1&#34;)
  *             .backupConfig(BackupPlanBackupConfigArgs.builder()
@@ -114,6 +116,7 @@ import javax.annotation.Nullable;
  * 
  *     public static void stack(Context ctx) {
  *         var primary = new Cluster(&#34;primary&#34;, ClusterArgs.builder()        
+ *             .name(&#34;autopilot-cluster&#34;)
  *             .location(&#34;us-central1&#34;)
  *             .enableAutopilot(true)
  *             .ipAllocationPolicy()
@@ -128,6 +131,7 @@ import javax.annotation.Nullable;
  *             .build());
  * 
  *         var autopilot = new BackupPlan(&#34;autopilot&#34;, BackupPlanArgs.builder()        
+ *             .name(&#34;autopilot-plan&#34;)
  *             .cluster(primary.id())
  *             .location(&#34;us-central1&#34;)
  *             .backupConfig(BackupPlanBackupConfigArgs.builder()
@@ -175,6 +179,7 @@ import javax.annotation.Nullable;
  * 
  *     public static void stack(Context ctx) {
  *         var primary = new Cluster(&#34;primary&#34;, ClusterArgs.builder()        
+ *             .name(&#34;cmek-cluster&#34;)
  *             .location(&#34;us-central1&#34;)
  *             .initialNodeCount(1)
  *             .workloadIdentityConfig(ClusterWorkloadIdentityConfigArgs.builder()
@@ -188,14 +193,17 @@ import javax.annotation.Nullable;
  *             .build());
  * 
  *         var keyRing = new KeyRing(&#34;keyRing&#34;, KeyRingArgs.builder()        
+ *             .name(&#34;backup-key&#34;)
  *             .location(&#34;us-central1&#34;)
  *             .build());
  * 
  *         var cryptoKey = new CryptoKey(&#34;cryptoKey&#34;, CryptoKeyArgs.builder()        
+ *             .name(&#34;backup-key&#34;)
  *             .keyRing(keyRing.id())
  *             .build());
  * 
  *         var cmek = new BackupPlan(&#34;cmek&#34;, BackupPlanArgs.builder()        
+ *             .name(&#34;cmek-plan&#34;)
  *             .cluster(primary.id())
  *             .location(&#34;us-central1&#34;)
  *             .backupConfig(BackupPlanBackupConfigArgs.builder()
@@ -247,6 +255,7 @@ import javax.annotation.Nullable;
  * 
  *     public static void stack(Context ctx) {
  *         var primary = new Cluster(&#34;primary&#34;, ClusterArgs.builder()        
+ *             .name(&#34;full-cluster&#34;)
  *             .location(&#34;us-central1&#34;)
  *             .initialNodeCount(1)
  *             .workloadIdentityConfig(ClusterWorkloadIdentityConfigArgs.builder()
@@ -260,6 +269,7 @@ import javax.annotation.Nullable;
  *             .build());
  * 
  *         var full = new BackupPlan(&#34;full&#34;, BackupPlanArgs.builder()        
+ *             .name(&#34;full-plan&#34;)
  *             .cluster(primary.id())
  *             .location(&#34;us-central1&#34;)
  *             .retentionPolicy(BackupPlanRetentionPolicyArgs.builder()

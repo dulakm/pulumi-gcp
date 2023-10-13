@@ -64,6 +64,7 @@ import javax.annotation.Nullable;
  *             .build());
  * 
  *         var target_vm = new Instance(&#34;target-vm&#34;, InstanceArgs.builder()        
+ *             .name(&#34;target-vm&#34;)
  *             .machineType(&#34;e2-medium&#34;)
  *             .zone(&#34;us-central1-a&#34;)
  *             .bootDisk(InstanceBootDiskArgs.builder()
@@ -77,6 +78,7 @@ import javax.annotation.Nullable;
  *             .build());
  * 
  *         var default_ = new TargetInstance(&#34;default&#34;, TargetInstanceArgs.builder()        
+ *             .name(&#34;target&#34;)
  *             .instance(target_vm.id())
  *             .build());
  * 
@@ -100,7 +102,6 @@ import javax.annotation.Nullable;
  * import com.pulumi.gcp.compute.inputs.InstanceNetworkInterfaceArgs;
  * import com.pulumi.gcp.compute.TargetInstance;
  * import com.pulumi.gcp.compute.TargetInstanceArgs;
- * import com.pulumi.resources.CustomResourceOptions;
  * import java.util.List;
  * import java.util.ArrayList;
  * import java.util.Map;
@@ -114,7 +115,7 @@ import javax.annotation.Nullable;
  *     }
  * 
  *     public static void stack(Context ctx) {
- *         final var target-vmNetwork = ComputeFunctions.getNetwork(GetNetworkArgs.builder()
+ *         final var target-vm = ComputeFunctions.getNetwork(GetNetworkArgs.builder()
  *             .name(&#34;default&#34;)
  *             .build());
  * 
@@ -123,7 +124,8 @@ import javax.annotation.Nullable;
  *             .project(&#34;debian-cloud&#34;)
  *             .build());
  * 
- *         var target_vmInstance = new Instance(&#34;target-vmInstance&#34;, InstanceArgs.builder()        
+ *         var target_vmResource = new Instance(&#34;target-vmResource&#34;, InstanceArgs.builder()        
+ *             .name(&#34;custom-network-target-vm&#34;)
  *             .machineType(&#34;e2-medium&#34;)
  *             .zone(&#34;us-central1-a&#34;)
  *             .bootDisk(InstanceBootDiskArgs.builder()
@@ -134,16 +136,13 @@ import javax.annotation.Nullable;
  *             .networkInterfaces(InstanceNetworkInterfaceArgs.builder()
  *                 .network(&#34;default&#34;)
  *                 .build())
- *             .build(), CustomResourceOptions.builder()
- *                 .provider(google_beta)
- *                 .build());
+ *             .build());
  * 
  *         var customNetwork = new TargetInstance(&#34;customNetwork&#34;, TargetInstanceArgs.builder()        
- *             .instance(target_vmInstance.id())
- *             .network(target_vmNetwork.selfLink())
- *             .build(), CustomResourceOptions.builder()
- *                 .provider(google_beta)
- *                 .build());
+ *             .name(&#34;custom-network&#34;)
+ *             .instance(target_vmResource.id())
+ *             .network(target_vm.selfLink())
+ *             .build());
  * 
  *     }
  * }

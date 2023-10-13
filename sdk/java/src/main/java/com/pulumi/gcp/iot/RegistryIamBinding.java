@@ -63,8 +63,9 @@ import javax.annotation.Nullable;
  *             .build());
  * 
  *         var policy = new RegistryIamPolicy(&#34;policy&#34;, RegistryIamPolicyArgs.builder()        
- *             .project(google_cloudiot_registry.test-registry().project())
- *             .region(google_cloudiot_registry.test-registry().region())
+ *             .project(test_registry.project())
+ *             .region(test_registry.region())
+ *             .name(test_registry.name())
  *             .policyData(admin.applyValue(getIAMPolicyResult -&gt; getIAMPolicyResult.policyData()))
  *             .build());
  * 
@@ -95,8 +96,9 @@ import javax.annotation.Nullable;
  * 
  *     public static void stack(Context ctx) {
  *         var binding = new RegistryIamBinding(&#34;binding&#34;, RegistryIamBindingArgs.builder()        
- *             .project(google_cloudiot_registry.test-registry().project())
- *             .region(google_cloudiot_registry.test-registry().region())
+ *             .project(test_registry.project())
+ *             .region(test_registry.region())
+ *             .name(test_registry.name())
  *             .role(&#34;roles/viewer&#34;)
  *             .members(&#34;user:jane@example.com&#34;)
  *             .build());
@@ -128,8 +130,9 @@ import javax.annotation.Nullable;
  * 
  *     public static void stack(Context ctx) {
  *         var member = new RegistryIamMember(&#34;member&#34;, RegistryIamMemberArgs.builder()        
- *             .project(google_cloudiot_registry.test-registry().project())
- *             .region(google_cloudiot_registry.test-registry().region())
+ *             .project(test_registry.project())
+ *             .region(test_registry.region())
+ *             .name(test_registry.name())
  *             .role(&#34;roles/viewer&#34;)
  *             .member(&#34;user:jane@example.com&#34;)
  *             .build());

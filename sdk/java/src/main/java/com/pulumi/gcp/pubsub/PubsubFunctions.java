@@ -205,7 +205,7 @@ public final class PubsubFunctions {
      * 
      *     public static void stack(Context ctx) {
      *         final var policy = PubsubFunctions.getSubscriptionIamPolicy(GetSubscriptionIamPolicyArgs.builder()
-     *             .subscription(google_pubsub_subscription.subscription().id())
+     *             .subscription(subscription.id())
      *             .build());
      * 
      *     }
@@ -242,7 +242,7 @@ public final class PubsubFunctions {
      * 
      *     public static void stack(Context ctx) {
      *         final var policy = PubsubFunctions.getSubscriptionIamPolicy(GetSubscriptionIamPolicyArgs.builder()
-     *             .subscription(google_pubsub_subscription.subscription().id())
+     *             .subscription(subscription.id())
      *             .build());
      * 
      *     }
@@ -279,7 +279,7 @@ public final class PubsubFunctions {
      * 
      *     public static void stack(Context ctx) {
      *         final var policy = PubsubFunctions.getSubscriptionIamPolicy(GetSubscriptionIamPolicyArgs.builder()
-     *             .subscription(google_pubsub_subscription.subscription().id())
+     *             .subscription(subscription.id())
      *             .build());
      * 
      *     }
@@ -316,7 +316,7 @@ public final class PubsubFunctions {
      * 
      *     public static void stack(Context ctx) {
      *         final var policy = PubsubFunctions.getSubscriptionIamPolicy(GetSubscriptionIamPolicyArgs.builder()
-     *             .subscription(google_pubsub_subscription.subscription().id())
+     *             .subscription(subscription.id())
      *             .build());
      * 
      *     }
@@ -509,8 +509,8 @@ public final class PubsubFunctions {
      * 
      *     public static void stack(Context ctx) {
      *         final var policy = PubsubFunctions.getTopicIamPolicy(GetTopicIamPolicyArgs.builder()
-     *             .project(google_pubsub_topic.example().project())
-     *             .topic(google_pubsub_topic.example().name())
+     *             .project(example.project())
+     *             .topic(example.name())
      *             .build());
      * 
      *     }
@@ -547,8 +547,8 @@ public final class PubsubFunctions {
      * 
      *     public static void stack(Context ctx) {
      *         final var policy = PubsubFunctions.getTopicIamPolicy(GetTopicIamPolicyArgs.builder()
-     *             .project(google_pubsub_topic.example().project())
-     *             .topic(google_pubsub_topic.example().name())
+     *             .project(example.project())
+     *             .topic(example.name())
      *             .build());
      * 
      *     }
@@ -585,8 +585,8 @@ public final class PubsubFunctions {
      * 
      *     public static void stack(Context ctx) {
      *         final var policy = PubsubFunctions.getTopicIamPolicy(GetTopicIamPolicyArgs.builder()
-     *             .project(google_pubsub_topic.example().project())
-     *             .topic(google_pubsub_topic.example().name())
+     *             .project(example.project())
+     *             .topic(example.name())
      *             .build());
      * 
      *     }
@@ -623,8 +623,8 @@ public final class PubsubFunctions {
      * 
      *     public static void stack(Context ctx) {
      *         final var policy = PubsubFunctions.getTopicIamPolicy(GetTopicIamPolicyArgs.builder()
-     *             .project(google_pubsub_topic.example().project())
-     *             .topic(google_pubsub_topic.example().name())
+     *             .project(example.project())
+     *             .topic(example.name())
      *             .build());
      * 
      *     }

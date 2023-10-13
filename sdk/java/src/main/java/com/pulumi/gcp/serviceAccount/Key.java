@@ -93,7 +93,53 @@ import javax.annotation.Nullable;
  * 
  *         var mykey = new Key(&#34;mykey&#34;, KeyArgs.builder()        
  *             .serviceAccountId(myaccount.name())
- *             .keepers(Map.of(&#34;rotation_time&#34;, mykeyRotation.rotationRfc3339()))
+ *             .keepers(Map.of(&#34;rotationTime&#34;, mykeyRotation.rotationRfc3339()))
+ *             .build());
+ * 
+ *     }
+ * }
+ * ```
+ * ### Save Key In Kubernetes Secret - DEPRECATED
+ * ```java
+ * package generated_program;
+ * 
+ * import com.pulumi.Context;
+ * import com.pulumi.Pulumi;
+ * import com.pulumi.core.Output;
+ * import com.pulumi.gcp.serviceAccount.Account;
+ * import com.pulumi.gcp.serviceAccount.AccountArgs;
+ * import com.pulumi.gcp.serviceAccount.Key;
+ * import com.pulumi.gcp.serviceAccount.KeyArgs;
+ * import com.pulumi.kubernetes.core_v1.Secret;
+ * import com.pulumi.kubernetes.core_v1.SecretArgs;
+ * import com.pulumi.kubernetes.meta_v1.inputs.ObjectMetaArgs;
+ * import java.util.List;
+ * import java.util.ArrayList;
+ * import java.util.Map;
+ * import java.io.File;
+ * import java.nio.file.Files;
+ * import java.nio.file.Paths;
+ * 
+ * public class App {
+ *     public static void main(String[] args) {
+ *         Pulumi.run(App::stack);
+ *     }
+ * 
+ *     public static void stack(Context ctx) {
+ *         var myaccount = new Account(&#34;myaccount&#34;, AccountArgs.builder()        
+ *             .accountId(&#34;myaccount&#34;)
+ *             .displayName(&#34;My Service Account&#34;)
+ *             .build());
+ * 
+ *         var mykey = new Key(&#34;mykey&#34;, KeyArgs.builder()        
+ *             .serviceAccountId(myaccount.name())
+ *             .build());
+ * 
+ *         var google_application_credentials = new Secret(&#34;google-application-credentials&#34;, SecretArgs.builder()        
+ *             .metadata(ObjectMetaArgs.builder()
+ *                 .name(&#34;google-application-credentials&#34;)
+ *                 .build())
+ *             .data(Map.of(&#34;credentials.json&#34;, StdFunctions.base64decode().applyValue(invoke -&gt; invoke.result())))
  *             .build());
  * 
  *     }

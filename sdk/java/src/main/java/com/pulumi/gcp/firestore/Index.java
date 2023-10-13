@@ -61,6 +61,7 @@ import javax.annotation.Nullable;
  * 
  *     public static void stack(Context ctx) {
  *         var my_index = new Index(&#34;my-index&#34;, IndexArgs.builder()        
+ *             .project(&#34;my-project-name&#34;)
  *             .collection(&#34;chatrooms&#34;)
  *             .fields(            
  *                 IndexFieldArgs.builder()
@@ -71,7 +72,6 @@ import javax.annotation.Nullable;
  *                     .fieldPath(&#34;description&#34;)
  *                     .order(&#34;DESCENDING&#34;)
  *                     .build())
- *             .project(&#34;my-project-name&#34;)
  *             .build());
  * 
  *     }

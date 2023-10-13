@@ -70,7 +70,6 @@ import javax.annotation.Nullable;
  * import com.pulumi.gcp.datastream.inputs.StreamDestinationConfigGcsDestinationConfigJsonFileFormatArgs;
  * import com.pulumi.gcp.datastream.inputs.StreamBackfillAllArgs;
  * import com.pulumi.gcp.datastream.inputs.StreamBackfillAllMysqlExcludedObjectsArgs;
- * import com.pulumi.resources.CustomResourceOptions;
  * import java.util.List;
  * import java.util.ArrayList;
  * import java.util.Map;
@@ -87,6 +86,7 @@ import javax.annotation.Nullable;
  *         final var project = OrganizationsFunctions.getProject();
  * 
  *         var instance = new DatabaseInstance(&#34;instance&#34;, DatabaseInstanceArgs.builder()        
+ *             .name(&#34;my-instance&#34;)
  *             .databaseVersion(&#34;MYSQL_8_0&#34;)
  *             .region(&#34;us-central1&#34;)
  *             .settings(DatabaseInstanceSettingsArgs.builder()
@@ -119,6 +119,7 @@ import javax.annotation.Nullable;
  * 
  *         var db = new Database(&#34;db&#34;, DatabaseArgs.builder()        
  *             .instance(instance.name())
+ *             .name(&#34;db&#34;)
  *             .build());
  * 
  *         var pwd = new RandomPassword(&#34;pwd&#34;, RandomPasswordArgs.builder()        
@@ -127,6 +128,7 @@ import javax.annotation.Nullable;
  *             .build());
  * 
  *         var user = new User(&#34;user&#34;, UserArgs.builder()        
+ *             .name(&#34;user&#34;)
  *             .instance(instance.name())
  *             .host(&#34;%&#34;)
  *             .password(pwd.result())
@@ -144,6 +146,7 @@ import javax.annotation.Nullable;
  *             .build());
  * 
  *         var bucket = new Bucket(&#34;bucket&#34;, BucketArgs.builder()        
+ *             .name(&#34;my-bucket&#34;)
  *             .location(&#34;US&#34;)
  *             .uniformBucketLevelAccess(true)
  *             .build());
@@ -257,9 +260,7 @@ import javax.annotation.Nullable;
  *                     .build())
  *                 .build())
  *             .customerManagedEncryptionKey(&#34;kms-name&#34;)
- *             .build(), CustomResourceOptions.builder()
- *                 .dependsOn(keyUser)
- *                 .build());
+ *             .build());
  * 
  *     }
  * }
@@ -565,6 +566,7 @@ import javax.annotation.Nullable;
  *             .build());
  * 
  *         var instance = new DatabaseInstance(&#34;instance&#34;, DatabaseInstanceArgs.builder()        
+ *             .name(&#34;instance-name&#34;)
  *             .databaseVersion(&#34;MYSQL_8_0&#34;)
  *             .region(&#34;us-central1&#34;)
  *             .settings(DatabaseInstanceSettingsArgs.builder()
@@ -601,6 +603,7 @@ import javax.annotation.Nullable;
  *             .build());
  * 
  *         var user = new User(&#34;user&#34;, UserArgs.builder()        
+ *             .name(&#34;my-user&#34;)
  *             .instance(instance.name())
  *             .host(&#34;%&#34;)
  *             .password(pwd.result())
@@ -639,6 +642,7 @@ import javax.annotation.Nullable;
  * 
  *         var db = new Database(&#34;db&#34;, DatabaseArgs.builder()        
  *             .instance(instance.name())
+ *             .name(&#34;db&#34;)
  *             .build());
  * 
  *     }
@@ -681,7 +685,6 @@ import javax.annotation.Nullable;
  * import com.pulumi.gcp.datastream.inputs.StreamDestinationConfigBigqueryDestinationConfigSourceHierarchyDatasetsArgs;
  * import com.pulumi.gcp.datastream.inputs.StreamDestinationConfigBigqueryDestinationConfigSourceHierarchyDatasetsDatasetTemplateArgs;
  * import com.pulumi.gcp.datastream.inputs.StreamBackfillNoneArgs;
- * import com.pulumi.resources.CustomResourceOptions;
  * import java.util.List;
  * import java.util.ArrayList;
  * import java.util.Map;
@@ -698,6 +701,7 @@ import javax.annotation.Nullable;
  *         final var project = OrganizationsFunctions.getProject();
  * 
  *         var instance = new DatabaseInstance(&#34;instance&#34;, DatabaseInstanceArgs.builder()        
+ *             .name(&#34;my-instance&#34;)
  *             .databaseVersion(&#34;MYSQL_8_0&#34;)
  *             .region(&#34;us-central1&#34;)
  *             .settings(DatabaseInstanceSettingsArgs.builder()
@@ -730,6 +734,7 @@ import javax.annotation.Nullable;
  * 
  *         var db = new Database(&#34;db&#34;, DatabaseArgs.builder()        
  *             .instance(instance.name())
+ *             .name(&#34;db&#34;)
  *             .build());
  * 
  *         var pwd = new RandomPassword(&#34;pwd&#34;, RandomPasswordArgs.builder()        
@@ -738,6 +743,7 @@ import javax.annotation.Nullable;
  *             .build());
  * 
  *         var user = new User(&#34;user&#34;, UserArgs.builder()        
+ *             .name(&#34;user&#34;)
  *             .instance(instance.name())
  *             .host(&#34;%&#34;)
  *             .password(pwd.result())
@@ -789,9 +795,7 @@ import javax.annotation.Nullable;
  *                     .build())
  *                 .build())
  *             .backfillNone()
- *             .build(), CustomResourceOptions.builder()
- *                 .dependsOn(bigqueryKeyUser)
- *                 .build());
+ *             .build());
  * 
  *     }
  * }

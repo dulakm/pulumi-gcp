@@ -41,7 +41,6 @@ import javax.annotation.Nullable;
  * import com.pulumi.gcp.workstations.WorkstationConfigArgs;
  * import com.pulumi.gcp.workstations.inputs.WorkstationConfigHostArgs;
  * import com.pulumi.gcp.workstations.inputs.WorkstationConfigHostGceInstanceArgs;
- * import com.pulumi.resources.CustomResourceOptions;
  * import java.util.List;
  * import java.util.ArrayList;
  * import java.util.Map;
@@ -55,34 +54,30 @@ import javax.annotation.Nullable;
  *     }
  * 
  *     public static void stack(Context ctx) {
- *         var defaultNetwork = new Network(&#34;defaultNetwork&#34;, NetworkArgs.builder()        
+ *         var default_ = new Network(&#34;default&#34;, NetworkArgs.builder()        
+ *             .name(&#34;workstation-cluster&#34;)
  *             .autoCreateSubnetworks(false)
- *             .build(), CustomResourceOptions.builder()
- *                 .provider(google_beta)
- *                 .build());
+ *             .build());
  * 
- *         var defaultSubnetwork = new Subnetwork(&#34;defaultSubnetwork&#34;, SubnetworkArgs.builder()        
+ *         var defaultResource = new Subnetwork(&#34;defaultResource&#34;, SubnetworkArgs.builder()        
+ *             .name(&#34;workstation-cluster&#34;)
  *             .ipCidrRange(&#34;10.0.0.0/24&#34;)
  *             .region(&#34;us-central1&#34;)
- *             .network(defaultNetwork.name())
- *             .build(), CustomResourceOptions.builder()
- *                 .provider(google_beta)
- *                 .build());
+ *             .network(default_.name())
+ *             .build());
  * 
- *         var defaultWorkstationCluster = new WorkstationCluster(&#34;defaultWorkstationCluster&#34;, WorkstationClusterArgs.builder()        
+ *         var defaultResource2 = new WorkstationCluster(&#34;defaultResource2&#34;, WorkstationClusterArgs.builder()        
  *             .workstationClusterId(&#34;workstation-cluster&#34;)
- *             .network(defaultNetwork.id())
- *             .subnetwork(defaultSubnetwork.id())
+ *             .network(default_.id())
+ *             .subnetwork(defaultResource.id())
  *             .location(&#34;us-central1&#34;)
  *             .labels(Map.of(&#34;label&#34;, &#34;key&#34;))
  *             .annotations(Map.of(&#34;label-one&#34;, &#34;value-one&#34;))
- *             .build(), CustomResourceOptions.builder()
- *                 .provider(google_beta)
- *                 .build());
+ *             .build());
  * 
- *         var defaultWorkstationConfig = new WorkstationConfig(&#34;defaultWorkstationConfig&#34;, WorkstationConfigArgs.builder()        
+ *         var defaultResource3 = new WorkstationConfig(&#34;defaultResource3&#34;, WorkstationConfigArgs.builder()        
  *             .workstationConfigId(&#34;workstation-config&#34;)
- *             .workstationClusterId(defaultWorkstationCluster.workstationClusterId())
+ *             .workstationClusterId(defaultResource2.workstationClusterId())
  *             .location(&#34;us-central1&#34;)
  *             .idleTimeout(&#34;600s&#34;)
  *             .runningTimeout(&#34;21600s&#34;)
@@ -93,9 +88,7 @@ import javax.annotation.Nullable;
  *                     .disablePublicIpAddresses(true)
  *                     .build())
  *                 .build())
- *             .build(), CustomResourceOptions.builder()
- *                 .provider(google_beta)
- *                 .build());
+ *             .build());
  * 
  *     }
  * }
@@ -118,7 +111,6 @@ import javax.annotation.Nullable;
  * import com.pulumi.gcp.workstations.inputs.WorkstationConfigHostArgs;
  * import com.pulumi.gcp.workstations.inputs.WorkstationConfigHostGceInstanceArgs;
  * import com.pulumi.gcp.workstations.inputs.WorkstationConfigContainerArgs;
- * import com.pulumi.resources.CustomResourceOptions;
  * import java.util.List;
  * import java.util.ArrayList;
  * import java.util.Map;
@@ -132,34 +124,30 @@ import javax.annotation.Nullable;
  *     }
  * 
  *     public static void stack(Context ctx) {
- *         var defaultNetwork = new Network(&#34;defaultNetwork&#34;, NetworkArgs.builder()        
+ *         var default_ = new Network(&#34;default&#34;, NetworkArgs.builder()        
+ *             .name(&#34;workstation-cluster&#34;)
  *             .autoCreateSubnetworks(false)
- *             .build(), CustomResourceOptions.builder()
- *                 .provider(google_beta)
- *                 .build());
+ *             .build());
  * 
- *         var defaultSubnetwork = new Subnetwork(&#34;defaultSubnetwork&#34;, SubnetworkArgs.builder()        
+ *         var defaultResource = new Subnetwork(&#34;defaultResource&#34;, SubnetworkArgs.builder()        
+ *             .name(&#34;workstation-cluster&#34;)
  *             .ipCidrRange(&#34;10.0.0.0/24&#34;)
  *             .region(&#34;us-central1&#34;)
- *             .network(defaultNetwork.name())
- *             .build(), CustomResourceOptions.builder()
- *                 .provider(google_beta)
- *                 .build());
+ *             .network(default_.name())
+ *             .build());
  * 
- *         var defaultWorkstationCluster = new WorkstationCluster(&#34;defaultWorkstationCluster&#34;, WorkstationClusterArgs.builder()        
+ *         var defaultResource2 = new WorkstationCluster(&#34;defaultResource2&#34;, WorkstationClusterArgs.builder()        
  *             .workstationClusterId(&#34;workstation-cluster&#34;)
- *             .network(defaultNetwork.id())
- *             .subnetwork(defaultSubnetwork.id())
+ *             .network(default_.id())
+ *             .subnetwork(defaultResource.id())
  *             .location(&#34;us-central1&#34;)
  *             .labels(Map.of(&#34;label&#34;, &#34;key&#34;))
  *             .annotations(Map.of(&#34;label-one&#34;, &#34;value-one&#34;))
- *             .build(), CustomResourceOptions.builder()
- *                 .provider(google_beta)
- *                 .build());
+ *             .build());
  * 
- *         var defaultWorkstationConfig = new WorkstationConfig(&#34;defaultWorkstationConfig&#34;, WorkstationConfigArgs.builder()        
+ *         var defaultResource3 = new WorkstationConfig(&#34;defaultResource3&#34;, WorkstationConfigArgs.builder()        
  *             .workstationConfigId(&#34;workstation-config&#34;)
- *             .workstationClusterId(defaultWorkstationCluster.workstationClusterId())
+ *             .workstationClusterId(defaultResource2.workstationClusterId())
  *             .location(&#34;us-central1&#34;)
  *             .host(WorkstationConfigHostArgs.builder()
  *                 .gceInstance(WorkstationConfigHostGceInstanceArgs.builder()
@@ -176,9 +164,7 @@ import javax.annotation.Nullable;
  *                     Map.entry(&#34;BABE&#34;, &#34;bar&#34;)
  *                 ))
  *                 .build())
- *             .build(), CustomResourceOptions.builder()
- *                 .provider(google_beta)
- *                 .build());
+ *             .build());
  * 
  *     }
  * }
@@ -203,7 +189,6 @@ import javax.annotation.Nullable;
  * import com.pulumi.gcp.workstations.inputs.WorkstationConfigHostGceInstanceShieldedInstanceConfigArgs;
  * import com.pulumi.gcp.workstations.inputs.WorkstationConfigPersistentDirectoryArgs;
  * import com.pulumi.gcp.workstations.inputs.WorkstationConfigPersistentDirectoryGcePdArgs;
- * import com.pulumi.resources.CustomResourceOptions;
  * import java.util.List;
  * import java.util.ArrayList;
  * import java.util.Map;
@@ -217,34 +202,30 @@ import javax.annotation.Nullable;
  *     }
  * 
  *     public static void stack(Context ctx) {
- *         var defaultNetwork = new Network(&#34;defaultNetwork&#34;, NetworkArgs.builder()        
+ *         var default_ = new Network(&#34;default&#34;, NetworkArgs.builder()        
+ *             .name(&#34;workstation-cluster&#34;)
  *             .autoCreateSubnetworks(false)
- *             .build(), CustomResourceOptions.builder()
- *                 .provider(google_beta)
- *                 .build());
+ *             .build());
  * 
- *         var defaultSubnetwork = new Subnetwork(&#34;defaultSubnetwork&#34;, SubnetworkArgs.builder()        
+ *         var defaultResource = new Subnetwork(&#34;defaultResource&#34;, SubnetworkArgs.builder()        
+ *             .name(&#34;workstation-cluster&#34;)
  *             .ipCidrRange(&#34;10.0.0.0/24&#34;)
  *             .region(&#34;us-central1&#34;)
- *             .network(defaultNetwork.name())
- *             .build(), CustomResourceOptions.builder()
- *                 .provider(google_beta)
- *                 .build());
+ *             .network(default_.name())
+ *             .build());
  * 
- *         var defaultWorkstationCluster = new WorkstationCluster(&#34;defaultWorkstationCluster&#34;, WorkstationClusterArgs.builder()        
+ *         var defaultResource2 = new WorkstationCluster(&#34;defaultResource2&#34;, WorkstationClusterArgs.builder()        
  *             .workstationClusterId(&#34;workstation-cluster&#34;)
- *             .network(defaultNetwork.id())
- *             .subnetwork(defaultSubnetwork.id())
+ *             .network(default_.id())
+ *             .subnetwork(defaultResource.id())
  *             .location(&#34;us-central1&#34;)
  *             .labels(Map.of(&#34;label&#34;, &#34;key&#34;))
  *             .annotations(Map.of(&#34;label-one&#34;, &#34;value-one&#34;))
- *             .build(), CustomResourceOptions.builder()
- *                 .provider(google_beta)
- *                 .build());
+ *             .build());
  * 
- *         var defaultWorkstationConfig = new WorkstationConfig(&#34;defaultWorkstationConfig&#34;, WorkstationConfigArgs.builder()        
+ *         var defaultResource3 = new WorkstationConfig(&#34;defaultResource3&#34;, WorkstationConfigArgs.builder()        
  *             .workstationConfigId(&#34;workstation-config&#34;)
- *             .workstationClusterId(defaultWorkstationCluster.workstationClusterId())
+ *             .workstationClusterId(defaultResource2.workstationClusterId())
  *             .location(&#34;us-central1&#34;)
  *             .host(WorkstationConfigHostArgs.builder()
  *                 .gceInstance(WorkstationConfigHostGceInstanceArgs.builder()
@@ -266,9 +247,7 @@ import javax.annotation.Nullable;
  *                     .reclaimPolicy(&#34;DELETE&#34;)
  *                     .build())
  *                 .build())
- *             .build(), CustomResourceOptions.builder()
- *                 .provider(google_beta)
- *                 .build());
+ *             .build());
  * 
  *     }
  * }
@@ -294,7 +273,6 @@ import javax.annotation.Nullable;
  * import com.pulumi.gcp.workstations.WorkstationConfigArgs;
  * import com.pulumi.gcp.workstations.inputs.WorkstationConfigPersistentDirectoryArgs;
  * import com.pulumi.gcp.workstations.inputs.WorkstationConfigPersistentDirectoryGcePdArgs;
- * import com.pulumi.resources.CustomResourceOptions;
  * import java.util.List;
  * import java.util.ArrayList;
  * import java.util.Map;
@@ -308,48 +286,42 @@ import javax.annotation.Nullable;
  *     }
  * 
  *     public static void stack(Context ctx) {
- *         var defaultNetwork = new Network(&#34;defaultNetwork&#34;, NetworkArgs.builder()        
+ *         var default_ = new Network(&#34;default&#34;, NetworkArgs.builder()        
+ *             .name(&#34;workstation-cluster&#34;)
  *             .autoCreateSubnetworks(false)
- *             .build(), CustomResourceOptions.builder()
- *                 .provider(google_beta)
- *                 .build());
+ *             .build());
  * 
- *         var defaultSubnetwork = new Subnetwork(&#34;defaultSubnetwork&#34;, SubnetworkArgs.builder()        
+ *         var defaultResource = new Subnetwork(&#34;defaultResource&#34;, SubnetworkArgs.builder()        
+ *             .name(&#34;workstation-cluster&#34;)
  *             .ipCidrRange(&#34;10.0.0.0/24&#34;)
  *             .region(&#34;us-central1&#34;)
- *             .network(defaultNetwork.name())
- *             .build(), CustomResourceOptions.builder()
- *                 .provider(google_beta)
- *                 .build());
+ *             .network(default_.name())
+ *             .build());
  * 
  *         var mySourceDisk = new Disk(&#34;mySourceDisk&#34;, DiskArgs.builder()        
+ *             .name(&#34;workstation-config&#34;)
  *             .size(10)
  *             .type(&#34;pd-ssd&#34;)
  *             .zone(&#34;us-central1-a&#34;)
- *             .build(), CustomResourceOptions.builder()
- *                 .provider(google_beta)
- *                 .build());
+ *             .build());
  * 
  *         var mySourceSnapshot = new Snapshot(&#34;mySourceSnapshot&#34;, SnapshotArgs.builder()        
+ *             .name(&#34;workstation-config&#34;)
  *             .sourceDisk(mySourceDisk.name())
  *             .zone(&#34;us-central1-a&#34;)
- *             .build(), CustomResourceOptions.builder()
- *                 .provider(google_beta)
- *                 .build());
+ *             .build());
  * 
- *         var defaultWorkstationCluster = new WorkstationCluster(&#34;defaultWorkstationCluster&#34;, WorkstationClusterArgs.builder()        
+ *         var defaultResource2 = new WorkstationCluster(&#34;defaultResource2&#34;, WorkstationClusterArgs.builder()        
  *             .workstationClusterId(&#34;workstation-cluster&#34;)
- *             .network(defaultNetwork.id())
- *             .subnetwork(defaultSubnetwork.id())
+ *             .network(default_.id())
+ *             .subnetwork(defaultResource.id())
  *             .location(&#34;us-central1&#34;)
- *             .build(), CustomResourceOptions.builder()
- *                 .provider(google_beta)
- *                 .build());
+ *             .build());
  * 
- *         var defaultWorkstationConfig = new WorkstationConfig(&#34;defaultWorkstationConfig&#34;, WorkstationConfigArgs.builder()        
+ *         var defaultResource3 = new WorkstationConfig(&#34;defaultResource3&#34;, WorkstationConfigArgs.builder()        
  *             .workstationConfigId(&#34;workstation-config&#34;)
- *             .workstationClusterId(defaultWorkstationCluster.workstationClusterId())
- *             .location(defaultWorkstationCluster.location())
+ *             .workstationClusterId(defaultResource2.workstationClusterId())
+ *             .location(defaultResource2.location())
  *             .persistentDirectories(WorkstationConfigPersistentDirectoryArgs.builder()
  *                 .mountPath(&#34;/home&#34;)
  *                 .gcePd(WorkstationConfigPersistentDirectoryGcePdArgs.builder()
@@ -357,9 +329,7 @@ import javax.annotation.Nullable;
  *                     .reclaimPolicy(&#34;DELETE&#34;)
  *                     .build())
  *                 .build())
- *             .build(), CustomResourceOptions.builder()
- *                 .provider(google_beta)
- *                 .build());
+ *             .build());
  * 
  *     }
  * }
@@ -382,7 +352,6 @@ import javax.annotation.Nullable;
  * import com.pulumi.gcp.workstations.inputs.WorkstationConfigHostArgs;
  * import com.pulumi.gcp.workstations.inputs.WorkstationConfigHostGceInstanceArgs;
  * import com.pulumi.gcp.workstations.inputs.WorkstationConfigHostGceInstanceShieldedInstanceConfigArgs;
- * import com.pulumi.resources.CustomResourceOptions;
  * import java.util.List;
  * import java.util.ArrayList;
  * import java.util.Map;
@@ -396,34 +365,30 @@ import javax.annotation.Nullable;
  *     }
  * 
  *     public static void stack(Context ctx) {
- *         var defaultNetwork = new Network(&#34;defaultNetwork&#34;, NetworkArgs.builder()        
+ *         var default_ = new Network(&#34;default&#34;, NetworkArgs.builder()        
+ *             .name(&#34;workstation-cluster&#34;)
  *             .autoCreateSubnetworks(false)
- *             .build(), CustomResourceOptions.builder()
- *                 .provider(google_beta)
- *                 .build());
+ *             .build());
  * 
- *         var defaultSubnetwork = new Subnetwork(&#34;defaultSubnetwork&#34;, SubnetworkArgs.builder()        
+ *         var defaultResource = new Subnetwork(&#34;defaultResource&#34;, SubnetworkArgs.builder()        
+ *             .name(&#34;workstation-cluster&#34;)
  *             .ipCidrRange(&#34;10.0.0.0/24&#34;)
  *             .region(&#34;us-central1&#34;)
- *             .network(defaultNetwork.name())
- *             .build(), CustomResourceOptions.builder()
- *                 .provider(google_beta)
- *                 .build());
+ *             .network(default_.name())
+ *             .build());
  * 
- *         var defaultWorkstationCluster = new WorkstationCluster(&#34;defaultWorkstationCluster&#34;, WorkstationClusterArgs.builder()        
+ *         var defaultResource2 = new WorkstationCluster(&#34;defaultResource2&#34;, WorkstationClusterArgs.builder()        
  *             .workstationClusterId(&#34;workstation-cluster&#34;)
- *             .network(defaultNetwork.id())
- *             .subnetwork(defaultSubnetwork.id())
+ *             .network(default_.id())
+ *             .subnetwork(defaultResource.id())
  *             .location(&#34;us-central1&#34;)
  *             .labels(Map.of(&#34;label&#34;, &#34;key&#34;))
  *             .annotations(Map.of(&#34;label-one&#34;, &#34;value-one&#34;))
- *             .build(), CustomResourceOptions.builder()
- *                 .provider(google_beta)
- *                 .build());
+ *             .build());
  * 
- *         var defaultWorkstationConfig = new WorkstationConfig(&#34;defaultWorkstationConfig&#34;, WorkstationConfigArgs.builder()        
+ *         var defaultResource3 = new WorkstationConfig(&#34;defaultResource3&#34;, WorkstationConfigArgs.builder()        
  *             .workstationConfigId(&#34;workstation-config&#34;)
- *             .workstationClusterId(defaultWorkstationCluster.workstationClusterId())
+ *             .workstationClusterId(defaultResource2.workstationClusterId())
  *             .location(&#34;us-central1&#34;)
  *             .host(WorkstationConfigHostArgs.builder()
  *                 .gceInstance(WorkstationConfigHostGceInstanceArgs.builder()
@@ -436,9 +401,7 @@ import javax.annotation.Nullable;
  *                         .build())
  *                     .build())
  *                 .build())
- *             .build(), CustomResourceOptions.builder()
- *                 .provider(google_beta)
- *                 .build());
+ *             .build());
  * 
  *     }
  * }
@@ -460,7 +423,6 @@ import javax.annotation.Nullable;
  * import com.pulumi.gcp.workstations.WorkstationConfigArgs;
  * import com.pulumi.gcp.workstations.inputs.WorkstationConfigHostArgs;
  * import com.pulumi.gcp.workstations.inputs.WorkstationConfigHostGceInstanceArgs;
- * import com.pulumi.resources.CustomResourceOptions;
  * import java.util.List;
  * import java.util.ArrayList;
  * import java.util.Map;
@@ -474,34 +436,30 @@ import javax.annotation.Nullable;
  *     }
  * 
  *     public static void stack(Context ctx) {
- *         var defaultNetwork = new Network(&#34;defaultNetwork&#34;, NetworkArgs.builder()        
+ *         var default_ = new Network(&#34;default&#34;, NetworkArgs.builder()        
+ *             .name(&#34;workstation-cluster&#34;)
  *             .autoCreateSubnetworks(false)
- *             .build(), CustomResourceOptions.builder()
- *                 .provider(google_beta)
- *                 .build());
+ *             .build());
  * 
- *         var defaultSubnetwork = new Subnetwork(&#34;defaultSubnetwork&#34;, SubnetworkArgs.builder()        
+ *         var defaultResource = new Subnetwork(&#34;defaultResource&#34;, SubnetworkArgs.builder()        
+ *             .name(&#34;workstation-cluster&#34;)
  *             .ipCidrRange(&#34;10.0.0.0/24&#34;)
  *             .region(&#34;us-central1&#34;)
- *             .network(defaultNetwork.name())
- *             .build(), CustomResourceOptions.builder()
- *                 .provider(google_beta)
- *                 .build());
+ *             .network(default_.name())
+ *             .build());
  * 
- *         var defaultWorkstationCluster = new WorkstationCluster(&#34;defaultWorkstationCluster&#34;, WorkstationClusterArgs.builder()        
+ *         var defaultResource2 = new WorkstationCluster(&#34;defaultResource2&#34;, WorkstationClusterArgs.builder()        
  *             .workstationClusterId(&#34;workstation-cluster&#34;)
- *             .network(defaultNetwork.id())
- *             .subnetwork(defaultSubnetwork.id())
+ *             .network(default_.id())
+ *             .subnetwork(defaultResource.id())
  *             .location(&#34;us-central1&#34;)
  *             .labels(Map.of(&#34;label&#34;, &#34;key&#34;))
  *             .annotations(Map.of(&#34;label-one&#34;, &#34;value-one&#34;))
- *             .build(), CustomResourceOptions.builder()
- *                 .provider(google_beta)
- *                 .build());
+ *             .build());
  * 
- *         var defaultWorkstationConfig = new WorkstationConfig(&#34;defaultWorkstationConfig&#34;, WorkstationConfigArgs.builder()        
+ *         var defaultResource3 = new WorkstationConfig(&#34;defaultResource3&#34;, WorkstationConfigArgs.builder()        
  *             .workstationConfigId(&#34;workstation-config&#34;)
- *             .workstationClusterId(defaultWorkstationCluster.workstationClusterId())
+ *             .workstationClusterId(defaultResource2.workstationClusterId())
  *             .location(&#34;us-central1&#34;)
  *             .host(WorkstationConfigHostArgs.builder()
  *                 .gceInstance(WorkstationConfigHostGceInstanceArgs.builder()
@@ -514,9 +472,7 @@ import javax.annotation.Nullable;
  *                         .build())
  *                     .build())
  *                 .build())
- *             .build(), CustomResourceOptions.builder()
- *                 .provider(google_beta)
- *                 .build());
+ *             .build());
  * 
  *     }
  * }
@@ -546,7 +502,6 @@ import javax.annotation.Nullable;
  * import com.pulumi.gcp.workstations.inputs.WorkstationConfigHostGceInstanceArgs;
  * import com.pulumi.gcp.workstations.inputs.WorkstationConfigHostGceInstanceShieldedInstanceConfigArgs;
  * import com.pulumi.gcp.workstations.inputs.WorkstationConfigEncryptionKeyArgs;
- * import com.pulumi.resources.CustomResourceOptions;
  * import java.util.List;
  * import java.util.ArrayList;
  * import java.util.Map;
@@ -560,53 +515,45 @@ import javax.annotation.Nullable;
  *     }
  * 
  *     public static void stack(Context ctx) {
- *         var defaultNetwork = new Network(&#34;defaultNetwork&#34;, NetworkArgs.builder()        
+ *         var default_ = new Network(&#34;default&#34;, NetworkArgs.builder()        
+ *             .name(&#34;workstation-cluster&#34;)
  *             .autoCreateSubnetworks(false)
- *             .build(), CustomResourceOptions.builder()
- *                 .provider(google_beta)
- *                 .build());
+ *             .build());
  * 
- *         var defaultSubnetwork = new Subnetwork(&#34;defaultSubnetwork&#34;, SubnetworkArgs.builder()        
+ *         var defaultResource = new Subnetwork(&#34;defaultResource&#34;, SubnetworkArgs.builder()        
+ *             .name(&#34;workstation-cluster&#34;)
  *             .ipCidrRange(&#34;10.0.0.0/24&#34;)
  *             .region(&#34;us-central1&#34;)
- *             .network(defaultNetwork.name())
- *             .build(), CustomResourceOptions.builder()
- *                 .provider(google_beta)
- *                 .build());
+ *             .network(default_.name())
+ *             .build());
  * 
- *         var defaultWorkstationCluster = new WorkstationCluster(&#34;defaultWorkstationCluster&#34;, WorkstationClusterArgs.builder()        
+ *         var defaultResource2 = new WorkstationCluster(&#34;defaultResource2&#34;, WorkstationClusterArgs.builder()        
  *             .workstationClusterId(&#34;workstation-cluster&#34;)
- *             .network(defaultNetwork.id())
- *             .subnetwork(defaultSubnetwork.id())
+ *             .network(default_.id())
+ *             .subnetwork(defaultResource.id())
  *             .location(&#34;us-central1&#34;)
  *             .labels(Map.of(&#34;label&#34;, &#34;key&#34;))
  *             .annotations(Map.of(&#34;label-one&#34;, &#34;value-one&#34;))
- *             .build(), CustomResourceOptions.builder()
- *                 .provider(google_beta)
- *                 .build());
+ *             .build());
  * 
- *         var defaultKeyRing = new KeyRing(&#34;defaultKeyRing&#34;, KeyRingArgs.builder()        
+ *         var defaultResource3 = new KeyRing(&#34;defaultResource3&#34;, KeyRingArgs.builder()        
+ *             .name(&#34;workstation-cluster&#34;)
  *             .location(&#34;us-central1&#34;)
- *             .build(), CustomResourceOptions.builder()
- *                 .provider(google_beta)
- *                 .build());
+ *             .build());
  * 
- *         var defaultCryptoKey = new CryptoKey(&#34;defaultCryptoKey&#34;, CryptoKeyArgs.builder()        
- *             .keyRing(defaultKeyRing.id())
- *             .build(), CustomResourceOptions.builder()
- *                 .provider(google_beta)
- *                 .build());
+ *         var defaultResource4 = new CryptoKey(&#34;defaultResource4&#34;, CryptoKeyArgs.builder()        
+ *             .name(&#34;workstation-cluster&#34;)
+ *             .keyRing(defaultResource3.id())
+ *             .build());
  * 
- *         var defaultAccount = new Account(&#34;defaultAccount&#34;, AccountArgs.builder()        
+ *         var defaultResource5 = new Account(&#34;defaultResource5&#34;, AccountArgs.builder()        
  *             .accountId(&#34;my-account&#34;)
  *             .displayName(&#34;Service Account&#34;)
- *             .build(), CustomResourceOptions.builder()
- *                 .provider(google_beta)
- *                 .build());
+ *             .build());
  * 
- *         var defaultWorkstationConfig = new WorkstationConfig(&#34;defaultWorkstationConfig&#34;, WorkstationConfigArgs.builder()        
+ *         var defaultResource6 = new WorkstationConfig(&#34;defaultResource6&#34;, WorkstationConfigArgs.builder()        
  *             .workstationConfigId(&#34;workstation-config&#34;)
- *             .workstationClusterId(defaultWorkstationCluster.workstationClusterId())
+ *             .workstationClusterId(defaultResource2.workstationClusterId())
  *             .location(&#34;us-central1&#34;)
  *             .host(WorkstationConfigHostArgs.builder()
  *                 .gceInstance(WorkstationConfigHostGceInstanceArgs.builder()
@@ -620,12 +567,10 @@ import javax.annotation.Nullable;
  *                     .build())
  *                 .build())
  *             .encryptionKey(WorkstationConfigEncryptionKeyArgs.builder()
- *                 .kmsKey(defaultCryptoKey.id())
- *                 .kmsKeyServiceAccount(defaultAccount.email())
+ *                 .kmsKey(defaultResource4.id())
+ *                 .kmsKeyServiceAccount(defaultResource5.email())
  *                 .build())
- *             .build(), CustomResourceOptions.builder()
- *                 .provider(google_beta)
- *                 .build());
+ *             .build());
  * 
  *     }
  * }

@@ -59,6 +59,7 @@ import javax.annotation.Nullable;
  * 
  *     public static void stack(Context ctx) {
  *         var cluster = new Cluster(&#34;cluster&#34;, ClusterArgs.builder()        
+ *             .name(&#34;my-cluster&#34;)
  *             .location(&#34;us-central1-a&#34;)
  *             .initialNodeCount(1)
  *             .build());
@@ -74,6 +75,7 @@ import javax.annotation.Nullable;
  *             .build());
  * 
  *         var feature = new Feature(&#34;feature&#34;, FeatureArgs.builder()        
+ *             .name(&#34;multiclusteringress&#34;)
  *             .location(&#34;global&#34;)
  *             .spec(FeatureSpecArgs.builder()
  *                 .multiclusteringress(FeatureSpecMulticlusteringressArgs.builder()
@@ -108,8 +110,9 @@ import javax.annotation.Nullable;
  * 
  *     public static void stack(Context ctx) {
  *         var feature = new Feature(&#34;feature&#34;, FeatureArgs.builder()        
- *             .labels(Map.of(&#34;foo&#34;, &#34;bar&#34;))
+ *             .name(&#34;multiclusterservicediscovery&#34;)
  *             .location(&#34;global&#34;)
+ *             .labels(Map.of(&#34;foo&#34;, &#34;bar&#34;))
  *             .build());
  * 
  *     }
@@ -138,6 +141,7 @@ import javax.annotation.Nullable;
  * 
  *     public static void stack(Context ctx) {
  *         var feature = new Feature(&#34;feature&#34;, FeatureArgs.builder()        
+ *             .name(&#34;servicemesh&#34;)
  *             .location(&#34;global&#34;)
  *             .build());
  * 
@@ -171,6 +175,7 @@ import javax.annotation.Nullable;
  * 
  *     public static void stack(Context ctx) {
  *         var feature = new Feature(&#34;feature&#34;, FeatureArgs.builder()        
+ *             .name(&#34;fleetobservability&#34;)
  *             .location(&#34;global&#34;)
  *             .spec(FeatureSpecArgs.builder()
  *                 .fleetobservability(FeatureSpecFleetobservabilityArgs.builder()
@@ -213,6 +218,7 @@ import javax.annotation.Nullable;
  * 
  *     public static void stack(Context ctx) {
  *         var feature = new Feature(&#34;feature&#34;, FeatureArgs.builder()        
+ *             .name(&#34;fleetobservability&#34;)
  *             .location(&#34;global&#34;)
  *             .spec(FeatureSpecArgs.builder()
  *                 .fleetobservability(FeatureSpecFleetobservabilityArgs.builder()
@@ -256,6 +262,7 @@ import javax.annotation.Nullable;
  * 
  *     public static void stack(Context ctx) {
  *         var feature = new Feature(&#34;feature&#34;, FeatureArgs.builder()        
+ *             .name(&#34;fleetobservability&#34;)
  *             .location(&#34;global&#34;)
  *             .spec(FeatureSpecArgs.builder()
  *                 .fleetobservability(FeatureSpecFleetobservabilityArgs.builder()

@@ -41,6 +41,7 @@ import javax.annotation.Nullable;
  * import com.pulumi.Pulumi;
  * import com.pulumi.core.Output;
  * import com.pulumi.gcp.iot.Registry;
+ * import com.pulumi.gcp.iot.RegistryArgs;
  * import com.pulumi.gcp.iot.Device;
  * import com.pulumi.gcp.iot.DeviceArgs;
  * import java.util.List;
@@ -56,9 +57,12 @@ import javax.annotation.Nullable;
  *     }
  * 
  *     public static void stack(Context ctx) {
- *         var registry = new Registry(&#34;registry&#34;);
+ *         var registry = new Registry(&#34;registry&#34;, RegistryArgs.builder()        
+ *             .name(&#34;cloudiot-device-registry&#34;)
+ *             .build());
  * 
  *         var test_device = new Device(&#34;test-device&#34;, DeviceArgs.builder()        
+ *             .name(&#34;cloudiot-device&#34;)
  *             .registry(registry.id())
  *             .build());
  * 
@@ -73,6 +77,7 @@ import javax.annotation.Nullable;
  * import com.pulumi.Pulumi;
  * import com.pulumi.core.Output;
  * import com.pulumi.gcp.iot.Registry;
+ * import com.pulumi.gcp.iot.RegistryArgs;
  * import com.pulumi.gcp.iot.Device;
  * import com.pulumi.gcp.iot.DeviceArgs;
  * import com.pulumi.gcp.iot.inputs.DeviceCredentialArgs;
@@ -91,19 +96,24 @@ import javax.annotation.Nullable;
  *     }
  * 
  *     public static void stack(Context ctx) {
- *         var registry = new Registry(&#34;registry&#34;);
+ *         var registry = new Registry(&#34;registry&#34;, RegistryArgs.builder()        
+ *             .name(&#34;cloudiot-device-registry&#34;)
+ *             .build());
  * 
  *         var test_device = new Device(&#34;test-device&#34;, DeviceArgs.builder()        
+ *             .name(&#34;cloudiot-device&#34;)
  *             .registry(registry.id())
  *             .credentials(DeviceCredentialArgs.builder()
  *                 .publicKey(DeviceCredentialPublicKeyArgs.builder()
  *                     .format(&#34;RSA_PEM&#34;)
- *                     .key(Files.readString(Paths.get(&#34;test-fixtures/rsa_public.pem&#34;)))
+ *                     .key(StdFunctions.file(FileArgs.builder()
+ *                         .input(&#34;test-fixtures/rsa_public.pem&#34;)
+ *                         .build()).result())
  *                     .build())
  *                 .build())
  *             .blocked(false)
  *             .logLevel(&#34;INFO&#34;)
- *             .metadata(Map.of(&#34;test_key_1&#34;, &#34;test_value_1&#34;))
+ *             .metadata(Map.of(&#34;testKey1&#34;, &#34;test_value_1&#34;))
  *             .gatewayConfig(DeviceGatewayConfigArgs.builder()
  *                 .gatewayType(&#34;NON_GATEWAY&#34;)
  *                 .build())

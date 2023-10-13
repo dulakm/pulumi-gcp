@@ -100,10 +100,12 @@ import javax.annotation.Nullable;
  * 
  *     public static void stack(Context ctx) {
  *         var keyRing = new KeyRing(&#34;keyRing&#34;, KeyRingArgs.builder()        
+ *             .name(&#34;example-keyring&#34;)
  *             .location(&#34;us&#34;)
  *             .build());
  * 
  *         var cryptoKey = new CryptoKey(&#34;cryptoKey&#34;, CryptoKeyArgs.builder()        
+ *             .name(&#34;example-key&#34;)
  *             .keyRing(keyRing.id())
  *             .build());
  * 
@@ -228,13 +230,13 @@ import javax.annotation.Nullable;
  *     }
  * 
  *     public static void stack(Context ctx) {
- *         var publicDataset = new Dataset(&#34;publicDataset&#34;, DatasetArgs.builder()        
+ *         var public_ = new Dataset(&#34;public&#34;, DatasetArgs.builder()        
  *             .datasetId(&#34;public_dataset&#34;)
  *             .description(&#34;This dataset is public&#34;)
  *             .build());
  * 
- *         var publicRoutine = new Routine(&#34;publicRoutine&#34;, RoutineArgs.builder()        
- *             .datasetId(publicDataset.datasetId())
+ *         var publicResource = new Routine(&#34;publicResource&#34;, RoutineArgs.builder()        
+ *             .datasetId(public_.datasetId())
  *             .routineId(&#34;public_routine&#34;)
  *             .routineType(&#34;TABLE_VALUED_FUNCTION&#34;)
  *             .language(&#34;SQL&#34;)
@@ -270,9 +272,9 @@ import javax.annotation.Nullable;
  *                     .build(),
  *                 DatasetAccessArgs.builder()
  *                     .routine(DatasetAccessRoutineArgs.builder()
- *                         .projectId(publicRoutine.project())
- *                         .datasetId(publicRoutine.datasetId())
- *                         .routineId(publicRoutine.routineId())
+ *                         .projectId(publicResource.project())
+ *                         .datasetId(publicResource.datasetId())
+ *                         .routineId(publicResource.routineId())
  *                         .build())
  *                     .build())
  *             .build());

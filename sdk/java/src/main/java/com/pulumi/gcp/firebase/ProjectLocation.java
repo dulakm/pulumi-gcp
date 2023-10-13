@@ -45,7 +45,6 @@ import javax.annotation.Nullable;
  * import com.pulumi.gcp.firebase.ProjectArgs;
  * import com.pulumi.gcp.firebase.ProjectLocation;
  * import com.pulumi.gcp.firebase.ProjectLocationArgs;
- * import com.pulumi.resources.CustomResourceOptions;
  * import java.util.List;
  * import java.util.ArrayList;
  * import java.util.Map;
@@ -59,26 +58,21 @@ import javax.annotation.Nullable;
  *     }
  * 
  *     public static void stack(Context ctx) {
- *         var defaultProject = new Project(&#34;defaultProject&#34;, ProjectArgs.builder()        
+ *         var default_ = new Project(&#34;default&#34;, ProjectArgs.builder()        
  *             .projectId(&#34;my-project&#34;)
+ *             .name(&#34;my-project&#34;)
  *             .orgId(&#34;123456789&#34;)
  *             .labels(Map.of(&#34;firebase&#34;, &#34;enabled&#34;))
- *             .build(), CustomResourceOptions.builder()
- *                 .provider(google_beta)
- *                 .build());
+ *             .build());
  * 
- *         var defaultFirebase_projectProject = new Project(&#34;defaultFirebase/projectProject&#34;, ProjectArgs.builder()        
- *             .project(defaultProject.projectId())
- *             .build(), CustomResourceOptions.builder()
- *                 .provider(google_beta)
- *                 .build());
+ *         var defaultResource = new Project(&#34;defaultResource&#34;, ProjectArgs.builder()        
+ *             .project(default_.projectId())
+ *             .build());
  * 
  *         var basic = new ProjectLocation(&#34;basic&#34;, ProjectLocationArgs.builder()        
- *             .project(defaultFirebase / projectProject.project())
+ *             .project(defaultResource.project())
  *             .locationId(&#34;us-central&#34;)
- *             .build(), CustomResourceOptions.builder()
- *                 .provider(google_beta)
- *                 .build());
+ *             .build());
  * 
  *     }
  * }

@@ -40,7 +40,6 @@ import javax.annotation.Nullable;
  * import com.pulumi.gcp.gkeonprem.VMwareNodePool;
  * import com.pulumi.gcp.gkeonprem.VMwareNodePoolArgs;
  * import com.pulumi.gcp.gkeonprem.inputs.VMwareNodePoolConfigArgs;
- * import com.pulumi.resources.CustomResourceOptions;
  * import java.util.List;
  * import java.util.ArrayList;
  * import java.util.Map;
@@ -55,6 +54,7 @@ import javax.annotation.Nullable;
  * 
  *     public static void stack(Context ctx) {
  *         var default_basic = new VMwareCluster(&#34;default-basic&#34;, VMwareClusterArgs.builder()        
+ *             .name(&#34;my-cluster&#34;)
  *             .location(&#34;us-west1&#34;)
  *             .adminClusterMembership(&#34;projects/870316890899/locations/global/memberships/gkeonprem-terraform-test&#34;)
  *             .description(&#34;test cluster&#34;)
@@ -90,11 +90,10 @@ import javax.annotation.Nullable;
  *                             .build())
  *                     .build())
  *                 .build())
- *             .build(), CustomResourceOptions.builder()
- *                 .provider(google_beta)
- *                 .build());
+ *             .build());
  * 
  *         var nodepool_basic = new VMwareNodePool(&#34;nodepool-basic&#34;, VMwareNodePoolArgs.builder()        
+ *             .name(&#34;my-nodepool&#34;)
  *             .location(&#34;us-west1&#34;)
  *             .vmwareCluster(default_basic.name())
  *             .config(VMwareNodePoolConfigArgs.builder()
@@ -102,9 +101,7 @@ import javax.annotation.Nullable;
  *                 .imageType(&#34;ubuntu_containerd&#34;)
  *                 .enableLoadBalancer(true)
  *                 .build())
- *             .build(), CustomResourceOptions.builder()
- *                 .provider(google_beta)
- *                 .build());
+ *             .build());
  * 
  *     }
  * }
@@ -128,7 +125,6 @@ import javax.annotation.Nullable;
  * import com.pulumi.gcp.gkeonprem.VMwareNodePoolArgs;
  * import com.pulumi.gcp.gkeonprem.inputs.VMwareNodePoolConfigArgs;
  * import com.pulumi.gcp.gkeonprem.inputs.VMwareNodePoolNodePoolAutoscalingArgs;
- * import com.pulumi.resources.CustomResourceOptions;
  * import java.util.List;
  * import java.util.ArrayList;
  * import java.util.Map;
@@ -143,6 +139,7 @@ import javax.annotation.Nullable;
  * 
  *     public static void stack(Context ctx) {
  *         var default_full = new VMwareCluster(&#34;default-full&#34;, VMwareClusterArgs.builder()        
+ *             .name(&#34;my-cluster&#34;)
  *             .location(&#34;us-west1&#34;)
  *             .adminClusterMembership(&#34;projects/870316890899/locations/global/memberships/gkeonprem-terraform-test&#34;)
  *             .description(&#34;test cluster&#34;)
@@ -178,11 +175,10 @@ import javax.annotation.Nullable;
  *                             .build())
  *                     .build())
  *                 .build())
- *             .build(), CustomResourceOptions.builder()
- *                 .provider(google_beta)
- *                 .build());
+ *             .build());
  * 
  *         var nodepool_full = new VMwareNodePool(&#34;nodepool-full&#34;, VMwareNodePoolArgs.builder()        
+ *             .name(&#34;my-nodepool&#34;)
  *             .location(&#34;us-west1&#34;)
  *             .vmwareCluster(default_full.name())
  *             .annotations()
@@ -210,9 +206,7 @@ import javax.annotation.Nullable;
  *                 .minReplicas(1)
  *                 .maxReplicas(5)
  *                 .build())
- *             .build(), CustomResourceOptions.builder()
- *                 .provider(google_beta)
- *                 .build());
+ *             .build());
  * 
  *     }
  * }

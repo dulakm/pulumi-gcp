@@ -48,10 +48,10 @@ import javax.annotation.Nullable;
  * 
  *     public static void stack(Context ctx) {
  *         var default_ = new Realm(&#34;default&#34;, RealmArgs.builder()        
- *             .description(&#34;one of the nine&#34;)
- *             .location(&#34;global&#34;)
  *             .realmId(&#34;tf-test-realm&#34;)
  *             .timeZone(&#34;EST&#34;)
+ *             .location(&#34;global&#34;)
+ *             .description(&#34;one of the nine&#34;)
  *             .build());
  * 
  *     }

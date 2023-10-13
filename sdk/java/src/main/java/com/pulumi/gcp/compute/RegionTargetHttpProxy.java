@@ -27,7 +27,6 @@ import javax.annotation.Nullable;
  * 
  * ## Example Usage
  * ### Region Target Http Proxy Basic
- * 
  * ```java
  * package generated_program;
  * 
@@ -58,41 +57,45 @@ import javax.annotation.Nullable;
  *     }
  * 
  *     public static void stack(Context ctx) {
- *         var defaultRegionHealthCheck = new RegionHealthCheck(&#34;defaultRegionHealthCheck&#34;, RegionHealthCheckArgs.builder()        
+ *         var defaultResource3 = new RegionHealthCheck(&#34;defaultResource3&#34;, RegionHealthCheckArgs.builder()        
  *             .region(&#34;us-central1&#34;)
+ *             .name(&#34;http-health-check&#34;)
  *             .httpHealthCheck(RegionHealthCheckHttpHealthCheckArgs.builder()
  *                 .port(80)
  *                 .build())
  *             .build());
  * 
- *         var defaultRegionBackendService = new RegionBackendService(&#34;defaultRegionBackendService&#34;, RegionBackendServiceArgs.builder()        
+ *         var defaultResource2 = new RegionBackendService(&#34;defaultResource2&#34;, RegionBackendServiceArgs.builder()        
  *             .region(&#34;us-central1&#34;)
+ *             .name(&#34;backend-service&#34;)
  *             .protocol(&#34;HTTP&#34;)
  *             .timeoutSec(10)
  *             .loadBalancingScheme(&#34;INTERNAL_MANAGED&#34;)
- *             .healthChecks(defaultRegionHealthCheck.id())
+ *             .healthChecks(defaultResource3.id())
  *             .build());
  * 
- *         var defaultRegionUrlMap = new RegionUrlMap(&#34;defaultRegionUrlMap&#34;, RegionUrlMapArgs.builder()        
+ *         var defaultResource = new RegionUrlMap(&#34;defaultResource&#34;, RegionUrlMapArgs.builder()        
  *             .region(&#34;us-central1&#34;)
- *             .defaultService(defaultRegionBackendService.id())
+ *             .name(&#34;url-map&#34;)
+ *             .defaultService(defaultResource2.id())
  *             .hostRules(RegionUrlMapHostRuleArgs.builder()
  *                 .hosts(&#34;mysite.com&#34;)
  *                 .pathMatcher(&#34;allpaths&#34;)
  *                 .build())
  *             .pathMatchers(RegionUrlMapPathMatcherArgs.builder()
  *                 .name(&#34;allpaths&#34;)
- *                 .defaultService(defaultRegionBackendService.id())
+ *                 .defaultService(defaultResource2.id())
  *                 .pathRules(RegionUrlMapPathMatcherPathRuleArgs.builder()
  *                     .paths(&#34;/*&#34;)
- *                     .service(defaultRegionBackendService.id())
+ *                     .service(defaultResource2.id())
  *                     .build())
  *                 .build())
  *             .build());
  * 
- *         var defaultRegionTargetHttpProxy = new RegionTargetHttpProxy(&#34;defaultRegionTargetHttpProxy&#34;, RegionTargetHttpProxyArgs.builder()        
+ *         var default_ = new RegionTargetHttpProxy(&#34;default&#34;, RegionTargetHttpProxyArgs.builder()        
  *             .region(&#34;us-central1&#34;)
- *             .urlMap(defaultRegionUrlMap.id())
+ *             .name(&#34;test-proxy&#34;)
+ *             .urlMap(defaultResource.id())
  *             .build());
  * 
  *     }
@@ -123,17 +126,19 @@ import javax.annotation.Nullable;
  *     }
  * 
  *     public static void stack(Context ctx) {
- *         var defaultRegionUrlMap = new RegionUrlMap(&#34;defaultRegionUrlMap&#34;, RegionUrlMapArgs.builder()        
+ *         var defaultResource = new RegionUrlMap(&#34;defaultResource&#34;, RegionUrlMapArgs.builder()        
  *             .region(&#34;us-central1&#34;)
+ *             .name(&#34;url-map&#34;)
  *             .defaultUrlRedirect(RegionUrlMapDefaultUrlRedirectArgs.builder()
  *                 .httpsRedirect(true)
  *                 .stripQuery(false)
  *                 .build())
  *             .build());
  * 
- *         var defaultRegionTargetHttpProxy = new RegionTargetHttpProxy(&#34;defaultRegionTargetHttpProxy&#34;, RegionTargetHttpProxyArgs.builder()        
+ *         var default_ = new RegionTargetHttpProxy(&#34;default&#34;, RegionTargetHttpProxyArgs.builder()        
  *             .region(&#34;us-central1&#34;)
- *             .urlMap(defaultRegionUrlMap.id())
+ *             .name(&#34;test-https-redirect-proxy&#34;)
+ *             .urlMap(defaultResource.id())
  *             .build());
  * 
  *     }

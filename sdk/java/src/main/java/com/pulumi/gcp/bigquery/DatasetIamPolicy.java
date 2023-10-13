@@ -65,12 +65,12 @@ import javax.annotation.Nullable;
  *                 .build())
  *             .build());
  * 
- *         var datasetDataset = new Dataset(&#34;datasetDataset&#34;, DatasetArgs.builder()        
+ *         var datasetResource = new Dataset(&#34;datasetResource&#34;, DatasetArgs.builder()        
  *             .datasetId(&#34;example_dataset&#34;)
  *             .build());
  * 
- *         var datasetDatasetIamPolicy = new DatasetIamPolicy(&#34;datasetDatasetIamPolicy&#34;, DatasetIamPolicyArgs.builder()        
- *             .datasetId(datasetDataset.datasetId())
+ *         var dataset = new DatasetIamPolicy(&#34;dataset&#34;, DatasetIamPolicyArgs.builder()        
+ *             .datasetId(datasetResource.datasetId())
  *             .policyData(owner.applyValue(getIAMPolicyResult -&gt; getIAMPolicyResult.policyData()))
  *             .build());
  * 

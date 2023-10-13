@@ -55,6 +55,7 @@ import javax.annotation.Nullable;
  *             .build());
  * 
  *         var example = new Workflow(&#34;example&#34;, WorkflowArgs.builder()        
+ *             .name(&#34;workflow&#34;)
  *             .region(&#34;us-central1&#34;)
  *             .description(&#34;Magic&#34;)
  *             .serviceAccount(testAccount.id())
@@ -81,11 +82,11 @@ import javax.annotation.Nullable;
  *         url: https://en.wikipedia.org/w/api.php
  *         query:
  *             action: opensearch
- *             search: %s
+ *             search: ${currentTime.body.dayOfWeek}
  *     result: wikiResult
  * - returnOutput:
- *     return: %s
- * &#34;, currentTime.body().dayOfWeek(),wikiResult.body()[1]))
+ *     return: ${wikiResult.body[1]}
+ *             &#34;&#34;&#34;)
  *             .build());
  * 
  *     }

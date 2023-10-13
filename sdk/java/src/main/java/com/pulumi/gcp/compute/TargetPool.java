@@ -24,7 +24,6 @@ import javax.annotation.Nullable;
  * and [API](https://cloud.google.com/compute/docs/reference/latest/targetPools).
  * 
  * ## Example Usage
- * 
  * ```java
  * package generated_program;
  * 
@@ -48,17 +47,19 @@ import javax.annotation.Nullable;
  *     }
  * 
  *     public static void stack(Context ctx) {
- *         var defaultHttpHealthCheck = new HttpHealthCheck(&#34;defaultHttpHealthCheck&#34;, HttpHealthCheckArgs.builder()        
+ *         var defaultResource = new HttpHealthCheck(&#34;defaultResource&#34;, HttpHealthCheckArgs.builder()        
+ *             .name(&#34;default&#34;)
  *             .requestPath(&#34;/&#34;)
  *             .checkIntervalSec(1)
  *             .timeoutSec(1)
  *             .build());
  * 
- *         var defaultTargetPool = new TargetPool(&#34;defaultTargetPool&#34;, TargetPoolArgs.builder()        
+ *         var default_ = new TargetPool(&#34;default&#34;, TargetPoolArgs.builder()        
+ *             .name(&#34;instance-pool&#34;)
  *             .instances(            
  *                 &#34;us-central1-a/myinstance1&#34;,
  *                 &#34;us-central1-b/myinstance2&#34;)
- *             .healthChecks(defaultHttpHealthCheck.name())
+ *             .healthChecks(defaultResource.name())
  *             .build());
  * 
  *     }

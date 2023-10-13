@@ -50,11 +50,13 @@ import javax.annotation.Nullable;
  * 
  *     public static void stack(Context ctx) {
  *         var basic = new Project(&#34;basic&#34;, ProjectArgs.builder()        
- *             .orgId(&#34;123456789&#34;)
  *             .projectId(&#34;id&#34;)
+ *             .name(&#34;id&#34;)
+ *             .orgId(&#34;123456789&#34;)
  *             .build());
  * 
  *         var primary = new Policy(&#34;primary&#34;, PolicyArgs.builder()        
+ *             .name(basic.name().applyValue(name -&gt; String.format(&#34;projects/%s/policies/iam.disableServiceAccountKeyUpload&#34;, name)))
  *             .parent(basic.name().applyValue(name -&gt; String.format(&#34;projects/%s&#34;, name)))
  *             .spec(PolicySpecArgs.builder()
  *                 .rules(PolicySpecRuleArgs.builder()
@@ -98,6 +100,7 @@ import javax.annotation.Nullable;
  *             .build());
  * 
  *         var primary = new Policy(&#34;primary&#34;, PolicyArgs.builder()        
+ *             .name(basic.name().applyValue(name -&gt; String.format(&#34;%s/policies/gcp.resourceLocations&#34;, name)))
  *             .parent(basic.name())
  *             .spec(PolicySpecArgs.builder()
  *                 .inheritFromParent(true)
@@ -135,6 +138,7 @@ import javax.annotation.Nullable;
  * 
  *     public static void stack(Context ctx) {
  *         var primary = new Policy(&#34;primary&#34;, PolicyArgs.builder()        
+ *             .name(&#34;organizations/123456789/policies/gcp.detailedAuditLoggingMode&#34;)
  *             .parent(&#34;organizations/123456789&#34;)
  *             .spec(PolicySpecArgs.builder()
  *                 .reset(true)
@@ -171,11 +175,13 @@ import javax.annotation.Nullable;
  * 
  *     public static void stack(Context ctx) {
  *         var basic = new Project(&#34;basic&#34;, ProjectArgs.builder()        
- *             .orgId(&#34;123456789&#34;)
  *             .projectId(&#34;id&#34;)
+ *             .name(&#34;id&#34;)
+ *             .orgId(&#34;123456789&#34;)
  *             .build());
  * 
  *         var primary = new Policy(&#34;primary&#34;, PolicyArgs.builder()        
+ *             .name(basic.name().applyValue(name -&gt; String.format(&#34;projects/%s/policies/gcp.resourceLocations&#34;, name)))
  *             .parent(basic.name().applyValue(name -&gt; String.format(&#34;projects/%s&#34;, name)))
  *             .spec(PolicySpecArgs.builder()
  *                 .rules(                

@@ -29,7 +29,6 @@ import javax.annotation.Nullable;
  * 
  * ## Example Usage
  * ### External Ssl Proxy Lb Mig Backend
- * 
  * ```java
  * package generated_program;
  * 
@@ -41,6 +40,7 @@ import javax.annotation.Nullable;
  * import com.pulumi.gcp.compute.Subnetwork;
  * import com.pulumi.gcp.compute.SubnetworkArgs;
  * import com.pulumi.gcp.compute.GlobalAddress;
+ * import com.pulumi.gcp.compute.GlobalAddressArgs;
  * import com.pulumi.tls.PrivateKey;
  * import com.pulumi.tls.PrivateKeyArgs;
  * import com.pulumi.tls.SelfSignedCert;
@@ -69,7 +69,6 @@ import javax.annotation.Nullable;
  * import com.pulumi.gcp.compute.Firewall;
  * import com.pulumi.gcp.compute.FirewallArgs;
  * import com.pulumi.gcp.compute.inputs.FirewallAllowArgs;
- * import com.pulumi.resources.CustomResourceOptions;
  * import java.util.List;
  * import java.util.ArrayList;
  * import java.util.Map;
@@ -83,30 +82,30 @@ import javax.annotation.Nullable;
  *     }
  * 
  *     public static void stack(Context ctx) {
- *         var defaultNetwork = new Network(&#34;defaultNetwork&#34;, NetworkArgs.builder()        
+ *         var default_ = new Network(&#34;default&#34;, NetworkArgs.builder()        
+ *             .name(&#34;ssl-proxy-xlb-network&#34;)
  *             .autoCreateSubnetworks(false)
- *             .build(), CustomResourceOptions.builder()
- *                 .provider(google)
- *                 .build());
+ *             .build());
  * 
- *         var defaultSubnetwork = new Subnetwork(&#34;defaultSubnetwork&#34;, SubnetworkArgs.builder()        
+ *         var defaultResource = new Subnetwork(&#34;defaultResource&#34;, SubnetworkArgs.builder()        
+ *             .name(&#34;ssl-proxy-xlb-subnet&#34;)
  *             .ipCidrRange(&#34;10.0.1.0/24&#34;)
  *             .region(&#34;us-central1&#34;)
- *             .network(defaultNetwork.id())
- *             .build(), CustomResourceOptions.builder()
- *                 .provider(google)
- *                 .build());
+ *             .network(default_.id())
+ *             .build());
  * 
- *         var defaultGlobalAddress = new GlobalAddress(&#34;defaultGlobalAddress&#34;);
+ *         var defaultResource2 = new GlobalAddress(&#34;defaultResource2&#34;, GlobalAddressArgs.builder()        
+ *             .name(&#34;ssl-proxy-xlb-ip&#34;)
+ *             .build());
  * 
- *         var defaultPrivateKey = new PrivateKey(&#34;defaultPrivateKey&#34;, PrivateKeyArgs.builder()        
+ *         var defaultResource3 = new PrivateKey(&#34;defaultResource3&#34;, PrivateKeyArgs.builder()        
  *             .algorithm(&#34;RSA&#34;)
  *             .rsaBits(2048)
  *             .build());
  * 
- *         var defaultSelfSignedCert = new SelfSignedCert(&#34;defaultSelfSignedCert&#34;, SelfSignedCertArgs.builder()        
- *             .keyAlgorithm(defaultPrivateKey.algorithm())
- *             .privateKeyPem(defaultPrivateKey.privateKeyPem())
+ *         var defaultResource4 = new SelfSignedCert(&#34;defaultResource4&#34;, SelfSignedCertArgs.builder()        
+ *             .keyAlgorithm(defaultResource3.algorithm())
+ *             .privateKeyPem(defaultResource3.privateKeyPem())
  *             .validityPeriodHours(12)
  *             .earlyRenewalHours(3)
  *             .allowedUses(            
@@ -120,12 +119,14 @@ import javax.annotation.Nullable;
  *                 .build())
  *             .build());
  * 
- *         var defaultSSLCertificate = new SSLCertificate(&#34;defaultSSLCertificate&#34;, SSLCertificateArgs.builder()        
- *             .privateKey(defaultPrivateKey.privateKeyPem())
- *             .certificate(defaultSelfSignedCert.certPem())
+ *         var defaultResource5 = new SSLCertificate(&#34;defaultResource5&#34;, SSLCertificateArgs.builder()        
+ *             .name(&#34;default-cert&#34;)
+ *             .privateKey(defaultResource3.privateKeyPem())
+ *             .certificate(defaultResource4.certPem())
  *             .build());
  * 
- *         var defaultHealthCheck = new HealthCheck(&#34;defaultHealthCheck&#34;, HealthCheckArgs.builder()        
+ *         var defaultResource9 = new HealthCheck(&#34;defaultResource9&#34;, HealthCheckArgs.builder()        
+ *             .name(&#34;ssl-proxy-health-check&#34;)
  *             .timeoutSec(1)
  *             .checkIntervalSec(1)
  *             .tcpHealthCheck(HealthCheckTcpHealthCheckArgs.builder()
@@ -133,14 +134,15 @@ import javax.annotation.Nullable;
  *                 .build())
  *             .build());
  * 
- *         var defaultInstanceTemplate = new InstanceTemplate(&#34;defaultInstanceTemplate&#34;, InstanceTemplateArgs.builder()        
+ *         var defaultResource10 = new InstanceTemplate(&#34;defaultResource10&#34;, InstanceTemplateArgs.builder()        
+ *             .networkInterfaces(InstanceTemplateNetworkInterfaceArgs.builder()
+ *                 .accessConfigs()
+ *                 .network(default_.id())
+ *                 .subnetwork(defaultResource.id())
+ *                 .build())
+ *             .name(&#34;ssl-proxy-xlb-mig-template&#34;)
  *             .machineType(&#34;e2-small&#34;)
  *             .tags(&#34;allow-health-check&#34;)
- *             .networkInterfaces(InstanceTemplateNetworkInterfaceArgs.builder()
- *                 .network(defaultNetwork.id())
- *                 .subnetwork(defaultSubnetwork.id())
- *                 .accessConfigs()
- *                 .build())
  *             .disks(InstanceTemplateDiskArgs.builder()
  *                 .sourceImage(&#34;debian-cloud/debian-10&#34;)
  *                 .autoDelete(true)
@@ -167,58 +169,57 @@ import javax.annotation.Nullable;
  * &lt;/pre&gt;
  * EOF
  *             &#34;&#34;&#34;))
- *             .build(), CustomResourceOptions.builder()
- *                 .provider(google)
- *                 .build());
+ *             .build());
  * 
- *         var defaultInstanceGroupManager = new InstanceGroupManager(&#34;defaultInstanceGroupManager&#34;, InstanceGroupManagerArgs.builder()        
+ *         var defaultResource11 = new InstanceGroupManager(&#34;defaultResource11&#34;, InstanceGroupManagerArgs.builder()        
+ *             .name(&#34;ssl-proxy-xlb-mig1&#34;)
  *             .zone(&#34;us-central1-c&#34;)
  *             .namedPorts(InstanceGroupManagerNamedPortArgs.builder()
  *                 .name(&#34;tcp&#34;)
  *                 .port(443)
  *                 .build())
  *             .versions(InstanceGroupManagerVersionArgs.builder()
- *                 .instanceTemplate(defaultInstanceTemplate.id())
+ *                 .instanceTemplate(defaultResource10.id())
  *                 .name(&#34;primary&#34;)
  *                 .build())
  *             .baseInstanceName(&#34;vm&#34;)
  *             .targetSize(2)
- *             .build(), CustomResourceOptions.builder()
- *                 .provider(google)
- *                 .build());
+ *             .build());
  * 
- *         var defaultBackendService = new BackendService(&#34;defaultBackendService&#34;, BackendServiceArgs.builder()        
+ *         var defaultResource8 = new BackendService(&#34;defaultResource8&#34;, BackendServiceArgs.builder()        
+ *             .name(&#34;ssl-proxy-xlb-backend-service&#34;)
  *             .protocol(&#34;SSL&#34;)
  *             .portName(&#34;tcp&#34;)
  *             .loadBalancingScheme(&#34;EXTERNAL&#34;)
  *             .timeoutSec(10)
- *             .healthChecks(defaultHealthCheck.id())
+ *             .healthChecks(defaultResource9.id())
  *             .backends(BackendServiceBackendArgs.builder()
- *                 .group(defaultInstanceGroupManager.instanceGroup())
+ *                 .group(defaultResource11.instanceGroup())
  *                 .balancingMode(&#34;UTILIZATION&#34;)
  *                 .maxUtilization(1)
  *                 .capacityScaler(1)
  *                 .build())
  *             .build());
  * 
- *         var defaultTargetSSLProxy = new TargetSSLProxy(&#34;defaultTargetSSLProxy&#34;, TargetSSLProxyArgs.builder()        
- *             .backendService(defaultBackendService.id())
- *             .sslCertificates(defaultSSLCertificate.id())
+ *         var defaultResource6 = new TargetSSLProxy(&#34;defaultResource6&#34;, TargetSSLProxyArgs.builder()        
+ *             .name(&#34;test-proxy&#34;)
+ *             .backendService(defaultResource8.id())
+ *             .sslCertificates(defaultResource5.id())
  *             .build());
  * 
- *         var defaultGlobalForwardingRule = new GlobalForwardingRule(&#34;defaultGlobalForwardingRule&#34;, GlobalForwardingRuleArgs.builder()        
+ *         var defaultResource7 = new GlobalForwardingRule(&#34;defaultResource7&#34;, GlobalForwardingRuleArgs.builder()        
+ *             .name(&#34;ssl-proxy-xlb-forwarding-rule&#34;)
  *             .ipProtocol(&#34;TCP&#34;)
  *             .loadBalancingScheme(&#34;EXTERNAL&#34;)
  *             .portRange(&#34;443&#34;)
- *             .target(defaultTargetSSLProxy.id())
- *             .ipAddress(defaultGlobalAddress.id())
- *             .build(), CustomResourceOptions.builder()
- *                 .provider(google)
- *                 .build());
+ *             .target(defaultResource6.id())
+ *             .ipAddress(defaultResource2.id())
+ *             .build());
  * 
- *         var defaultFirewall = new Firewall(&#34;defaultFirewall&#34;, FirewallArgs.builder()        
+ *         var defaultResource12 = new Firewall(&#34;defaultResource12&#34;, FirewallArgs.builder()        
+ *             .name(&#34;ssl-proxy-xlb-fw-allow-hc&#34;)
  *             .direction(&#34;INGRESS&#34;)
- *             .network(defaultNetwork.id())
+ *             .network(default_.id())
  *             .sourceRanges(            
  *                 &#34;130.211.0.0/22&#34;,
  *                 &#34;35.191.0.0/16&#34;)
@@ -226,15 +227,12 @@ import javax.annotation.Nullable;
  *                 .protocol(&#34;tcp&#34;)
  *                 .build())
  *             .targetTags(&#34;allow-health-check&#34;)
- *             .build(), CustomResourceOptions.builder()
- *                 .provider(google)
- *                 .build());
+ *             .build());
  * 
  *     }
  * }
  * ```
  * ### External Tcp Proxy Lb Mig Backend
- * 
  * ```java
  * package generated_program;
  * 
@@ -268,7 +266,6 @@ import javax.annotation.Nullable;
  * import com.pulumi.gcp.compute.Firewall;
  * import com.pulumi.gcp.compute.FirewallArgs;
  * import com.pulumi.gcp.compute.inputs.FirewallAllowArgs;
- * import com.pulumi.resources.CustomResourceOptions;
  * import java.util.List;
  * import java.util.ArrayList;
  * import java.util.Map;
@@ -282,42 +279,40 @@ import javax.annotation.Nullable;
  *     }
  * 
  *     public static void stack(Context ctx) {
- *         var defaultNetwork = new Network(&#34;defaultNetwork&#34;, NetworkArgs.builder()        
+ *         var default_ = new Network(&#34;default&#34;, NetworkArgs.builder()        
+ *             .name(&#34;tcp-proxy-xlb-network&#34;)
  *             .autoCreateSubnetworks(false)
- *             .build(), CustomResourceOptions.builder()
- *                 .provider(google_beta)
- *                 .build());
- * 
- *         var defaultSubnetwork = new Subnetwork(&#34;defaultSubnetwork&#34;, SubnetworkArgs.builder()        
- *             .ipCidrRange(&#34;10.0.1.0/24&#34;)
- *             .region(&#34;us-central1&#34;)
- *             .network(defaultNetwork.id())
- *             .build(), CustomResourceOptions.builder()
- *                 .provider(google_beta)
- *                 .build());
- * 
- *         var defaultGlobalAddress = new GlobalAddress(&#34;defaultGlobalAddress&#34;, GlobalAddressArgs.Empty, CustomResourceOptions.builder()
- *             .provider(google_beta)
  *             .build());
  * 
- *         var defaultHealthCheck = new HealthCheck(&#34;defaultHealthCheck&#34;, HealthCheckArgs.builder()        
+ *         var defaultResource = new Subnetwork(&#34;defaultResource&#34;, SubnetworkArgs.builder()        
+ *             .name(&#34;tcp-proxy-xlb-subnet&#34;)
+ *             .ipCidrRange(&#34;10.0.1.0/24&#34;)
+ *             .region(&#34;us-central1&#34;)
+ *             .network(default_.id())
+ *             .build());
+ * 
+ *         var defaultResource2 = new GlobalAddress(&#34;defaultResource2&#34;, GlobalAddressArgs.builder()        
+ *             .name(&#34;tcp-proxy-xlb-ip&#34;)
+ *             .build());
+ * 
+ *         var defaultResource6 = new HealthCheck(&#34;defaultResource6&#34;, HealthCheckArgs.builder()        
+ *             .name(&#34;tcp-proxy-health-check&#34;)
  *             .timeoutSec(1)
  *             .checkIntervalSec(1)
  *             .tcpHealthCheck(HealthCheckTcpHealthCheckArgs.builder()
  *                 .port(&#34;80&#34;)
  *                 .build())
- *             .build(), CustomResourceOptions.builder()
- *                 .provider(google_beta)
- *                 .build());
+ *             .build());
  * 
- *         var defaultInstanceTemplate = new InstanceTemplate(&#34;defaultInstanceTemplate&#34;, InstanceTemplateArgs.builder()        
+ *         var defaultResource7 = new InstanceTemplate(&#34;defaultResource7&#34;, InstanceTemplateArgs.builder()        
+ *             .networkInterfaces(InstanceTemplateNetworkInterfaceArgs.builder()
+ *                 .accessConfigs()
+ *                 .network(default_.id())
+ *                 .subnetwork(defaultResource.id())
+ *                 .build())
+ *             .name(&#34;tcp-proxy-xlb-mig-template&#34;)
  *             .machineType(&#34;e2-small&#34;)
  *             .tags(&#34;allow-health-check&#34;)
- *             .networkInterfaces(InstanceTemplateNetworkInterfaceArgs.builder()
- *                 .network(defaultNetwork.id())
- *                 .subnetwork(defaultSubnetwork.id())
- *                 .accessConfigs()
- *                 .build())
  *             .disks(InstanceTemplateDiskArgs.builder()
  *                 .sourceImage(&#34;debian-cloud/debian-10&#34;)
  *                 .autoDelete(true)
@@ -340,61 +335,56 @@ import javax.annotation.Nullable;
  * &lt;/pre&gt;
  * EOF
  *             &#34;&#34;&#34;))
- *             .build(), CustomResourceOptions.builder()
- *                 .provider(google_beta)
- *                 .build());
+ *             .build());
  * 
- *         var defaultInstanceGroupManager = new InstanceGroupManager(&#34;defaultInstanceGroupManager&#34;, InstanceGroupManagerArgs.builder()        
+ *         var defaultResource8 = new InstanceGroupManager(&#34;defaultResource8&#34;, InstanceGroupManagerArgs.builder()        
+ *             .name(&#34;tcp-proxy-xlb-mig1&#34;)
  *             .zone(&#34;us-central1-c&#34;)
  *             .namedPorts(InstanceGroupManagerNamedPortArgs.builder()
  *                 .name(&#34;tcp&#34;)
  *                 .port(80)
  *                 .build())
  *             .versions(InstanceGroupManagerVersionArgs.builder()
- *                 .instanceTemplate(defaultInstanceTemplate.id())
+ *                 .instanceTemplate(defaultResource7.id())
  *                 .name(&#34;primary&#34;)
  *                 .build())
  *             .baseInstanceName(&#34;vm&#34;)
  *             .targetSize(2)
- *             .build(), CustomResourceOptions.builder()
- *                 .provider(google_beta)
- *                 .build());
+ *             .build());
  * 
- *         var defaultBackendService = new BackendService(&#34;defaultBackendService&#34;, BackendServiceArgs.builder()        
+ *         var defaultResource5 = new BackendService(&#34;defaultResource5&#34;, BackendServiceArgs.builder()        
+ *             .name(&#34;tcp-proxy-xlb-backend-service&#34;)
  *             .protocol(&#34;TCP&#34;)
  *             .portName(&#34;tcp&#34;)
  *             .loadBalancingScheme(&#34;EXTERNAL&#34;)
  *             .timeoutSec(10)
- *             .healthChecks(defaultHealthCheck.id())
+ *             .healthChecks(defaultResource6.id())
  *             .backends(BackendServiceBackendArgs.builder()
- *                 .group(defaultInstanceGroupManager.instanceGroup())
+ *                 .group(defaultResource8.instanceGroup())
  *                 .balancingMode(&#34;UTILIZATION&#34;)
  *                 .maxUtilization(1)
  *                 .capacityScaler(1)
  *                 .build())
- *             .build(), CustomResourceOptions.builder()
- *                 .provider(google_beta)
- *                 .build());
+ *             .build());
  * 
- *         var defaultTargetTCPProxy = new TargetTCPProxy(&#34;defaultTargetTCPProxy&#34;, TargetTCPProxyArgs.builder()        
- *             .backendService(defaultBackendService.id())
- *             .build(), CustomResourceOptions.builder()
- *                 .provider(google_beta)
- *                 .build());
+ *         var defaultResource4 = new TargetTCPProxy(&#34;defaultResource4&#34;, TargetTCPProxyArgs.builder()        
+ *             .name(&#34;test-proxy-health-check&#34;)
+ *             .backendService(defaultResource5.id())
+ *             .build());
  * 
- *         var defaultGlobalForwardingRule = new GlobalForwardingRule(&#34;defaultGlobalForwardingRule&#34;, GlobalForwardingRuleArgs.builder()        
+ *         var defaultResource3 = new GlobalForwardingRule(&#34;defaultResource3&#34;, GlobalForwardingRuleArgs.builder()        
+ *             .name(&#34;tcp-proxy-xlb-forwarding-rule&#34;)
  *             .ipProtocol(&#34;TCP&#34;)
  *             .loadBalancingScheme(&#34;EXTERNAL&#34;)
  *             .portRange(&#34;110&#34;)
- *             .target(defaultTargetTCPProxy.id())
- *             .ipAddress(defaultGlobalAddress.id())
- *             .build(), CustomResourceOptions.builder()
- *                 .provider(google_beta)
- *                 .build());
+ *             .target(defaultResource4.id())
+ *             .ipAddress(defaultResource2.id())
+ *             .build());
  * 
- *         var defaultFirewall = new Firewall(&#34;defaultFirewall&#34;, FirewallArgs.builder()        
+ *         var defaultResource9 = new Firewall(&#34;defaultResource9&#34;, FirewallArgs.builder()        
+ *             .name(&#34;tcp-proxy-xlb-fw-allow-hc&#34;)
  *             .direction(&#34;INGRESS&#34;)
- *             .network(defaultNetwork.id())
+ *             .network(default_.id())
  *             .sourceRanges(            
  *                 &#34;130.211.0.0/22&#34;,
  *                 &#34;35.191.0.0/16&#34;)
@@ -402,15 +392,12 @@ import javax.annotation.Nullable;
  *                 .protocol(&#34;tcp&#34;)
  *                 .build())
  *             .targetTags(&#34;allow-health-check&#34;)
- *             .build(), CustomResourceOptions.builder()
- *                 .provider(google_beta)
- *                 .build());
+ *             .build());
  * 
  *     }
  * }
  * ```
  * ### External Http Lb Mig Backend Custom Header
- * 
  * ```java
  * package generated_program;
  * 
@@ -446,7 +433,6 @@ import javax.annotation.Nullable;
  * import com.pulumi.gcp.compute.Firewall;
  * import com.pulumi.gcp.compute.FirewallArgs;
  * import com.pulumi.gcp.compute.inputs.FirewallAllowArgs;
- * import com.pulumi.resources.CustomResourceOptions;
  * import java.util.List;
  * import java.util.ArrayList;
  * import java.util.Map;
@@ -460,40 +446,38 @@ import javax.annotation.Nullable;
  *     }
  * 
  *     public static void stack(Context ctx) {
- *         var defaultNetwork = new Network(&#34;defaultNetwork&#34;, NetworkArgs.builder()        
+ *         var default_ = new Network(&#34;default&#34;, NetworkArgs.builder()        
+ *             .name(&#34;l7-xlb-network&#34;)
  *             .autoCreateSubnetworks(false)
- *             .build(), CustomResourceOptions.builder()
- *                 .provider(google_beta)
- *                 .build());
- * 
- *         var defaultSubnetwork = new Subnetwork(&#34;defaultSubnetwork&#34;, SubnetworkArgs.builder()        
- *             .ipCidrRange(&#34;10.0.1.0/24&#34;)
- *             .region(&#34;us-central1&#34;)
- *             .network(defaultNetwork.id())
- *             .build(), CustomResourceOptions.builder()
- *                 .provider(google_beta)
- *                 .build());
- * 
- *         var defaultGlobalAddress = new GlobalAddress(&#34;defaultGlobalAddress&#34;, GlobalAddressArgs.Empty, CustomResourceOptions.builder()
- *             .provider(google_beta)
  *             .build());
  * 
- *         var defaultHealthCheck = new HealthCheck(&#34;defaultHealthCheck&#34;, HealthCheckArgs.builder()        
+ *         var defaultResource = new Subnetwork(&#34;defaultResource&#34;, SubnetworkArgs.builder()        
+ *             .name(&#34;l7-xlb-subnet&#34;)
+ *             .ipCidrRange(&#34;10.0.1.0/24&#34;)
+ *             .region(&#34;us-central1&#34;)
+ *             .network(default_.id())
+ *             .build());
+ * 
+ *         var defaultResource2 = new GlobalAddress(&#34;defaultResource2&#34;, GlobalAddressArgs.builder()        
+ *             .name(&#34;l7-xlb-static-ip&#34;)
+ *             .build());
+ * 
+ *         var defaultResource8 = new HealthCheck(&#34;defaultResource8&#34;, HealthCheckArgs.builder()        
+ *             .name(&#34;l7-xlb-hc&#34;)
  *             .httpHealthCheck(HealthCheckHttpHealthCheckArgs.builder()
  *                 .portSpecification(&#34;USE_SERVING_PORT&#34;)
  *                 .build())
- *             .build(), CustomResourceOptions.builder()
- *                 .provider(google_beta)
- *                 .build());
+ *             .build());
  * 
- *         var defaultInstanceTemplate = new InstanceTemplate(&#34;defaultInstanceTemplate&#34;, InstanceTemplateArgs.builder()        
+ *         var defaultResource7 = new InstanceTemplate(&#34;defaultResource7&#34;, InstanceTemplateArgs.builder()        
+ *             .networkInterfaces(InstanceTemplateNetworkInterfaceArgs.builder()
+ *                 .accessConfigs()
+ *                 .network(default_.id())
+ *                 .subnetwork(defaultResource.id())
+ *                 .build())
+ *             .name(&#34;l7-xlb-mig-template&#34;)
  *             .machineType(&#34;e2-small&#34;)
  *             .tags(&#34;allow-health-check&#34;)
- *             .networkInterfaces(InstanceTemplateNetworkInterfaceArgs.builder()
- *                 .network(defaultNetwork.id())
- *                 .subnetwork(defaultSubnetwork.id())
- *                 .accessConfigs()
- *                 .build())
  *             .disks(InstanceTemplateDiskArgs.builder()
  *                 .sourceImage(&#34;debian-cloud/debian-10&#34;)
  *                 .autoDelete(true)
@@ -519,27 +503,25 @@ import javax.annotation.Nullable;
  * &lt;/pre&gt;
  * EOF
  *             &#34;&#34;&#34;))
- *             .build(), CustomResourceOptions.builder()
- *                 .provider(google_beta)
- *                 .build());
+ *             .build());
  * 
- *         var defaultInstanceGroupManager = new InstanceGroupManager(&#34;defaultInstanceGroupManager&#34;, InstanceGroupManagerArgs.builder()        
+ *         var defaultResource9 = new InstanceGroupManager(&#34;defaultResource9&#34;, InstanceGroupManagerArgs.builder()        
+ *             .name(&#34;l7-xlb-mig1&#34;)
  *             .zone(&#34;us-central1-c&#34;)
  *             .namedPorts(InstanceGroupManagerNamedPortArgs.builder()
  *                 .name(&#34;http&#34;)
  *                 .port(8080)
  *                 .build())
  *             .versions(InstanceGroupManagerVersionArgs.builder()
- *                 .instanceTemplate(defaultInstanceTemplate.id())
+ *                 .instanceTemplate(defaultResource7.id())
  *                 .name(&#34;primary&#34;)
  *                 .build())
  *             .baseInstanceName(&#34;vm&#34;)
  *             .targetSize(2)
- *             .build(), CustomResourceOptions.builder()
- *                 .provider(google_beta)
- *                 .build());
+ *             .build());
  * 
- *         var defaultBackendService = new BackendService(&#34;defaultBackendService&#34;, BackendServiceArgs.builder()        
+ *         var defaultResource6 = new BackendService(&#34;defaultResource6&#34;, BackendServiceArgs.builder()        
+ *             .name(&#34;l7-xlb-backend-service&#34;)
  *             .protocol(&#34;HTTP&#34;)
  *             .portName(&#34;my-port&#34;)
  *             .loadBalancingScheme(&#34;EXTERNAL&#34;)
@@ -547,41 +529,37 @@ import javax.annotation.Nullable;
  *             .enableCdn(true)
  *             .customRequestHeaders(&#34;X-Client-Geo-Location: {client_region_subdivision}, {client_city}&#34;)
  *             .customResponseHeaders(&#34;X-Cache-Hit: {cdn_cache_status}&#34;)
- *             .healthChecks(defaultHealthCheck.id())
+ *             .healthChecks(defaultResource8.id())
  *             .backends(BackendServiceBackendArgs.builder()
- *                 .group(defaultInstanceGroupManager.instanceGroup())
+ *                 .group(defaultResource9.instanceGroup())
  *                 .balancingMode(&#34;UTILIZATION&#34;)
  *                 .capacityScaler(1)
  *                 .build())
- *             .build(), CustomResourceOptions.builder()
- *                 .provider(google_beta)
- *                 .build());
+ *             .build());
  * 
- *         var defaultURLMap = new URLMap(&#34;defaultURLMap&#34;, URLMapArgs.builder()        
- *             .defaultService(defaultBackendService.id())
- *             .build(), CustomResourceOptions.builder()
- *                 .provider(google_beta)
- *                 .build());
+ *         var defaultResource5 = new URLMap(&#34;defaultResource5&#34;, URLMapArgs.builder()        
+ *             .name(&#34;l7-xlb-url-map&#34;)
+ *             .defaultService(defaultResource6.id())
+ *             .build());
  * 
- *         var defaultTargetHttpProxy = new TargetHttpProxy(&#34;defaultTargetHttpProxy&#34;, TargetHttpProxyArgs.builder()        
- *             .urlMap(defaultURLMap.id())
- *             .build(), CustomResourceOptions.builder()
- *                 .provider(google_beta)
- *                 .build());
+ *         var defaultResource4 = new TargetHttpProxy(&#34;defaultResource4&#34;, TargetHttpProxyArgs.builder()        
+ *             .name(&#34;l7-xlb-target-http-proxy&#34;)
+ *             .urlMap(defaultResource5.id())
+ *             .build());
  * 
- *         var defaultGlobalForwardingRule = new GlobalForwardingRule(&#34;defaultGlobalForwardingRule&#34;, GlobalForwardingRuleArgs.builder()        
+ *         var defaultResource3 = new GlobalForwardingRule(&#34;defaultResource3&#34;, GlobalForwardingRuleArgs.builder()        
+ *             .name(&#34;l7-xlb-forwarding-rule&#34;)
  *             .ipProtocol(&#34;TCP&#34;)
  *             .loadBalancingScheme(&#34;EXTERNAL&#34;)
  *             .portRange(&#34;80&#34;)
- *             .target(defaultTargetHttpProxy.id())
- *             .ipAddress(defaultGlobalAddress.id())
- *             .build(), CustomResourceOptions.builder()
- *                 .provider(google_beta)
- *                 .build());
+ *             .target(defaultResource4.id())
+ *             .ipAddress(defaultResource2.id())
+ *             .build());
  * 
- *         var defaultFirewall = new Firewall(&#34;defaultFirewall&#34;, FirewallArgs.builder()        
+ *         var defaultResource10 = new Firewall(&#34;defaultResource10&#34;, FirewallArgs.builder()        
+ *             .name(&#34;l7-xlb-fw-allow-hc&#34;)
  *             .direction(&#34;INGRESS&#34;)
- *             .network(defaultNetwork.id())
+ *             .network(default_.id())
  *             .sourceRanges(            
  *                 &#34;130.211.0.0/22&#34;,
  *                 &#34;35.191.0.0/16&#34;)
@@ -589,15 +567,12 @@ import javax.annotation.Nullable;
  *                 .protocol(&#34;tcp&#34;)
  *                 .build())
  *             .targetTags(&#34;allow-health-check&#34;)
- *             .build(), CustomResourceOptions.builder()
- *                 .provider(google_beta)
- *                 .build());
+ *             .build());
  * 
  *     }
  * }
  * ```
  * ### Global Forwarding Rule Http
- * 
  * ```java
  * package generated_program;
  * 
@@ -629,43 +604,48 @@ import javax.annotation.Nullable;
  *     }
  * 
  *     public static void stack(Context ctx) {
- *         var defaultHttpHealthCheck = new HttpHealthCheck(&#34;defaultHttpHealthCheck&#34;, HttpHealthCheckArgs.builder()        
+ *         var defaultResource4 = new HttpHealthCheck(&#34;defaultResource4&#34;, HttpHealthCheckArgs.builder()        
+ *             .name(&#34;check-backend&#34;)
  *             .requestPath(&#34;/&#34;)
  *             .checkIntervalSec(1)
  *             .timeoutSec(1)
  *             .build());
  * 
- *         var defaultBackendService = new BackendService(&#34;defaultBackendService&#34;, BackendServiceArgs.builder()        
+ *         var defaultResource3 = new BackendService(&#34;defaultResource3&#34;, BackendServiceArgs.builder()        
+ *             .name(&#34;backend&#34;)
  *             .portName(&#34;http&#34;)
  *             .protocol(&#34;HTTP&#34;)
  *             .timeoutSec(10)
- *             .healthChecks(defaultHttpHealthCheck.id())
+ *             .healthChecks(defaultResource4.id())
  *             .build());
  * 
- *         var defaultURLMap = new URLMap(&#34;defaultURLMap&#34;, URLMapArgs.builder()        
+ *         var defaultResource2 = new URLMap(&#34;defaultResource2&#34;, URLMapArgs.builder()        
+ *             .name(&#34;url-map-target-proxy&#34;)
  *             .description(&#34;a description&#34;)
- *             .defaultService(defaultBackendService.id())
+ *             .defaultService(defaultResource3.id())
  *             .hostRules(URLMapHostRuleArgs.builder()
  *                 .hosts(&#34;mysite.com&#34;)
  *                 .pathMatcher(&#34;allpaths&#34;)
  *                 .build())
  *             .pathMatchers(URLMapPathMatcherArgs.builder()
  *                 .name(&#34;allpaths&#34;)
- *                 .defaultService(defaultBackendService.id())
+ *                 .defaultService(defaultResource3.id())
  *                 .pathRules(URLMapPathMatcherPathRuleArgs.builder()
  *                     .paths(&#34;/*&#34;)
- *                     .service(defaultBackendService.id())
+ *                     .service(defaultResource3.id())
  *                     .build())
  *                 .build())
  *             .build());
  * 
- *         var defaultTargetHttpProxy = new TargetHttpProxy(&#34;defaultTargetHttpProxy&#34;, TargetHttpProxyArgs.builder()        
+ *         var defaultResource = new TargetHttpProxy(&#34;defaultResource&#34;, TargetHttpProxyArgs.builder()        
+ *             .name(&#34;target-proxy&#34;)
  *             .description(&#34;a description&#34;)
- *             .urlMap(defaultURLMap.id())
+ *             .urlMap(defaultResource2.id())
  *             .build());
  * 
- *         var defaultGlobalForwardingRule = new GlobalForwardingRule(&#34;defaultGlobalForwardingRule&#34;, GlobalForwardingRuleArgs.builder()        
- *             .target(defaultTargetHttpProxy.id())
+ *         var default_ = new GlobalForwardingRule(&#34;default&#34;, GlobalForwardingRuleArgs.builder()        
+ *             .name(&#34;global-rule&#34;)
+ *             .target(defaultResource.id())
  *             .portRange(&#34;80&#34;)
  *             .build());
  * 
@@ -673,7 +653,6 @@ import javax.annotation.Nullable;
  * }
  * ```
  * ### Global Forwarding Rule Internal
- * 
  * ```java
  * package generated_program;
  * 
@@ -704,7 +683,6 @@ import javax.annotation.Nullable;
  * import com.pulumi.gcp.compute.GlobalForwardingRule;
  * import com.pulumi.gcp.compute.GlobalForwardingRuleArgs;
  * import com.pulumi.gcp.compute.inputs.GlobalForwardingRuleMetadataFilterArgs;
- * import com.pulumi.resources.CustomResourceOptions;
  * import java.util.List;
  * import java.util.ArrayList;
  * import java.util.Map;
@@ -724,6 +702,7 @@ import javax.annotation.Nullable;
  *             .build());
  * 
  *         var instanceTemplate = new InstanceTemplate(&#34;instanceTemplate&#34;, InstanceTemplateArgs.builder()        
+ *             .name(&#34;template-backend&#34;)
  *             .machineType(&#34;e2-medium&#34;)
  *             .networkInterfaces(InstanceTemplateNetworkInterfaceArgs.builder()
  *                 .network(&#34;default&#34;)
@@ -733,11 +712,10 @@ import javax.annotation.Nullable;
  *                 .autoDelete(true)
  *                 .boot(true)
  *                 .build())
- *             .build(), CustomResourceOptions.builder()
- *                 .provider(google_beta)
- *                 .build());
+ *             .build());
  * 
  *         var igm = new InstanceGroupManager(&#34;igm&#34;, InstanceGroupManagerArgs.builder()        
+ *             .name(&#34;igm-internal&#34;)
  *             .versions(InstanceGroupManagerVersionArgs.builder()
  *                 .instanceTemplate(instanceTemplate.id())
  *                 .name(&#34;primary&#34;)
@@ -745,21 +723,19 @@ import javax.annotation.Nullable;
  *             .baseInstanceName(&#34;internal-glb&#34;)
  *             .zone(&#34;us-central1-f&#34;)
  *             .targetSize(1)
- *             .build(), CustomResourceOptions.builder()
- *                 .provider(google_beta)
- *                 .build());
+ *             .build());
  * 
- *         var defaultHealthCheck = new HealthCheck(&#34;defaultHealthCheck&#34;, HealthCheckArgs.builder()        
+ *         var defaultResource4 = new HealthCheck(&#34;defaultResource4&#34;, HealthCheckArgs.builder()        
+ *             .name(&#34;check-backend&#34;)
  *             .checkIntervalSec(1)
  *             .timeoutSec(1)
  *             .tcpHealthCheck(HealthCheckTcpHealthCheckArgs.builder()
  *                 .port(&#34;80&#34;)
  *                 .build())
- *             .build(), CustomResourceOptions.builder()
- *                 .provider(google_beta)
- *                 .build());
+ *             .build());
  * 
- *         var defaultBackendService = new BackendService(&#34;defaultBackendService&#34;, BackendServiceArgs.builder()        
+ *         var defaultResource3 = new BackendService(&#34;defaultResource3&#34;, BackendServiceArgs.builder()        
+ *             .name(&#34;backend&#34;)
  *             .portName(&#34;http&#34;)
  *             .protocol(&#34;HTTP&#34;)
  *             .timeoutSec(10)
@@ -770,39 +746,36 @@ import javax.annotation.Nullable;
  *                 .capacityScaler(0.4)
  *                 .maxRatePerInstance(50)
  *                 .build())
- *             .healthChecks(defaultHealthCheck.id())
- *             .build(), CustomResourceOptions.builder()
- *                 .provider(google_beta)
- *                 .build());
+ *             .healthChecks(defaultResource4.id())
+ *             .build());
  * 
- *         var defaultURLMap = new URLMap(&#34;defaultURLMap&#34;, URLMapArgs.builder()        
+ *         var defaultResource2 = new URLMap(&#34;defaultResource2&#34;, URLMapArgs.builder()        
+ *             .name(&#34;url-map-target-proxy&#34;)
  *             .description(&#34;a description&#34;)
- *             .defaultService(defaultBackendService.id())
+ *             .defaultService(defaultResource3.id())
  *             .hostRules(URLMapHostRuleArgs.builder()
  *                 .hosts(&#34;mysite.com&#34;)
  *                 .pathMatcher(&#34;allpaths&#34;)
  *                 .build())
  *             .pathMatchers(URLMapPathMatcherArgs.builder()
  *                 .name(&#34;allpaths&#34;)
- *                 .defaultService(defaultBackendService.id())
+ *                 .defaultService(defaultResource3.id())
  *                 .pathRules(URLMapPathMatcherPathRuleArgs.builder()
  *                     .paths(&#34;/*&#34;)
- *                     .service(defaultBackendService.id())
+ *                     .service(defaultResource3.id())
  *                     .build())
  *                 .build())
- *             .build(), CustomResourceOptions.builder()
- *                 .provider(google_beta)
- *                 .build());
+ *             .build());
  * 
- *         var defaultTargetHttpProxy = new TargetHttpProxy(&#34;defaultTargetHttpProxy&#34;, TargetHttpProxyArgs.builder()        
+ *         var defaultResource = new TargetHttpProxy(&#34;defaultResource&#34;, TargetHttpProxyArgs.builder()        
+ *             .name(&#34;target-proxy&#34;)
  *             .description(&#34;a description&#34;)
- *             .urlMap(defaultURLMap.id())
- *             .build(), CustomResourceOptions.builder()
- *                 .provider(google_beta)
- *                 .build());
+ *             .urlMap(defaultResource2.id())
+ *             .build());
  * 
- *         var defaultGlobalForwardingRule = new GlobalForwardingRule(&#34;defaultGlobalForwardingRule&#34;, GlobalForwardingRuleArgs.builder()        
- *             .target(defaultTargetHttpProxy.id())
+ *         var default_ = new GlobalForwardingRule(&#34;default&#34;, GlobalForwardingRuleArgs.builder()        
+ *             .name(&#34;global-rule&#34;)
+ *             .target(defaultResource.id())
  *             .portRange(&#34;80&#34;)
  *             .loadBalancingScheme(&#34;INTERNAL_SELF_MANAGED&#34;)
  *             .ipAddress(&#34;0.0.0.0&#34;)
@@ -813,9 +786,7 @@ import javax.annotation.Nullable;
  *                     .value(&#34;MARS&#34;)
  *                     .build())
  *                 .build())
- *             .build(), CustomResourceOptions.builder()
- *                 .provider(google_beta)
- *                 .build());
+ *             .build());
  * 
  *     }
  * }
@@ -850,37 +821,41 @@ import javax.annotation.Nullable;
  *     }
  * 
  *     public static void stack(Context ctx) {
- *         var defaultBackendService = new BackendService(&#34;defaultBackendService&#34;, BackendServiceArgs.builder()        
+ *         var defaultResource3 = new BackendService(&#34;defaultResource3&#34;, BackendServiceArgs.builder()        
+ *             .name(&#34;backend&#34;)
  *             .portName(&#34;http&#34;)
  *             .protocol(&#34;HTTP&#34;)
  *             .timeoutSec(10)
  *             .loadBalancingScheme(&#34;EXTERNAL_MANAGED&#34;)
  *             .build());
  * 
- *         var defaultURLMap = new URLMap(&#34;defaultURLMap&#34;, URLMapArgs.builder()        
+ *         var defaultResource2 = new URLMap(&#34;defaultResource2&#34;, URLMapArgs.builder()        
+ *             .name(&#34;url-map-target-proxy&#34;)
  *             .description(&#34;a description&#34;)
- *             .defaultService(defaultBackendService.id())
+ *             .defaultService(defaultResource3.id())
  *             .hostRules(URLMapHostRuleArgs.builder()
  *                 .hosts(&#34;mysite.com&#34;)
  *                 .pathMatcher(&#34;allpaths&#34;)
  *                 .build())
  *             .pathMatchers(URLMapPathMatcherArgs.builder()
  *                 .name(&#34;allpaths&#34;)
- *                 .defaultService(defaultBackendService.id())
+ *                 .defaultService(defaultResource3.id())
  *                 .pathRules(URLMapPathMatcherPathRuleArgs.builder()
  *                     .paths(&#34;/*&#34;)
- *                     .service(defaultBackendService.id())
+ *                     .service(defaultResource3.id())
  *                     .build())
  *                 .build())
  *             .build());
  * 
- *         var defaultTargetHttpProxy = new TargetHttpProxy(&#34;defaultTargetHttpProxy&#34;, TargetHttpProxyArgs.builder()        
+ *         var defaultResource = new TargetHttpProxy(&#34;defaultResource&#34;, TargetHttpProxyArgs.builder()        
+ *             .name(&#34;target-proxy&#34;)
  *             .description(&#34;a description&#34;)
- *             .urlMap(defaultURLMap.id())
+ *             .urlMap(defaultResource2.id())
  *             .build());
  * 
- *         var defaultGlobalForwardingRule = new GlobalForwardingRule(&#34;defaultGlobalForwardingRule&#34;, GlobalForwardingRuleArgs.builder()        
- *             .target(defaultTargetHttpProxy.id())
+ *         var default_ = new GlobalForwardingRule(&#34;default&#34;, GlobalForwardingRuleArgs.builder()        
+ *             .name(&#34;global-rule&#34;)
+ *             .target(defaultResource.id())
  *             .portRange(&#34;80&#34;)
  *             .loadBalancingScheme(&#34;EXTERNAL_MANAGED&#34;)
  *             .build());
@@ -889,7 +864,6 @@ import javax.annotation.Nullable;
  * }
  * ```
  * ### Global Forwarding Rule Hybrid
- * 
  * ```java
  * package generated_program;
  * 
@@ -933,47 +907,55 @@ import javax.annotation.Nullable;
  *     public static void stack(Context ctx) {
  *         final var config = ctx.config();
  *         final var subnetworkCidr = config.get(&#34;subnetworkCidr&#34;).orElse(&#34;10.0.0.0/24&#34;);
- *         var defaultNetwork = new Network(&#34;defaultNetwork&#34;);
+ *         var default_ = new Network(&#34;default&#34;, NetworkArgs.builder()        
+ *             .name(&#34;my-network&#34;)
+ *             .build());
  * 
- *         var internalNetwork = new Network(&#34;internalNetwork&#34;, NetworkArgs.builder()        
+ *         var internal = new Network(&#34;internal&#34;, NetworkArgs.builder()        
+ *             .name(&#34;my-internal-network&#34;)
  *             .autoCreateSubnetworks(false)
  *             .build());
  * 
- *         var internalSubnetwork = new Subnetwork(&#34;internalSubnetwork&#34;, SubnetworkArgs.builder()        
- *             .network(internalNetwork.id())
+ *         var internalResource = new Subnetwork(&#34;internalResource&#34;, SubnetworkArgs.builder()        
+ *             .name(&#34;my-subnetwork&#34;)
+ *             .network(internal.id())
  *             .ipCidrRange(subnetworkCidr)
  *             .region(&#34;us-central1&#34;)
  *             .privateIpGoogleAccess(true)
  *             .build());
  * 
- *         var defaultNetworkEndpointGroup = new NetworkEndpointGroup(&#34;defaultNetworkEndpointGroup&#34;, NetworkEndpointGroupArgs.builder()        
- *             .network(defaultNetwork.id())
+ *         var defaultResource = new NetworkEndpointGroup(&#34;defaultResource&#34;, NetworkEndpointGroupArgs.builder()        
+ *             .name(&#34;default-neg&#34;)
+ *             .network(default_.id())
  *             .defaultPort(&#34;90&#34;)
  *             .zone(&#34;us-central1-a&#34;)
  *             .networkEndpointType(&#34;GCE_VM_IP_PORT&#34;)
  *             .build());
  * 
- *         var internalNetworkEndpointGroup = new NetworkEndpointGroup(&#34;internalNetworkEndpointGroup&#34;, NetworkEndpointGroupArgs.builder()        
- *             .network(internalNetwork.id())
- *             .subnetwork(internalSubnetwork.id())
+ *         var internalResource2 = new NetworkEndpointGroup(&#34;internalResource2&#34;, NetworkEndpointGroupArgs.builder()        
+ *             .name(&#34;internal-neg&#34;)
+ *             .network(internal.id())
+ *             .subnetwork(internalResource.id())
  *             .zone(&#34;us-central1-a&#34;)
  *             .networkEndpointType(&#34;GCE_VM_IP&#34;)
  *             .build());
  * 
- *         var hybridNetworkEndpointGroup = new NetworkEndpointGroup(&#34;hybridNetworkEndpointGroup&#34;, NetworkEndpointGroupArgs.builder()        
- *             .network(defaultNetwork.id())
+ *         var hybrid = new NetworkEndpointGroup(&#34;hybrid&#34;, NetworkEndpointGroupArgs.builder()        
+ *             .name(&#34;hybrid-neg&#34;)
+ *             .network(default_.id())
  *             .defaultPort(&#34;90&#34;)
  *             .zone(&#34;us-central1-a&#34;)
  *             .networkEndpointType(&#34;NON_GCP_PRIVATE_IP_PORT&#34;)
  *             .build());
  * 
  *         var hybrid_endpoint = new NetworkEndpoint(&#34;hybrid-endpoint&#34;, NetworkEndpointArgs.builder()        
- *             .networkEndpointGroup(hybridNetworkEndpointGroup.name())
- *             .port(hybridNetworkEndpointGroup.defaultPort())
+ *             .networkEndpointGroup(hybrid.name())
+ *             .port(hybrid.defaultPort())
  *             .ipAddress(&#34;127.0.0.1&#34;)
  *             .build());
  * 
- *         var defaultHealthCheck = new HealthCheck(&#34;defaultHealthCheck&#34;, HealthCheckArgs.builder()        
+ *         var defaultResource3 = new HealthCheck(&#34;defaultResource3&#34;, HealthCheckArgs.builder()        
+ *             .name(&#34;health-check&#34;)
  *             .timeoutSec(1)
  *             .checkIntervalSec(1)
  *             .tcpHealthCheck(HealthCheckTcpHealthCheckArgs.builder()
@@ -981,59 +963,64 @@ import javax.annotation.Nullable;
  *                 .build())
  *             .build());
  * 
- *         var defaultBackendService = new BackendService(&#34;defaultBackendService&#34;, BackendServiceArgs.builder()        
+ *         var defaultResource2 = new BackendService(&#34;defaultResource2&#34;, BackendServiceArgs.builder()        
+ *             .name(&#34;backend-default&#34;)
  *             .portName(&#34;http&#34;)
  *             .protocol(&#34;HTTP&#34;)
  *             .timeoutSec(10)
  *             .backends(BackendServiceBackendArgs.builder()
- *                 .group(defaultNetworkEndpointGroup.id())
+ *                 .group(defaultResource.id())
  *                 .balancingMode(&#34;RATE&#34;)
  *                 .maxRatePerEndpoint(10)
  *                 .build())
- *             .healthChecks(defaultHealthCheck.id())
+ *             .healthChecks(defaultResource3.id())
  *             .build());
  * 
- *         var hybridBackendService = new BackendService(&#34;hybridBackendService&#34;, BackendServiceArgs.builder()        
+ *         var hybridResource = new BackendService(&#34;hybridResource&#34;, BackendServiceArgs.builder()        
+ *             .name(&#34;backend-hybrid&#34;)
  *             .portName(&#34;http&#34;)
  *             .protocol(&#34;HTTP&#34;)
  *             .timeoutSec(10)
  *             .backends(BackendServiceBackendArgs.builder()
- *                 .group(hybridNetworkEndpointGroup.id())
+ *                 .group(hybrid.id())
  *                 .balancingMode(&#34;RATE&#34;)
  *                 .maxRatePerEndpoint(10)
  *                 .build())
- *             .healthChecks(defaultHealthCheck.id())
+ *             .healthChecks(defaultResource3.id())
  *             .build());
  * 
- *         var defaultURLMap = new URLMap(&#34;defaultURLMap&#34;, URLMapArgs.builder()        
+ *         var defaultResource4 = new URLMap(&#34;defaultResource4&#34;, URLMapArgs.builder()        
+ *             .name(&#34;url-map-target-proxy&#34;)
  *             .description(&#34;a description&#34;)
- *             .defaultService(defaultBackendService.id())
+ *             .defaultService(defaultResource2.id())
  *             .hostRules(URLMapHostRuleArgs.builder()
  *                 .hosts(&#34;mysite.com&#34;)
  *                 .pathMatcher(&#34;allpaths&#34;)
  *                 .build())
  *             .pathMatchers(URLMapPathMatcherArgs.builder()
  *                 .name(&#34;allpaths&#34;)
- *                 .defaultService(defaultBackendService.id())
+ *                 .defaultService(defaultResource2.id())
  *                 .pathRules(                
  *                     URLMapPathMatcherPathRuleArgs.builder()
  *                         .paths(&#34;/*&#34;)
- *                         .service(defaultBackendService.id())
+ *                         .service(defaultResource2.id())
  *                         .build(),
  *                     URLMapPathMatcherPathRuleArgs.builder()
  *                         .paths(&#34;/hybrid&#34;)
- *                         .service(hybridBackendService.id())
+ *                         .service(hybridResource.id())
  *                         .build())
  *                 .build())
  *             .build());
  * 
- *         var defaultTargetHttpProxy = new TargetHttpProxy(&#34;defaultTargetHttpProxy&#34;, TargetHttpProxyArgs.builder()        
+ *         var defaultResource5 = new TargetHttpProxy(&#34;defaultResource5&#34;, TargetHttpProxyArgs.builder()        
+ *             .name(&#34;target-proxy&#34;)
  *             .description(&#34;a description&#34;)
- *             .urlMap(defaultURLMap.id())
+ *             .urlMap(defaultResource4.id())
  *             .build());
  * 
- *         var defaultGlobalForwardingRule = new GlobalForwardingRule(&#34;defaultGlobalForwardingRule&#34;, GlobalForwardingRuleArgs.builder()        
- *             .target(defaultTargetHttpProxy.id())
+ *         var defaultResource6 = new GlobalForwardingRule(&#34;defaultResource6&#34;, GlobalForwardingRuleArgs.builder()        
+ *             .name(&#34;global-rule&#34;)
+ *             .target(defaultResource5.id())
  *             .portRange(&#34;80&#34;)
  *             .build());
  * 
@@ -1041,7 +1028,6 @@ import javax.annotation.Nullable;
  * }
  * ```
  * ### Global Internal Http Lb With Mig Backend
- * 
  * ```java
  * package generated_program;
  * 
@@ -1079,7 +1065,6 @@ import javax.annotation.Nullable;
  * import com.pulumi.gcp.compute.inputs.InstanceNetworkInterfaceArgs;
  * import com.pulumi.gcp.compute.inputs.InstanceBootDiskArgs;
  * import com.pulumi.gcp.compute.inputs.InstanceBootDiskInitializeParamsArgs;
- * import com.pulumi.resources.CustomResourceOptions;
  * import java.util.List;
  * import java.util.ArrayList;
  * import java.util.Map;
@@ -1094,45 +1079,42 @@ import javax.annotation.Nullable;
  * 
  *     public static void stack(Context ctx) {
  *         var gilbNetwork = new Network(&#34;gilbNetwork&#34;, NetworkArgs.builder()        
+ *             .name(&#34;l7-gilb-network&#34;)
  *             .autoCreateSubnetworks(false)
- *             .build(), CustomResourceOptions.builder()
- *                 .provider(google_beta)
- *                 .build());
+ *             .build());
  * 
  *         var proxySubnet = new Subnetwork(&#34;proxySubnet&#34;, SubnetworkArgs.builder()        
+ *             .name(&#34;l7-gilb-proxy-subnet&#34;)
  *             .ipCidrRange(&#34;10.0.0.0/24&#34;)
  *             .region(&#34;europe-west1&#34;)
  *             .purpose(&#34;GLOBAL_MANAGED_PROXY&#34;)
  *             .role(&#34;ACTIVE&#34;)
  *             .network(gilbNetwork.id())
- *             .build(), CustomResourceOptions.builder()
- *                 .provider(google_beta)
- *                 .build());
+ *             .build());
  * 
  *         var gilbSubnet = new Subnetwork(&#34;gilbSubnet&#34;, SubnetworkArgs.builder()        
+ *             .name(&#34;l7-gilb-subnet&#34;)
  *             .ipCidrRange(&#34;10.0.1.0/24&#34;)
  *             .region(&#34;europe-west1&#34;)
  *             .network(gilbNetwork.id())
- *             .build(), CustomResourceOptions.builder()
- *                 .provider(google_beta)
- *                 .build());
+ *             .build());
  * 
- *         var defaultHealthCheck = new HealthCheck(&#34;defaultHealthCheck&#34;, HealthCheckArgs.builder()        
+ *         var defaultResource3 = new HealthCheck(&#34;defaultResource3&#34;, HealthCheckArgs.builder()        
+ *             .name(&#34;l7-gilb-hc&#34;)
  *             .httpHealthCheck(HealthCheckHttpHealthCheckArgs.builder()
  *                 .portSpecification(&#34;USE_SERVING_PORT&#34;)
  *                 .build())
- *             .build(), CustomResourceOptions.builder()
- *                 .provider(google_beta)
- *                 .build());
+ *             .build());
  * 
  *         var instanceTemplate = new InstanceTemplate(&#34;instanceTemplate&#34;, InstanceTemplateArgs.builder()        
- *             .machineType(&#34;e2-small&#34;)
- *             .tags(&#34;http-server&#34;)
  *             .networkInterfaces(InstanceTemplateNetworkInterfaceArgs.builder()
+ *                 .accessConfigs()
  *                 .network(gilbNetwork.id())
  *                 .subnetwork(gilbSubnet.id())
- *                 .accessConfigs()
  *                 .build())
+ *             .name(&#34;l7-gilb-mig-template&#34;)
+ *             .machineType(&#34;e2-small&#34;)
+ *             .tags(&#34;http-server&#34;)
  *             .disks(InstanceTemplateDiskArgs.builder()
  *                 .sourceImage(&#34;debian-cloud/debian-10&#34;)
  *                 .autoDelete(true)
@@ -1158,11 +1140,10 @@ import javax.annotation.Nullable;
  * &lt;/pre&gt;
  * EOF
  *             &#34;&#34;&#34;))
- *             .build(), CustomResourceOptions.builder()
- *                 .provider(google_beta)
- *                 .build());
+ *             .build());
  * 
  *         var mig = new InstanceGroupManager(&#34;mig&#34;, InstanceGroupManagerArgs.builder()        
+ *             .name(&#34;l7-gilb-mig1&#34;)
  *             .zone(&#34;europe-west1-b&#34;)
  *             .versions(InstanceGroupManagerVersionArgs.builder()
  *                 .instanceTemplate(instanceTemplate.id())
@@ -1170,49 +1151,43 @@ import javax.annotation.Nullable;
  *                 .build())
  *             .baseInstanceName(&#34;vm&#34;)
  *             .targetSize(2)
- *             .build(), CustomResourceOptions.builder()
- *                 .provider(google_beta)
- *                 .build());
+ *             .build());
  * 
- *         var defaultBackendService = new BackendService(&#34;defaultBackendService&#34;, BackendServiceArgs.builder()        
+ *         var defaultResource2 = new BackendService(&#34;defaultResource2&#34;, BackendServiceArgs.builder()        
+ *             .name(&#34;l7-gilb-backend-subnet&#34;)
  *             .protocol(&#34;HTTP&#34;)
  *             .loadBalancingScheme(&#34;INTERNAL_MANAGED&#34;)
  *             .timeoutSec(10)
- *             .healthChecks(defaultHealthCheck.id())
+ *             .healthChecks(defaultResource3.id())
  *             .backends(BackendServiceBackendArgs.builder()
  *                 .group(mig.instanceGroup())
  *                 .balancingMode(&#34;UTILIZATION&#34;)
  *                 .capacityScaler(1)
  *                 .build())
- *             .build(), CustomResourceOptions.builder()
- *                 .provider(google_beta)
- *                 .build());
+ *             .build());
  * 
- *         var defaultURLMap = new URLMap(&#34;defaultURLMap&#34;, URLMapArgs.builder()        
- *             .defaultService(defaultBackendService.id())
- *             .build(), CustomResourceOptions.builder()
- *                 .provider(google_beta)
- *                 .build());
+ *         var defaultResource = new URLMap(&#34;defaultResource&#34;, URLMapArgs.builder()        
+ *             .name(&#34;l7-gilb-url-map&#34;)
+ *             .defaultService(defaultResource2.id())
+ *             .build());
  * 
- *         var defaultTargetHttpProxy = new TargetHttpProxy(&#34;defaultTargetHttpProxy&#34;, TargetHttpProxyArgs.builder()        
- *             .urlMap(defaultURLMap.id())
- *             .build(), CustomResourceOptions.builder()
- *                 .provider(google_beta)
- *                 .build());
+ *         var default_ = new TargetHttpProxy(&#34;default&#34;, TargetHttpProxyArgs.builder()        
+ *             .name(&#34;l7-gilb-target-http-proxy&#34;)
+ *             .urlMap(defaultResource.id())
+ *             .build());
  * 
  *         var googleComputeForwardingRule = new GlobalForwardingRule(&#34;googleComputeForwardingRule&#34;, GlobalForwardingRuleArgs.builder()        
+ *             .name(&#34;l7-gilb-forwarding-rule&#34;)
  *             .ipProtocol(&#34;TCP&#34;)
  *             .loadBalancingScheme(&#34;INTERNAL_MANAGED&#34;)
  *             .portRange(&#34;80&#34;)
- *             .target(defaultTargetHttpProxy.id())
+ *             .target(default_.id())
  *             .network(gilbNetwork.id())
  *             .subnetwork(gilbSubnet.id())
- *             .build(), CustomResourceOptions.builder()
- *                 .provider(google_beta)
- *                 .dependsOn(proxySubnet)
- *                 .build());
+ *             .build());
  * 
  *         var fw_iap = new Firewall(&#34;fw-iap&#34;, FirewallArgs.builder()        
+ *             .name(&#34;l7-gilb-fw-allow-iap-hc&#34;)
  *             .direction(&#34;INGRESS&#34;)
  *             .network(gilbNetwork.id())
  *             .sourceRanges(            
@@ -1222,11 +1197,10 @@ import javax.annotation.Nullable;
  *             .allows(FirewallAllowArgs.builder()
  *                 .protocol(&#34;tcp&#34;)
  *                 .build())
- *             .build(), CustomResourceOptions.builder()
- *                 .provider(google_beta)
- *                 .build());
+ *             .build());
  * 
  *         var fw_gilb_to_backends = new Firewall(&#34;fw-gilb-to-backends&#34;, FirewallArgs.builder()        
+ *             .name(&#34;l7-gilb-fw-allow-gilb-to-backends&#34;)
  *             .direction(&#34;INGRESS&#34;)
  *             .network(gilbNetwork.id())
  *             .sourceRanges(&#34;10.0.0.0/24&#34;)
@@ -1238,11 +1212,10 @@ import javax.annotation.Nullable;
  *                     &#34;443&#34;,
  *                     &#34;8080&#34;)
  *                 .build())
- *             .build(), CustomResourceOptions.builder()
- *                 .provider(google_beta)
- *                 .build());
+ *             .build());
  * 
  *         var vm_test = new Instance(&#34;vm-test&#34;, InstanceArgs.builder()        
+ *             .name(&#34;l7-gilb-test-vm&#34;)
  *             .zone(&#34;europe-west1-b&#34;)
  *             .machineType(&#34;e2-small&#34;)
  *             .networkInterfaces(InstanceNetworkInterfaceArgs.builder()
@@ -1254,9 +1227,7 @@ import javax.annotation.Nullable;
  *                     .image(&#34;debian-cloud/debian-10&#34;)
  *                     .build())
  *                 .build())
- *             .build(), CustomResourceOptions.builder()
- *                 .provider(google_beta)
- *                 .build());
+ *             .build());
  * 
  *     }
  * }
@@ -1276,7 +1247,6 @@ import javax.annotation.Nullable;
  * import com.pulumi.gcp.compute.GlobalAddressArgs;
  * import com.pulumi.gcp.compute.GlobalForwardingRule;
  * import com.pulumi.gcp.compute.GlobalForwardingRuleArgs;
- * import com.pulumi.resources.CustomResourceOptions;
  * import java.util.List;
  * import java.util.ArrayList;
  * import java.util.Map;
@@ -1292,40 +1262,36 @@ import javax.annotation.Nullable;
  *     public static void stack(Context ctx) {
  *         var network = new Network(&#34;network&#34;, NetworkArgs.builder()        
  *             .project(&#34;my-project-name&#34;)
+ *             .name(&#34;my-network&#34;)
  *             .autoCreateSubnetworks(false)
- *             .build(), CustomResourceOptions.builder()
- *                 .provider(google_beta)
- *                 .build());
+ *             .build());
  * 
  *         var vpcSubnetwork = new Subnetwork(&#34;vpcSubnetwork&#34;, SubnetworkArgs.builder()        
  *             .project(network.project())
+ *             .name(&#34;my-subnetwork&#34;)
  *             .ipCidrRange(&#34;10.2.0.0/16&#34;)
  *             .region(&#34;us-central1&#34;)
  *             .network(network.id())
  *             .privateIpGoogleAccess(true)
- *             .build(), CustomResourceOptions.builder()
- *                 .provider(google_beta)
- *                 .build());
+ *             .build());
  * 
- *         var defaultGlobalAddress = new GlobalAddress(&#34;defaultGlobalAddress&#34;, GlobalAddressArgs.builder()        
+ *         var default_ = new GlobalAddress(&#34;default&#34;, GlobalAddressArgs.builder()        
  *             .project(network.project())
+ *             .name(&#34;global-psconnect-ip&#34;)
  *             .addressType(&#34;INTERNAL&#34;)
  *             .purpose(&#34;PRIVATE_SERVICE_CONNECT&#34;)
  *             .network(network.id())
  *             .address(&#34;100.100.100.106&#34;)
- *             .build(), CustomResourceOptions.builder()
- *                 .provider(google_beta)
- *                 .build());
+ *             .build());
  * 
- *         var defaultGlobalForwardingRule = new GlobalForwardingRule(&#34;defaultGlobalForwardingRule&#34;, GlobalForwardingRuleArgs.builder()        
+ *         var defaultResource = new GlobalForwardingRule(&#34;defaultResource&#34;, GlobalForwardingRuleArgs.builder()        
  *             .project(network.project())
+ *             .name(&#34;globalrule&#34;)
  *             .target(&#34;all-apis&#34;)
  *             .network(network.id())
- *             .ipAddress(defaultGlobalAddress.id())
+ *             .ipAddress(default_.id())
  *             .loadBalancingScheme(&#34;&#34;)
- *             .build(), CustomResourceOptions.builder()
- *                 .provider(google_beta)
- *                 .build());
+ *             .build());
  * 
  *     }
  * }
@@ -1345,7 +1311,6 @@ import javax.annotation.Nullable;
  * import com.pulumi.gcp.compute.GlobalAddressArgs;
  * import com.pulumi.gcp.compute.GlobalForwardingRule;
  * import com.pulumi.gcp.compute.GlobalForwardingRuleArgs;
- * import com.pulumi.resources.CustomResourceOptions;
  * import java.util.List;
  * import java.util.ArrayList;
  * import java.util.Map;
@@ -1361,41 +1326,37 @@ import javax.annotation.Nullable;
  *     public static void stack(Context ctx) {
  *         var network = new Network(&#34;network&#34;, NetworkArgs.builder()        
  *             .project(&#34;my-project-name&#34;)
+ *             .name(&#34;my-network&#34;)
  *             .autoCreateSubnetworks(false)
- *             .build(), CustomResourceOptions.builder()
- *                 .provider(google_beta)
- *                 .build());
+ *             .build());
  * 
  *         var vpcSubnetwork = new Subnetwork(&#34;vpcSubnetwork&#34;, SubnetworkArgs.builder()        
  *             .project(network.project())
+ *             .name(&#34;my-subnetwork&#34;)
  *             .ipCidrRange(&#34;10.2.0.0/16&#34;)
  *             .region(&#34;us-central1&#34;)
  *             .network(network.id())
  *             .privateIpGoogleAccess(true)
- *             .build(), CustomResourceOptions.builder()
- *                 .provider(google_beta)
- *                 .build());
+ *             .build());
  * 
- *         var defaultGlobalAddress = new GlobalAddress(&#34;defaultGlobalAddress&#34;, GlobalAddressArgs.builder()        
+ *         var default_ = new GlobalAddress(&#34;default&#34;, GlobalAddressArgs.builder()        
  *             .project(network.project())
+ *             .name(&#34;global-psconnect-ip&#34;)
  *             .addressType(&#34;INTERNAL&#34;)
  *             .purpose(&#34;PRIVATE_SERVICE_CONNECT&#34;)
  *             .network(network.id())
  *             .address(&#34;100.100.100.106&#34;)
- *             .build(), CustomResourceOptions.builder()
- *                 .provider(google_beta)
- *                 .build());
+ *             .build());
  * 
- *         var defaultGlobalForwardingRule = new GlobalForwardingRule(&#34;defaultGlobalForwardingRule&#34;, GlobalForwardingRuleArgs.builder()        
+ *         var defaultResource = new GlobalForwardingRule(&#34;defaultResource&#34;, GlobalForwardingRuleArgs.builder()        
  *             .project(network.project())
+ *             .name(&#34;globalrule&#34;)
  *             .target(&#34;all-apis&#34;)
  *             .network(network.id())
- *             .ipAddress(defaultGlobalAddress.id())
+ *             .ipAddress(default_.id())
  *             .loadBalancingScheme(&#34;&#34;)
  *             .noAutomateDnsZone(false)
- *             .build(), CustomResourceOptions.builder()
- *                 .provider(google_beta)
- *                 .build());
+ *             .build());
  * 
  *     }
  * }

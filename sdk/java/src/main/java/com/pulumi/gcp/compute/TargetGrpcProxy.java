@@ -29,7 +29,6 @@ import javax.annotation.Nullable;
  * 
  * ## Example Usage
  * ### Target Grpc Proxy Basic
- * 
  * ```java
  * package generated_program;
  * 
@@ -61,7 +60,8 @@ import javax.annotation.Nullable;
  *     }
  * 
  *     public static void stack(Context ctx) {
- *         var defaultHealthCheck = new HealthCheck(&#34;defaultHealthCheck&#34;, HealthCheckArgs.builder()        
+ *         var defaultResource = new HealthCheck(&#34;defaultResource&#34;, HealthCheckArgs.builder()        
+ *             .name(&#34;healthcheck&#34;)
  *             .timeoutSec(1)
  *             .checkIntervalSec(1)
  *             .grpcHealthCheck(HealthCheckGrpcHealthCheckArgs.builder()
@@ -72,14 +72,16 @@ import javax.annotation.Nullable;
  *             .build());
  * 
  *         var home = new BackendService(&#34;home&#34;, BackendServiceArgs.builder()        
+ *             .name(&#34;backend&#34;)
  *             .portName(&#34;grpc&#34;)
  *             .protocol(&#34;GRPC&#34;)
  *             .timeoutSec(10)
- *             .healthChecks(defaultHealthCheck.id())
+ *             .healthChecks(defaultResource.id())
  *             .loadBalancingScheme(&#34;INTERNAL_SELF_MANAGED&#34;)
  *             .build());
  * 
  *         var urlmap = new URLMap(&#34;urlmap&#34;, URLMapArgs.builder()        
+ *             .name(&#34;urlmap&#34;)
  *             .description(&#34;a description&#34;)
  *             .defaultService(home.id())
  *             .hostRules(URLMapHostRuleArgs.builder()
@@ -141,7 +143,8 @@ import javax.annotation.Nullable;
  *                 .build())
  *             .build());
  * 
- *         var defaultTargetGrpcProxy = new TargetGrpcProxy(&#34;defaultTargetGrpcProxy&#34;, TargetGrpcProxyArgs.builder()        
+ *         var default_ = new TargetGrpcProxy(&#34;default&#34;, TargetGrpcProxyArgs.builder()        
+ *             .name(&#34;proxy&#34;)
  *             .urlMap(urlmap.id())
  *             .validateForProxyless(true)
  *             .build());

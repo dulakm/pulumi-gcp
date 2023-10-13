@@ -40,9 +40,9 @@ public final class IotFunctions {
      * 
      *     public static void stack(Context ctx) {
      *         final var policy = IotFunctions.getRegistryIamPolicy(GetRegistryIamPolicyArgs.builder()
-     *             .project(google_cloudiot_registry.test-registry().project())
-     *             .region(google_cloudiot_registry.test-registry().region())
-     *             .name(google_cloudiot_registry.test-registry().name())
+     *             .project(test_registry.project())
+     *             .region(test_registry.region())
+     *             .name(test_registry.name())
      *             .build());
      * 
      *     }
@@ -79,9 +79,9 @@ public final class IotFunctions {
      * 
      *     public static void stack(Context ctx) {
      *         final var policy = IotFunctions.getRegistryIamPolicy(GetRegistryIamPolicyArgs.builder()
-     *             .project(google_cloudiot_registry.test-registry().project())
-     *             .region(google_cloudiot_registry.test-registry().region())
-     *             .name(google_cloudiot_registry.test-registry().name())
+     *             .project(test_registry.project())
+     *             .region(test_registry.region())
+     *             .name(test_registry.name())
      *             .build());
      * 
      *     }
@@ -118,9 +118,9 @@ public final class IotFunctions {
      * 
      *     public static void stack(Context ctx) {
      *         final var policy = IotFunctions.getRegistryIamPolicy(GetRegistryIamPolicyArgs.builder()
-     *             .project(google_cloudiot_registry.test-registry().project())
-     *             .region(google_cloudiot_registry.test-registry().region())
-     *             .name(google_cloudiot_registry.test-registry().name())
+     *             .project(test_registry.project())
+     *             .region(test_registry.region())
+     *             .name(test_registry.name())
      *             .build());
      * 
      *     }
@@ -157,9 +157,9 @@ public final class IotFunctions {
      * 
      *     public static void stack(Context ctx) {
      *         final var policy = IotFunctions.getRegistryIamPolicy(GetRegistryIamPolicyArgs.builder()
-     *             .project(google_cloudiot_registry.test-registry().project())
-     *             .region(google_cloudiot_registry.test-registry().region())
-     *             .name(google_cloudiot_registry.test-registry().name())
+     *             .project(test_registry.project())
+     *             .region(test_registry.region())
+     *             .name(test_registry.name())
      *             .build());
      * 
      *     }

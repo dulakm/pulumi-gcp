@@ -29,7 +29,6 @@ import javax.annotation.Nullable;
  * 
  * ## Example Usage
  * ### Target Ssl Proxy Basic
- * 
  * ```java
  * package generated_program;
  * 
@@ -58,12 +57,18 @@ import javax.annotation.Nullable;
  *     }
  * 
  *     public static void stack(Context ctx) {
- *         var defaultSSLCertificate = new SSLCertificate(&#34;defaultSSLCertificate&#34;, SSLCertificateArgs.builder()        
- *             .privateKey(Files.readString(Paths.get(&#34;path/to/private.key&#34;)))
- *             .certificate(Files.readString(Paths.get(&#34;path/to/certificate.crt&#34;)))
+ *         var defaultResource = new SSLCertificate(&#34;defaultResource&#34;, SSLCertificateArgs.builder()        
+ *             .name(&#34;default-cert&#34;)
+ *             .privateKey(StdFunctions.file(FileArgs.builder()
+ *                 .input(&#34;path/to/private.key&#34;)
+ *                 .build()).result())
+ *             .certificate(StdFunctions.file(FileArgs.builder()
+ *                 .input(&#34;path/to/certificate.crt&#34;)
+ *                 .build()).result())
  *             .build());
  * 
- *         var defaultHealthCheck = new HealthCheck(&#34;defaultHealthCheck&#34;, HealthCheckArgs.builder()        
+ *         var defaultResource3 = new HealthCheck(&#34;defaultResource3&#34;, HealthCheckArgs.builder()        
+ *             .name(&#34;health-check&#34;)
  *             .checkIntervalSec(1)
  *             .timeoutSec(1)
  *             .tcpHealthCheck(HealthCheckTcpHealthCheckArgs.builder()
@@ -71,14 +76,16 @@ import javax.annotation.Nullable;
  *                 .build())
  *             .build());
  * 
- *         var defaultBackendService = new BackendService(&#34;defaultBackendService&#34;, BackendServiceArgs.builder()        
+ *         var defaultResource2 = new BackendService(&#34;defaultResource2&#34;, BackendServiceArgs.builder()        
+ *             .name(&#34;backend-service&#34;)
  *             .protocol(&#34;SSL&#34;)
- *             .healthChecks(defaultHealthCheck.id())
+ *             .healthChecks(defaultResource3.id())
  *             .build());
  * 
- *         var defaultTargetSSLProxy = new TargetSSLProxy(&#34;defaultTargetSSLProxy&#34;, TargetSSLProxyArgs.builder()        
- *             .backendService(defaultBackendService.id())
- *             .sslCertificates(defaultSSLCertificate.id())
+ *         var default_ = new TargetSSLProxy(&#34;default&#34;, TargetSSLProxyArgs.builder()        
+ *             .name(&#34;test-proxy&#34;)
+ *             .backendService(defaultResource2.id())
+ *             .sslCertificates(defaultResource.id())
  *             .build());
  * 
  *     }

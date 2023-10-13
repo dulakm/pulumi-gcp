@@ -42,6 +42,7 @@ import javax.annotation.Nullable;
  * import com.pulumi.gcp.compute.inputs.InstanceTemplateNetworkInterfaceArgs;
  * import com.pulumi.gcp.compute.inputs.InstanceTemplateServiceAccountArgs;
  * import com.pulumi.gcp.compute.TargetPool;
+ * import com.pulumi.gcp.compute.TargetPoolArgs;
  * import com.pulumi.gcp.compute.RegionInstanceGroupManager;
  * import com.pulumi.gcp.compute.RegionInstanceGroupManagerArgs;
  * import com.pulumi.gcp.compute.inputs.RegionInstanceGroupManagerVersionArgs;
@@ -64,7 +65,8 @@ import javax.annotation.Nullable;
  *     }
  * 
  *     public static void stack(Context ctx) {
- *         var foobarInstanceTemplate = new InstanceTemplate(&#34;foobarInstanceTemplate&#34;, InstanceTemplateArgs.builder()        
+ *         var foobarResource = new InstanceTemplate(&#34;foobarResource&#34;, InstanceTemplateArgs.builder()        
+ *             .name(&#34;my-instance-template&#34;)
  *             .machineType(&#34;e2-standard-4&#34;)
  *             .disks(InstanceTemplateDiskArgs.builder()
  *                 .sourceImage(&#34;debian-cloud/debian-11&#34;)
@@ -88,21 +90,25 @@ import javax.annotation.Nullable;
  *                 .build())
  *             .build());
  * 
- *         var foobarTargetPool = new TargetPool(&#34;foobarTargetPool&#34;);
+ *         var foobarResource2 = new TargetPool(&#34;foobarResource2&#34;, TargetPoolArgs.builder()        
+ *             .name(&#34;my-target-pool&#34;)
+ *             .build());
  * 
- *         var foobarRegionInstanceGroupManager = new RegionInstanceGroupManager(&#34;foobarRegionInstanceGroupManager&#34;, RegionInstanceGroupManagerArgs.builder()        
+ *         var foobarResource3 = new RegionInstanceGroupManager(&#34;foobarResource3&#34;, RegionInstanceGroupManagerArgs.builder()        
+ *             .name(&#34;my-region-igm&#34;)
  *             .region(&#34;us-central1&#34;)
  *             .versions(RegionInstanceGroupManagerVersionArgs.builder()
- *                 .instanceTemplate(foobarInstanceTemplate.id())
+ *                 .instanceTemplate(foobarResource.id())
  *                 .name(&#34;primary&#34;)
  *                 .build())
- *             .targetPools(foobarTargetPool.id())
+ *             .targetPools(foobarResource2.id())
  *             .baseInstanceName(&#34;foobar&#34;)
  *             .build());
  * 
- *         var foobarRegionAutoscaler = new RegionAutoscaler(&#34;foobarRegionAutoscaler&#34;, RegionAutoscalerArgs.builder()        
+ *         var foobar = new RegionAutoscaler(&#34;foobar&#34;, RegionAutoscalerArgs.builder()        
+ *             .name(&#34;my-region-autoscaler&#34;)
  *             .region(&#34;us-central1&#34;)
- *             .target(foobarRegionInstanceGroupManager.id())
+ *             .target(foobarResource3.id())
  *             .autoscalingPolicy(RegionAutoscalerAutoscalingPolicyArgs.builder()
  *                 .maxReplicas(5)
  *                 .minReplicas(1)

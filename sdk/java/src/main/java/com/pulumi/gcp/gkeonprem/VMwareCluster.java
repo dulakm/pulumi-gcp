@@ -47,7 +47,6 @@ import javax.annotation.Nullable;
  * import com.pulumi.gcp.gkeonprem.inputs.VMwareClusterLoadBalancerArgs;
  * import com.pulumi.gcp.gkeonprem.inputs.VMwareClusterLoadBalancerVipConfigArgs;
  * import com.pulumi.gcp.gkeonprem.inputs.VMwareClusterLoadBalancerMetalLbConfigArgs;
- * import com.pulumi.resources.CustomResourceOptions;
  * import java.util.List;
  * import java.util.ArrayList;
  * import java.util.Map;
@@ -62,6 +61,7 @@ import javax.annotation.Nullable;
  * 
  *     public static void stack(Context ctx) {
  *         var cluster_basic = new VMwareCluster(&#34;cluster-basic&#34;, VMwareClusterArgs.builder()        
+ *             .name(&#34;cluster-basic&#34;)
  *             .location(&#34;us-west1&#34;)
  *             .adminClusterMembership(&#34;projects/870316890899/locations/global/memberships/gkeonprem-terraform-test&#34;)
  *             .description(&#34;test cluster&#34;)
@@ -100,9 +100,7 @@ import javax.annotation.Nullable;
  *                             .build())
  *                     .build())
  *                 .build())
- *             .build(), CustomResourceOptions.builder()
- *                 .provider(google_beta)
- *                 .build());
+ *             .build());
  * 
  *     }
  * }
@@ -130,7 +128,6 @@ import javax.annotation.Nullable;
  * import com.pulumi.gcp.gkeonprem.inputs.VMwareClusterAntiAffinityGroupsArgs;
  * import com.pulumi.gcp.gkeonprem.inputs.VMwareClusterAutoRepairConfigArgs;
  * import com.pulumi.gcp.gkeonprem.inputs.VMwareClusterStorageArgs;
- * import com.pulumi.resources.CustomResourceOptions;
  * import java.util.List;
  * import java.util.ArrayList;
  * import java.util.Map;
@@ -145,6 +142,7 @@ import javax.annotation.Nullable;
  * 
  *     public static void stack(Context ctx) {
  *         var cluster_f5lb = new VMwareCluster(&#34;cluster-f5lb&#34;, VMwareClusterArgs.builder()        
+ *             .name(&#34;cluster-f5lb&#34;)
  *             .location(&#34;us-west1&#34;)
  *             .adminClusterMembership(&#34;projects/870316890899/locations/global/memberships/gkeonprem-terraform-test&#34;)
  *             .description(&#34;test cluster&#34;)
@@ -207,9 +205,7 @@ import javax.annotation.Nullable;
  *             .storage(VMwareClusterStorageArgs.builder()
  *                 .vsphereCsiDisabled(true)
  *                 .build())
- *             .build(), CustomResourceOptions.builder()
- *                 .provider(google_beta)
- *                 .build());
+ *             .build());
  * 
  *     }
  * }
@@ -236,7 +232,6 @@ import javax.annotation.Nullable;
  * import com.pulumi.gcp.gkeonprem.inputs.VMwareClusterAuthorizationArgs;
  * import com.pulumi.gcp.gkeonprem.inputs.VMwareClusterAntiAffinityGroupsArgs;
  * import com.pulumi.gcp.gkeonprem.inputs.VMwareClusterAutoRepairConfigArgs;
- * import com.pulumi.resources.CustomResourceOptions;
  * import java.util.List;
  * import java.util.ArrayList;
  * import java.util.Map;
@@ -251,6 +246,7 @@ import javax.annotation.Nullable;
  * 
  *     public static void stack(Context ctx) {
  *         var cluster_manuallb = new VMwareCluster(&#34;cluster-manuallb&#34;, VMwareClusterArgs.builder()        
+ *             .name(&#34;cluster-manuallb&#34;)
  *             .location(&#34;us-west1&#34;)
  *             .adminClusterMembership(&#34;projects/870316890899/locations/global/memberships/gkeonprem-terraform-test&#34;)
  *             .description(&#34;test cluster&#34;)
@@ -329,9 +325,7 @@ import javax.annotation.Nullable;
  *             .autoRepairConfig(VMwareClusterAutoRepairConfigArgs.builder()
  *                 .enabled(true)
  *                 .build())
- *             .build(), CustomResourceOptions.builder()
- *                 .provider(google_beta)
- *                 .build());
+ *             .build());
  * 
  *     }
  * }

@@ -36,7 +36,6 @@ import javax.annotation.Nullable;
  * import com.pulumi.gcp.workstations.inputs.WorkstationConfigHostGceInstanceArgs;
  * import com.pulumi.gcp.workstations.Workstation;
  * import com.pulumi.gcp.workstations.WorkstationArgs;
- * import com.pulumi.resources.CustomResourceOptions;
  * import java.util.List;
  * import java.util.ArrayList;
  * import java.util.Map;
@@ -50,34 +49,30 @@ import javax.annotation.Nullable;
  *     }
  * 
  *     public static void stack(Context ctx) {
- *         var defaultNetwork = new Network(&#34;defaultNetwork&#34;, NetworkArgs.builder()        
+ *         var default_ = new Network(&#34;default&#34;, NetworkArgs.builder()        
+ *             .name(&#34;workstation-cluster&#34;)
  *             .autoCreateSubnetworks(false)
- *             .build(), CustomResourceOptions.builder()
- *                 .provider(google_beta)
- *                 .build());
+ *             .build());
  * 
- *         var defaultSubnetwork = new Subnetwork(&#34;defaultSubnetwork&#34;, SubnetworkArgs.builder()        
+ *         var defaultResource = new Subnetwork(&#34;defaultResource&#34;, SubnetworkArgs.builder()        
+ *             .name(&#34;workstation-cluster&#34;)
  *             .ipCidrRange(&#34;10.0.0.0/24&#34;)
  *             .region(&#34;us-central1&#34;)
- *             .network(defaultNetwork.name())
- *             .build(), CustomResourceOptions.builder()
- *                 .provider(google_beta)
- *                 .build());
+ *             .network(default_.name())
+ *             .build());
  * 
- *         var defaultWorkstationCluster = new WorkstationCluster(&#34;defaultWorkstationCluster&#34;, WorkstationClusterArgs.builder()        
+ *         var defaultResource2 = new WorkstationCluster(&#34;defaultResource2&#34;, WorkstationClusterArgs.builder()        
  *             .workstationClusterId(&#34;workstation-cluster&#34;)
- *             .network(defaultNetwork.id())
- *             .subnetwork(defaultSubnetwork.id())
+ *             .network(default_.id())
+ *             .subnetwork(defaultResource.id())
  *             .location(&#34;us-central1&#34;)
  *             .labels(Map.of(&#34;label&#34;, &#34;key&#34;))
  *             .annotations(Map.of(&#34;label-one&#34;, &#34;value-one&#34;))
- *             .build(), CustomResourceOptions.builder()
- *                 .provider(google_beta)
- *                 .build());
+ *             .build());
  * 
- *         var defaultWorkstationConfig = new WorkstationConfig(&#34;defaultWorkstationConfig&#34;, WorkstationConfigArgs.builder()        
+ *         var defaultResource3 = new WorkstationConfig(&#34;defaultResource3&#34;, WorkstationConfigArgs.builder()        
  *             .workstationConfigId(&#34;workstation-config&#34;)
- *             .workstationClusterId(defaultWorkstationCluster.workstationClusterId())
+ *             .workstationClusterId(defaultResource2.workstationClusterId())
  *             .location(&#34;us-central1&#34;)
  *             .host(WorkstationConfigHostArgs.builder()
  *                 .gceInstance(WorkstationConfigHostGceInstanceArgs.builder()
@@ -86,21 +81,17 @@ import javax.annotation.Nullable;
  *                     .disablePublicIpAddresses(true)
  *                     .build())
  *                 .build())
- *             .build(), CustomResourceOptions.builder()
- *                 .provider(google_beta)
- *                 .build());
+ *             .build());
  * 
- *         var defaultWorkstation = new Workstation(&#34;defaultWorkstation&#34;, WorkstationArgs.builder()        
+ *         var defaultResource4 = new Workstation(&#34;defaultResource4&#34;, WorkstationArgs.builder()        
  *             .workstationId(&#34;work-station&#34;)
- *             .workstationConfigId(defaultWorkstationConfig.workstationConfigId())
- *             .workstationClusterId(defaultWorkstationCluster.workstationClusterId())
+ *             .workstationConfigId(defaultResource3.workstationConfigId())
+ *             .workstationClusterId(defaultResource2.workstationClusterId())
  *             .location(&#34;us-central1&#34;)
  *             .labels(Map.of(&#34;label&#34;, &#34;key&#34;))
  *             .env(Map.of(&#34;name&#34;, &#34;foo&#34;))
  *             .annotations(Map.of(&#34;label-one&#34;, &#34;value-one&#34;))
- *             .build(), CustomResourceOptions.builder()
- *                 .provider(google_beta)
- *                 .build());
+ *             .build());
  * 
  *     }
  * }

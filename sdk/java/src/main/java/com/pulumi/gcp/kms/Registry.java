@@ -39,6 +39,7 @@ import javax.annotation.Nullable;
  * import com.pulumi.Pulumi;
  * import com.pulumi.core.Output;
  * import com.pulumi.gcp.iot.Registry;
+ * import com.pulumi.gcp.iot.RegistryArgs;
  * import java.util.List;
  * import java.util.ArrayList;
  * import java.util.Map;
@@ -52,7 +53,9 @@ import javax.annotation.Nullable;
  *     }
  * 
  *     public static void stack(Context ctx) {
- *         var test_registry = new Registry(&#34;test-registry&#34;);
+ *         var test_registry = new Registry(&#34;test-registry&#34;, RegistryArgs.builder()        
+ *             .name(&#34;cloudiot-registry&#34;)
+ *             .build());
  * 
  *     }
  * }
@@ -65,6 +68,7 @@ import javax.annotation.Nullable;
  * import com.pulumi.Pulumi;
  * import com.pulumi.core.Output;
  * import com.pulumi.gcp.pubsub.Topic;
+ * import com.pulumi.gcp.pubsub.TopicArgs;
  * import com.pulumi.gcp.iot.Registry;
  * import com.pulumi.gcp.iot.RegistryArgs;
  * import com.pulumi.gcp.iot.inputs.RegistryEventNotificationConfigItemArgs;
@@ -81,9 +85,12 @@ import javax.annotation.Nullable;
  *     }
  * 
  *     public static void stack(Context ctx) {
- *         var default_telemetry = new Topic(&#34;default-telemetry&#34;);
+ *         var default_telemetry = new Topic(&#34;default-telemetry&#34;, TopicArgs.builder()        
+ *             .name(&#34;default-telemetry&#34;)
+ *             .build());
  * 
  *         var test_registry = new Registry(&#34;test-registry&#34;, RegistryArgs.builder()        
+ *             .name(&#34;cloudiot-registry&#34;)
  *             .eventNotificationConfigs(RegistryEventNotificationConfigItemArgs.builder()
  *                 .pubsubTopicName(default_telemetry.id())
  *                 .subfolderMatches(&#34;&#34;)
@@ -101,6 +108,7 @@ import javax.annotation.Nullable;
  * import com.pulumi.Pulumi;
  * import com.pulumi.core.Output;
  * import com.pulumi.gcp.pubsub.Topic;
+ * import com.pulumi.gcp.pubsub.TopicArgs;
  * import com.pulumi.gcp.iot.Registry;
  * import com.pulumi.gcp.iot.RegistryArgs;
  * import com.pulumi.gcp.iot.inputs.RegistryEventNotificationConfigItemArgs;
@@ -118,13 +126,20 @@ import javax.annotation.Nullable;
  *     }
  * 
  *     public static void stack(Context ctx) {
- *         var default_devicestatus = new Topic(&#34;default-devicestatus&#34;);
+ *         var default_devicestatus = new Topic(&#34;default-devicestatus&#34;, TopicArgs.builder()        
+ *             .name(&#34;default-devicestatus&#34;)
+ *             .build());
  * 
- *         var default_telemetry = new Topic(&#34;default-telemetry&#34;);
+ *         var default_telemetry = new Topic(&#34;default-telemetry&#34;, TopicArgs.builder()        
+ *             .name(&#34;default-telemetry&#34;)
+ *             .build());
  * 
- *         var additional_telemetry = new Topic(&#34;additional-telemetry&#34;);
+ *         var additional_telemetry = new Topic(&#34;additional-telemetry&#34;, TopicArgs.builder()        
+ *             .name(&#34;additional-telemetry&#34;)
+ *             .build());
  * 
  *         var test_registry = new Registry(&#34;test-registry&#34;, RegistryArgs.builder()        
+ *             .name(&#34;cloudiot-registry&#34;)
  *             .eventNotificationConfigs(            
  *                 RegistryEventNotificationConfigItemArgs.builder()
  *                     .pubsubTopicName(additional_telemetry.id())
@@ -134,14 +149,16 @@ import javax.annotation.Nullable;
  *                     .pubsubTopicName(default_telemetry.id())
  *                     .subfolderMatches(&#34;&#34;)
  *                     .build())
- *             .stateNotificationConfig(Map.of(&#34;pubsub_topic_name&#34;, default_devicestatus.id()))
- *             .mqttConfig(Map.of(&#34;mqtt_enabled_state&#34;, &#34;MQTT_ENABLED&#34;))
- *             .httpConfig(Map.of(&#34;http_enabled_state&#34;, &#34;HTTP_ENABLED&#34;))
+ *             .stateNotificationConfig(Map.of(&#34;pubsubTopicName&#34;, default_devicestatus.id()))
+ *             .mqttConfig(Map.of(&#34;mqttEnabledState&#34;, &#34;MQTT_ENABLED&#34;))
+ *             .httpConfig(Map.of(&#34;httpEnabledState&#34;, &#34;HTTP_ENABLED&#34;))
  *             .logLevel(&#34;INFO&#34;)
  *             .credentials(RegistryCredentialArgs.builder()
  *                 .publicKeyCertificate(Map.ofEntries(
  *                     Map.entry(&#34;format&#34;, &#34;X509_CERTIFICATE_PEM&#34;),
- *                     Map.entry(&#34;certificate&#34;, Files.readString(Paths.get(&#34;test-fixtures/rsa_cert.pem&#34;)))
+ *                     Map.entry(&#34;certificate&#34;, StdFunctions.file(FileArgs.builder()
+ *                         .input(&#34;test-fixtures/rsa_cert.pem&#34;)
+ *                         .build()).result())
  *                 ))
  *                 .build())
  *             .build());

@@ -197,8 +197,8 @@ public final class SecretmanagerFunctions {
      * 
      *     public static void stack(Context ctx) {
      *         final var policy = SecretmanagerFunctions.getSecretIamPolicy(GetSecretIamPolicyArgs.builder()
-     *             .project(google_secret_manager_secret.secret-basic().project())
-     *             .secretId(google_secret_manager_secret.secret-basic().secret_id())
+     *             .project(secret_basic.project())
+     *             .secretId(secret_basic.secretId())
      *             .build());
      * 
      *     }
@@ -235,8 +235,8 @@ public final class SecretmanagerFunctions {
      * 
      *     public static void stack(Context ctx) {
      *         final var policy = SecretmanagerFunctions.getSecretIamPolicy(GetSecretIamPolicyArgs.builder()
-     *             .project(google_secret_manager_secret.secret-basic().project())
-     *             .secretId(google_secret_manager_secret.secret-basic().secret_id())
+     *             .project(secret_basic.project())
+     *             .secretId(secret_basic.secretId())
      *             .build());
      * 
      *     }
@@ -273,8 +273,8 @@ public final class SecretmanagerFunctions {
      * 
      *     public static void stack(Context ctx) {
      *         final var policy = SecretmanagerFunctions.getSecretIamPolicy(GetSecretIamPolicyArgs.builder()
-     *             .project(google_secret_manager_secret.secret-basic().project())
-     *             .secretId(google_secret_manager_secret.secret-basic().secret_id())
+     *             .project(secret_basic.project())
+     *             .secretId(secret_basic.secretId())
      *             .build());
      * 
      *     }
@@ -311,8 +311,8 @@ public final class SecretmanagerFunctions {
      * 
      *     public static void stack(Context ctx) {
      *         final var policy = SecretmanagerFunctions.getSecretIamPolicy(GetSecretIamPolicyArgs.builder()
-     *             .project(google_secret_manager_secret.secret-basic().project())
-     *             .secretId(google_secret_manager_secret.secret-basic().secret_id())
+     *             .project(secret_basic.project())
+     *             .secretId(secret_basic.secretId())
      *             .build());
      * 
      *     }

@@ -58,11 +58,13 @@ import javax.annotation.Nullable;
  * 
  *     public static void stack(Context ctx) {
  *         var soletenant_tmpl = new NodeTemplate(&#34;soletenant-tmpl&#34;, NodeTemplateArgs.builder()        
+ *             .name(&#34;soletenant-tmpl&#34;)
  *             .region(&#34;us-central1&#34;)
  *             .nodeType(&#34;n1-node-96-624&#34;)
  *             .build());
  * 
  *         var nodes = new NodeGroup(&#34;nodes&#34;, NodeGroupArgs.builder()        
+ *             .name(&#34;soletenant-group&#34;)
  *             .zone(&#34;us-central1-a&#34;)
  *             .description(&#34;example google_compute_node_group for the Google Provider&#34;)
  *             .size(1)
@@ -99,11 +101,13 @@ import javax.annotation.Nullable;
  * 
  *     public static void stack(Context ctx) {
  *         var soletenant_tmpl = new NodeTemplate(&#34;soletenant-tmpl&#34;, NodeTemplateArgs.builder()        
+ *             .name(&#34;soletenant-tmpl&#34;)
  *             .region(&#34;us-central1&#34;)
  *             .nodeType(&#34;n1-node-96-624&#34;)
  *             .build());
  * 
  *         var nodes = new NodeGroup(&#34;nodes&#34;, NodeGroupArgs.builder()        
+ *             .name(&#34;soletenant-group&#34;)
  *             .zone(&#34;us-central1-a&#34;)
  *             .description(&#34;example google_compute_node_group for Google Provider&#34;)
  *             .maintenancePolicy(&#34;RESTART_IN_PLACE&#34;)
@@ -151,15 +155,18 @@ import javax.annotation.Nullable;
  *     public static void stack(Context ctx) {
  *         var guestProject = new Project(&#34;guestProject&#34;, ProjectArgs.builder()        
  *             .projectId(&#34;project-id&#34;)
+ *             .name(&#34;project-name&#34;)
  *             .orgId(&#34;123456789&#34;)
  *             .build());
  * 
  *         var soletenant_tmpl = new NodeTemplate(&#34;soletenant-tmpl&#34;, NodeTemplateArgs.builder()        
+ *             .name(&#34;soletenant-tmpl&#34;)
  *             .region(&#34;us-central1&#34;)
  *             .nodeType(&#34;n1-node-96-624&#34;)
  *             .build());
  * 
  *         var nodes = new NodeGroup(&#34;nodes&#34;, NodeGroupArgs.builder()        
+ *             .name(&#34;soletenant-group&#34;)
  *             .zone(&#34;us-central1-f&#34;)
  *             .description(&#34;example google_compute_node_group for Terraform Google Provider&#34;)
  *             .size(1)

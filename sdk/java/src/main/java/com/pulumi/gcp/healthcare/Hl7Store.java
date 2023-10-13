@@ -38,6 +38,7 @@ import javax.annotation.Nullable;
  * import com.pulumi.Pulumi;
  * import com.pulumi.core.Output;
  * import com.pulumi.gcp.pubsub.Topic;
+ * import com.pulumi.gcp.pubsub.TopicArgs;
  * import com.pulumi.gcp.healthcare.Dataset;
  * import com.pulumi.gcp.healthcare.DatasetArgs;
  * import com.pulumi.gcp.healthcare.Hl7Store;
@@ -56,13 +57,17 @@ import javax.annotation.Nullable;
  *     }
  * 
  *     public static void stack(Context ctx) {
- *         var topic = new Topic(&#34;topic&#34;);
+ *         var topic = new Topic(&#34;topic&#34;, TopicArgs.builder()        
+ *             .name(&#34;hl7-v2-notifications&#34;)
+ *             .build());
  * 
  *         var dataset = new Dataset(&#34;dataset&#34;, DatasetArgs.builder()        
+ *             .name(&#34;example-dataset&#34;)
  *             .location(&#34;us-central1&#34;)
  *             .build());
  * 
  *         var store = new Hl7Store(&#34;store&#34;, Hl7StoreArgs.builder()        
+ *             .name(&#34;example-hl7-v2-store&#34;)
  *             .dataset(dataset.id())
  *             .notificationConfigs(Hl7StoreNotificationConfigsArgs.builder()
  *                 .pubsubTopic(topic.id())
@@ -85,7 +90,6 @@ import javax.annotation.Nullable;
  * import com.pulumi.gcp.healthcare.Hl7Store;
  * import com.pulumi.gcp.healthcare.Hl7StoreArgs;
  * import com.pulumi.gcp.healthcare.inputs.Hl7StoreParserConfigArgs;
- * import com.pulumi.resources.CustomResourceOptions;
  * import java.util.List;
  * import java.util.ArrayList;
  * import java.util.Map;
@@ -100,12 +104,12 @@ import javax.annotation.Nullable;
  * 
  *     public static void stack(Context ctx) {
  *         var dataset = new Dataset(&#34;dataset&#34;, DatasetArgs.builder()        
+ *             .name(&#34;example-dataset&#34;)
  *             .location(&#34;us-central1&#34;)
- *             .build(), CustomResourceOptions.builder()
- *                 .provider(google_beta)
- *                 .build());
+ *             .build());
  * 
  *         var store = new Hl7Store(&#34;store&#34;, Hl7StoreArgs.builder()        
+ *             .name(&#34;example-hl7-v2-store&#34;)
  *             .dataset(dataset.id())
  *             .parserConfig(Hl7StoreParserConfigArgs.builder()
  *                 .allowNullHeader(false)
@@ -191,9 +195,7 @@ import javax.annotation.Nullable;
  * }
  *                 &#34;&#34;&#34;)
  *                 .build())
- *             .build(), CustomResourceOptions.builder()
- *                 .provider(google_beta)
- *                 .build());
+ *             .build());
  * 
  *     }
  * }
@@ -210,7 +212,6 @@ import javax.annotation.Nullable;
  * import com.pulumi.gcp.healthcare.Hl7Store;
  * import com.pulumi.gcp.healthcare.Hl7StoreArgs;
  * import com.pulumi.gcp.healthcare.inputs.Hl7StoreParserConfigArgs;
- * import com.pulumi.resources.CustomResourceOptions;
  * import java.util.List;
  * import java.util.ArrayList;
  * import java.util.Map;
@@ -225,21 +226,19 @@ import javax.annotation.Nullable;
  * 
  *     public static void stack(Context ctx) {
  *         var dataset = new Dataset(&#34;dataset&#34;, DatasetArgs.builder()        
+ *             .name(&#34;example-dataset&#34;)
  *             .location(&#34;us-central1&#34;)
- *             .build(), CustomResourceOptions.builder()
- *                 .provider(google_beta)
- *                 .build());
+ *             .build());
  * 
  *         var store = new Hl7Store(&#34;store&#34;, Hl7StoreArgs.builder()        
+ *             .name(&#34;example-hl7-v2-store&#34;)
  *             .dataset(dataset.id())
  *             .parserConfig(Hl7StoreParserConfigArgs.builder()
  *                 .allowNullHeader(false)
  *                 .segmentTerminator(&#34;Jw==&#34;)
  *                 .version(&#34;V2&#34;)
  *                 .build())
- *             .build(), CustomResourceOptions.builder()
- *                 .provider(google_beta)
- *                 .build());
+ *             .build());
  * 
  *     }
  * }

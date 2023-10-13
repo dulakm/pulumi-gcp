@@ -42,8 +42,9 @@ import javax.annotation.Nullable;
  * 
  *     public static void stack(Context ctx) {
  *         var primary = new RegionNetworkFirewallPolicy(&#34;primary&#34;, RegionNetworkFirewallPolicyArgs.builder()        
- *             .description(&#34;Sample regional network firewall policy&#34;)
+ *             .name(&#34;policy&#34;)
  *             .project(&#34;my-project-name&#34;)
+ *             .description(&#34;Sample regional network firewall policy&#34;)
  *             .region(&#34;us-west1&#34;)
  *             .build());
  * 

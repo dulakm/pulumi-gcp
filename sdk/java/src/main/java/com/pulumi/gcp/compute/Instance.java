@@ -47,10 +47,10 @@ import javax.annotation.Nullable;
  * import com.pulumi.gcp.serviceAccount.AccountArgs;
  * import com.pulumi.gcp.compute.Instance;
  * import com.pulumi.gcp.compute.InstanceArgs;
+ * import com.pulumi.gcp.compute.inputs.InstanceNetworkInterfaceArgs;
  * import com.pulumi.gcp.compute.inputs.InstanceBootDiskArgs;
  * import com.pulumi.gcp.compute.inputs.InstanceBootDiskInitializeParamsArgs;
  * import com.pulumi.gcp.compute.inputs.InstanceScratchDiskArgs;
- * import com.pulumi.gcp.compute.inputs.InstanceNetworkInterfaceArgs;
  * import com.pulumi.gcp.compute.inputs.InstanceServiceAccountArgs;
  * import java.util.List;
  * import java.util.ArrayList;
@@ -65,12 +65,17 @@ import javax.annotation.Nullable;
  *     }
  * 
  *     public static void stack(Context ctx) {
- *         var defaultAccount = new Account(&#34;defaultAccount&#34;, AccountArgs.builder()        
+ *         var default_ = new Account(&#34;default&#34;, AccountArgs.builder()        
  *             .accountId(&#34;service_account_id&#34;)
  *             .displayName(&#34;Service Account&#34;)
  *             .build());
  * 
- *         var defaultInstance = new Instance(&#34;defaultInstance&#34;, InstanceArgs.builder()        
+ *         var defaultResource = new Instance(&#34;defaultResource&#34;, InstanceArgs.builder()        
+ *             .networkInterfaces(InstanceNetworkInterfaceArgs.builder()
+ *                 .accessConfigs()
+ *                 .network(&#34;default&#34;)
+ *                 .build())
+ *             .name(&#34;test&#34;)
  *             .machineType(&#34;e2-medium&#34;)
  *             .zone(&#34;us-central1-a&#34;)
  *             .tags(            
@@ -79,20 +84,16 @@ import javax.annotation.Nullable;
  *             .bootDisk(InstanceBootDiskArgs.builder()
  *                 .initializeParams(InstanceBootDiskInitializeParamsArgs.builder()
  *                     .image(&#34;debian-cloud/debian-11&#34;)
- *                     .labels(Map.of(&#34;my_label&#34;, &#34;value&#34;))
+ *                     .labels(Map.of(&#34;myLabel&#34;, &#34;value&#34;))
  *                     .build())
  *                 .build())
  *             .scratchDisks(InstanceScratchDiskArgs.builder()
  *                 .interface_(&#34;SCSI&#34;)
  *                 .build())
- *             .networkInterfaces(InstanceNetworkInterfaceArgs.builder()
- *                 .network(&#34;default&#34;)
- *                 .accessConfigs()
- *                 .build())
  *             .metadata(Map.of(&#34;foo&#34;, &#34;bar&#34;))
  *             .metadataStartupScript(&#34;echo hi &gt; /test.txt&#34;)
  *             .serviceAccount(InstanceServiceAccountArgs.builder()
- *                 .email(defaultAccount.email())
+ *                 .email(default_.email())
  *                 .scopes(&#34;cloud-platform&#34;)
  *                 .build())
  *             .build());

@@ -55,14 +55,14 @@ import javax.annotation.Nullable;
  *     }
  * 
  *     public static void stack(Context ctx) {
- *         var defaultGameServerDeployment = new GameServerDeployment(&#34;defaultGameServerDeployment&#34;, GameServerDeploymentArgs.builder()        
+ *         var default_ = new GameServerDeployment(&#34;default&#34;, GameServerDeploymentArgs.builder()        
  *             .deploymentId(&#34;tf-test-deployment&#34;)
  *             .description(&#34;a deployment description&#34;)
  *             .build());
  * 
- *         var defaultGameServerConfig = new GameServerConfig(&#34;defaultGameServerConfig&#34;, GameServerConfigArgs.builder()        
+ *         var defaultResource = new GameServerConfig(&#34;defaultResource&#34;, GameServerConfigArgs.builder()        
  *             .configId(&#34;tf-test-config&#34;)
- *             .deploymentId(defaultGameServerDeployment.deploymentId())
+ *             .deploymentId(default_.deploymentId())
  *             .description(&#34;a config description&#34;)
  *             .fleetConfigs(GameServerConfigFleetConfigArgs.builder()
  *                 .name(&#34;something-unique&#34;)

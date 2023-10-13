@@ -54,14 +54,14 @@ import javax.annotation.Nullable;
  * 
  *     public static void stack(Context ctx) {
  *         var custom = new CustomService(&#34;custom&#34;, CustomServiceArgs.builder()        
- *             .displayName(&#34;My Custom Service custom-srv&#34;)
  *             .serviceId(&#34;custom-srv&#34;)
+ *             .displayName(&#34;My Custom Service custom-srv&#34;)
  *             .telemetry(CustomServiceTelemetryArgs.builder()
  *                 .resourceName(&#34;//product.googleapis.com/foo/foo/services/test&#34;)
  *                 .build())
  *             .userLabels(Map.ofEntries(
- *                 Map.entry(&#34;my_key&#34;, &#34;my_value&#34;),
- *                 Map.entry(&#34;my_other_key&#34;, &#34;my_other_value&#34;)
+ *                 Map.entry(&#34;myKey&#34;, &#34;my_value&#34;),
+ *                 Map.entry(&#34;myOtherKey&#34;, &#34;my_other_value&#34;)
  *             ))
  *             .build());
  * 

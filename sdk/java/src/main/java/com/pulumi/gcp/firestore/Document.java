@@ -57,10 +57,10 @@ import javax.annotation.Nullable;
  * 
  *     public static void stack(Context ctx) {
  *         var mydoc = new Document(&#34;mydoc&#34;, DocumentArgs.builder()        
+ *             .project(&#34;my-project-name&#34;)
  *             .collection(&#34;somenewcollection&#34;)
  *             .documentId(&#34;my-doc-id&#34;)
  *             .fields(&#34;{\&#34;something\&#34;:{\&#34;mapValue\&#34;:{\&#34;fields\&#34;:{\&#34;akey\&#34;:{\&#34;stringValue\&#34;:\&#34;avalue\&#34;}}}}}&#34;)
- *             .project(&#34;my-project-name&#34;)
  *             .build());
  * 
  *     }
@@ -89,24 +89,24 @@ import javax.annotation.Nullable;
  * 
  *     public static void stack(Context ctx) {
  *         var mydoc = new Document(&#34;mydoc&#34;, DocumentArgs.builder()        
+ *             .project(&#34;my-project-name&#34;)
  *             .collection(&#34;somenewcollection&#34;)
  *             .documentId(&#34;my-doc-id&#34;)
  *             .fields(&#34;{\&#34;something\&#34;:{\&#34;mapValue\&#34;:{\&#34;fields\&#34;:{\&#34;akey\&#34;:{\&#34;stringValue\&#34;:\&#34;avalue\&#34;}}}}}&#34;)
- *             .project(&#34;my-project-name&#34;)
  *             .build());
  * 
  *         var subDocument = new Document(&#34;subDocument&#34;, DocumentArgs.builder()        
+ *             .project(&#34;my-project-name&#34;)
  *             .collection(mydoc.path().applyValue(path -&gt; String.format(&#34;%s/subdocs&#34;, path)))
  *             .documentId(&#34;bitcoinkey&#34;)
  *             .fields(&#34;{\&#34;something\&#34;:{\&#34;mapValue\&#34;:{\&#34;fields\&#34;:{\&#34;ayo\&#34;:{\&#34;stringValue\&#34;:\&#34;val2\&#34;}}}}}&#34;)
- *             .project(&#34;my-project-name&#34;)
  *             .build());
  * 
  *         var subSubDocument = new Document(&#34;subSubDocument&#34;, DocumentArgs.builder()        
+ *             .project(&#34;my-project-name&#34;)
  *             .collection(subDocument.path().applyValue(path -&gt; String.format(&#34;%s/subsubdocs&#34;, path)))
  *             .documentId(&#34;asecret&#34;)
  *             .fields(&#34;{\&#34;something\&#34;:{\&#34;mapValue\&#34;:{\&#34;fields\&#34;:{\&#34;secret\&#34;:{\&#34;stringValue\&#34;:\&#34;hithere\&#34;}}}}}&#34;)
- *             .project(&#34;my-project-name&#34;)
  *             .build());
  * 
  *     }

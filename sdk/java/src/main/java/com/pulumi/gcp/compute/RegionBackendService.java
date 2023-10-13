@@ -43,7 +43,6 @@ import javax.annotation.Nullable;
  * 
  * ## Example Usage
  * ### Region Backend Service Basic
- * 
  * ```java
  * package generated_program;
  * 
@@ -68,7 +67,8 @@ import javax.annotation.Nullable;
  *     }
  * 
  *     public static void stack(Context ctx) {
- *         var defaultHealthCheck = new HealthCheck(&#34;defaultHealthCheck&#34;, HealthCheckArgs.builder()        
+ *         var defaultResource = new HealthCheck(&#34;defaultResource&#34;, HealthCheckArgs.builder()        
+ *             .name(&#34;rbs-health-check&#34;)
  *             .checkIntervalSec(1)
  *             .timeoutSec(1)
  *             .tcpHealthCheck(HealthCheckTcpHealthCheckArgs.builder()
@@ -76,9 +76,10 @@ import javax.annotation.Nullable;
  *                 .build())
  *             .build());
  * 
- *         var defaultRegionBackendService = new RegionBackendService(&#34;defaultRegionBackendService&#34;, RegionBackendServiceArgs.builder()        
+ *         var default_ = new RegionBackendService(&#34;default&#34;, RegionBackendServiceArgs.builder()        
+ *             .name(&#34;region-service&#34;)
  *             .region(&#34;us-central1&#34;)
- *             .healthChecks(defaultHealthCheck.id())
+ *             .healthChecks(defaultResource.id())
  *             .connectionDrainingTimeoutSec(10)
  *             .sessionAffinity(&#34;CLIENT_IP&#34;)
  *             .build());
@@ -87,7 +88,6 @@ import javax.annotation.Nullable;
  * }
  * ```
  * ### Region Backend Service Cache
- * 
  * ```java
  * package generated_program;
  * 
@@ -100,7 +100,6 @@ import javax.annotation.Nullable;
  * import com.pulumi.gcp.compute.RegionBackendService;
  * import com.pulumi.gcp.compute.RegionBackendServiceArgs;
  * import com.pulumi.gcp.compute.inputs.RegionBackendServiceCdnPolicyArgs;
- * import com.pulumi.resources.CustomResourceOptions;
  * import java.util.List;
  * import java.util.ArrayList;
  * import java.util.Map;
@@ -114,18 +113,18 @@ import javax.annotation.Nullable;
  *     }
  * 
  *     public static void stack(Context ctx) {
- *         var defaultRegionHealthCheck = new RegionHealthCheck(&#34;defaultRegionHealthCheck&#34;, RegionHealthCheckArgs.builder()        
+ *         var defaultResource = new RegionHealthCheck(&#34;defaultResource&#34;, RegionHealthCheckArgs.builder()        
+ *             .name(&#34;rbs-health-check&#34;)
  *             .region(&#34;us-central1&#34;)
  *             .httpHealthCheck(RegionHealthCheckHttpHealthCheckArgs.builder()
  *                 .port(80)
  *                 .build())
- *             .build(), CustomResourceOptions.builder()
- *                 .provider(google_beta)
- *                 .build());
+ *             .build());
  * 
- *         var defaultRegionBackendService = new RegionBackendService(&#34;defaultRegionBackendService&#34;, RegionBackendServiceArgs.builder()        
+ *         var default_ = new RegionBackendService(&#34;default&#34;, RegionBackendServiceArgs.builder()        
+ *             .name(&#34;region-service&#34;)
  *             .region(&#34;us-central1&#34;)
- *             .healthChecks(defaultRegionHealthCheck.id())
+ *             .healthChecks(defaultResource.id())
  *             .enableCdn(true)
  *             .cdnPolicy(RegionBackendServiceCdnPolicyArgs.builder()
  *                 .cacheMode(&#34;CACHE_ALL_STATIC&#34;)
@@ -137,15 +136,12 @@ import javax.annotation.Nullable;
  *                 .build())
  *             .loadBalancingScheme(&#34;EXTERNAL&#34;)
  *             .protocol(&#34;HTTP&#34;)
- *             .build(), CustomResourceOptions.builder()
- *                 .provider(google_beta)
- *                 .build());
+ *             .build());
  * 
  *     }
  * }
  * ```
  * ### Region Backend Service Ilb Round Robin
- * 
  * ```java
  * package generated_program;
  * 
@@ -171,6 +167,7 @@ import javax.annotation.Nullable;
  * 
  *     public static void stack(Context ctx) {
  *         var healthCheck = new HealthCheck(&#34;healthCheck&#34;, HealthCheckArgs.builder()        
+ *             .name(&#34;rbs-health-check&#34;)
  *             .httpHealthCheck(HealthCheckHttpHealthCheckArgs.builder()
  *                 .port(80)
  *                 .build())
@@ -178,6 +175,7 @@ import javax.annotation.Nullable;
  * 
  *         var default_ = new RegionBackendService(&#34;default&#34;, RegionBackendServiceArgs.builder()        
  *             .region(&#34;us-central1&#34;)
+ *             .name(&#34;region-service&#34;)
  *             .healthChecks(healthCheck.id())
  *             .protocol(&#34;HTTP&#34;)
  *             .loadBalancingScheme(&#34;INTERNAL_MANAGED&#34;)
@@ -188,7 +186,6 @@ import javax.annotation.Nullable;
  * }
  * ```
  * ### Region Backend Service External
- * 
  * ```java
  * package generated_program;
  * 
@@ -200,7 +197,6 @@ import javax.annotation.Nullable;
  * import com.pulumi.gcp.compute.inputs.RegionHealthCheckTcpHealthCheckArgs;
  * import com.pulumi.gcp.compute.RegionBackendService;
  * import com.pulumi.gcp.compute.RegionBackendServiceArgs;
- * import com.pulumi.resources.CustomResourceOptions;
  * import java.util.List;
  * import java.util.ArrayList;
  * import java.util.Map;
@@ -215,28 +211,25 @@ import javax.annotation.Nullable;
  * 
  *     public static void stack(Context ctx) {
  *         var healthCheck = new RegionHealthCheck(&#34;healthCheck&#34;, RegionHealthCheckArgs.builder()        
+ *             .name(&#34;rbs-health-check&#34;)
  *             .region(&#34;us-central1&#34;)
  *             .tcpHealthCheck(RegionHealthCheckTcpHealthCheckArgs.builder()
  *                 .port(80)
  *                 .build())
- *             .build(), CustomResourceOptions.builder()
- *                 .provider(google_beta)
- *                 .build());
+ *             .build());
  * 
  *         var default_ = new RegionBackendService(&#34;default&#34;, RegionBackendServiceArgs.builder()        
  *             .region(&#34;us-central1&#34;)
+ *             .name(&#34;region-service&#34;)
  *             .healthChecks(healthCheck.id())
  *             .protocol(&#34;TCP&#34;)
  *             .loadBalancingScheme(&#34;EXTERNAL&#34;)
- *             .build(), CustomResourceOptions.builder()
- *                 .provider(google_beta)
- *                 .build());
+ *             .build());
  * 
  *     }
  * }
  * ```
  * ### Region Backend Service External Weighted
- * 
  * ```java
  * package generated_program;
  * 
@@ -262,6 +255,7 @@ import javax.annotation.Nullable;
  * 
  *     public static void stack(Context ctx) {
  *         var healthCheck = new RegionHealthCheck(&#34;healthCheck&#34;, RegionHealthCheckArgs.builder()        
+ *             .name(&#34;rbs-health-check&#34;)
  *             .region(&#34;us-central1&#34;)
  *             .httpHealthCheck(RegionHealthCheckHttpHealthCheckArgs.builder()
  *                 .port(80)
@@ -270,6 +264,7 @@ import javax.annotation.Nullable;
  * 
  *         var default_ = new RegionBackendService(&#34;default&#34;, RegionBackendServiceArgs.builder()        
  *             .region(&#34;us-central1&#34;)
+ *             .name(&#34;region-service&#34;)
  *             .healthChecks(healthCheck.id())
  *             .protocol(&#34;TCP&#34;)
  *             .loadBalancingScheme(&#34;EXTERNAL&#34;)
@@ -280,7 +275,6 @@ import javax.annotation.Nullable;
  * }
  * ```
  * ### Region Backend Service Ilb Ring Hash
- * 
  * ```java
  * package generated_program;
  * 
@@ -311,6 +305,7 @@ import javax.annotation.Nullable;
  * 
  *     public static void stack(Context ctx) {
  *         var healthCheck = new HealthCheck(&#34;healthCheck&#34;, HealthCheckArgs.builder()        
+ *             .name(&#34;rbs-health-check&#34;)
  *             .httpHealthCheck(HealthCheckHttpHealthCheckArgs.builder()
  *                 .port(80)
  *                 .build())
@@ -318,6 +313,7 @@ import javax.annotation.Nullable;
  * 
  *         var default_ = new RegionBackendService(&#34;default&#34;, RegionBackendServiceArgs.builder()        
  *             .region(&#34;us-central1&#34;)
+ *             .name(&#34;region-service&#34;)
  *             .healthChecks(healthCheck.id())
  *             .loadBalancingScheme(&#34;INTERNAL_MANAGED&#34;)
  *             .localityLbPolicy(&#34;RING_HASH&#34;)
@@ -344,7 +340,6 @@ import javax.annotation.Nullable;
  * }
  * ```
  * ### Region Backend Service Balancing Mode
- * 
  * ```java
  * package generated_program;
  * 
@@ -388,22 +383,25 @@ import javax.annotation.Nullable;
  *             .project(&#34;debian-cloud&#34;)
  *             .build());
  * 
- *         var defaultNetwork = new Network(&#34;defaultNetwork&#34;, NetworkArgs.builder()        
+ *         var defaultResource2 = new Network(&#34;defaultResource2&#34;, NetworkArgs.builder()        
+ *             .name(&#34;rbs-net&#34;)
  *             .autoCreateSubnetworks(false)
  *             .routingMode(&#34;REGIONAL&#34;)
  *             .build());
  * 
- *         var defaultSubnetwork = new Subnetwork(&#34;defaultSubnetwork&#34;, SubnetworkArgs.builder()        
+ *         var defaultResource3 = new Subnetwork(&#34;defaultResource3&#34;, SubnetworkArgs.builder()        
+ *             .name(&#34;rbs-net-default&#34;)
  *             .ipCidrRange(&#34;10.1.2.0/24&#34;)
  *             .region(&#34;us-central1&#34;)
- *             .network(defaultNetwork.id())
+ *             .network(defaultResource2.id())
  *             .build());
  * 
  *         var instanceTemplate = new InstanceTemplate(&#34;instanceTemplate&#34;, InstanceTemplateArgs.builder()        
+ *             .name(&#34;template-region-service&#34;)
  *             .machineType(&#34;e2-medium&#34;)
  *             .networkInterfaces(InstanceTemplateNetworkInterfaceArgs.builder()
- *                 .network(defaultNetwork.id())
- *                 .subnetwork(defaultSubnetwork.id())
+ *                 .network(defaultResource2.id())
+ *                 .subnetwork(defaultResource3.id())
  *                 .build())
  *             .disks(InstanceTemplateDiskArgs.builder()
  *                 .sourceImage(debianImage.applyValue(getImageResult -&gt; getImageResult.selfLink()))
@@ -417,6 +415,7 @@ import javax.annotation.Nullable;
  * 
  *         var rigm = new RegionInstanceGroupManager(&#34;rigm&#34;, RegionInstanceGroupManagerArgs.builder()        
  *             .region(&#34;us-central1&#34;)
+ *             .name(&#34;rbs-rigm&#34;)
  *             .versions(RegionInstanceGroupManagerVersionArgs.builder()
  *                 .instanceTemplate(instanceTemplate.id())
  *                 .name(&#34;primary&#34;)
@@ -425,14 +424,15 @@ import javax.annotation.Nullable;
  *             .targetSize(1)
  *             .build());
  * 
- *         var defaultRegionHealthCheck = new RegionHealthCheck(&#34;defaultRegionHealthCheck&#34;, RegionHealthCheckArgs.builder()        
+ *         var defaultResource = new RegionHealthCheck(&#34;defaultResource&#34;, RegionHealthCheckArgs.builder()        
  *             .region(&#34;us-central1&#34;)
+ *             .name(&#34;rbs-health-check&#34;)
  *             .httpHealthCheck(RegionHealthCheckHttpHealthCheckArgs.builder()
  *                 .portSpecification(&#34;USE_SERVING_PORT&#34;)
  *                 .build())
  *             .build());
  * 
- *         var defaultRegionBackendService = new RegionBackendService(&#34;defaultRegionBackendService&#34;, RegionBackendServiceArgs.builder()        
+ *         var default_ = new RegionBackendService(&#34;default&#34;, RegionBackendServiceArgs.builder()        
  *             .loadBalancingScheme(&#34;INTERNAL_MANAGED&#34;)
  *             .backends(RegionBackendServiceBackendArgs.builder()
  *                 .group(rigm.instanceGroup())
@@ -440,16 +440,16 @@ import javax.annotation.Nullable;
  *                 .capacityScaler(1)
  *                 .build())
  *             .region(&#34;us-central1&#34;)
+ *             .name(&#34;region-service&#34;)
  *             .protocol(&#34;HTTP&#34;)
  *             .timeoutSec(10)
- *             .healthChecks(defaultRegionHealthCheck.id())
+ *             .healthChecks(defaultResource.id())
  *             .build());
  * 
  *     }
  * }
  * ```
  * ### Region Backend Service Connection Tracking
- * 
  * ```java
  * package generated_program;
  * 
@@ -462,7 +462,6 @@ import javax.annotation.Nullable;
  * import com.pulumi.gcp.compute.RegionBackendService;
  * import com.pulumi.gcp.compute.RegionBackendServiceArgs;
  * import com.pulumi.gcp.compute.inputs.RegionBackendServiceConnectionTrackingPolicyArgs;
- * import com.pulumi.resources.CustomResourceOptions;
  * import java.util.List;
  * import java.util.ArrayList;
  * import java.util.Map;
@@ -477,15 +476,15 @@ import javax.annotation.Nullable;
  * 
  *     public static void stack(Context ctx) {
  *         var healthCheck = new RegionHealthCheck(&#34;healthCheck&#34;, RegionHealthCheckArgs.builder()        
+ *             .name(&#34;rbs-health-check&#34;)
  *             .region(&#34;us-central1&#34;)
  *             .tcpHealthCheck(RegionHealthCheckTcpHealthCheckArgs.builder()
  *                 .port(22)
  *                 .build())
- *             .build(), CustomResourceOptions.builder()
- *                 .provider(google_beta)
- *                 .build());
+ *             .build());
  * 
  *         var default_ = new RegionBackendService(&#34;default&#34;, RegionBackendServiceArgs.builder()        
+ *             .name(&#34;region-service&#34;)
  *             .region(&#34;us-central1&#34;)
  *             .healthChecks(healthCheck.id())
  *             .connectionDrainingTimeoutSec(10)
@@ -498,9 +497,7 @@ import javax.annotation.Nullable;
  *                 .idleTimeoutSec(60)
  *                 .enableStrongAffinity(true)
  *                 .build())
- *             .build(), CustomResourceOptions.builder()
- *                 .provider(google_beta)
- *                 .build());
+ *             .build());
  * 
  *     }
  * }

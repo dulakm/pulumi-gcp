@@ -51,16 +51,16 @@ import javax.annotation.Nullable;
  * 
  *     public static void stack(Context ctx) {
  *         var bbs_config = new BitbucketServerConfig(&#34;bbs-config&#34;, BitbucketServerConfigArgs.builder()        
- *             .apiKey(&#34;&lt;api-key&gt;&#34;)
  *             .configId(&#34;bbs-config&#34;)
- *             .hostUri(&#34;https://bbs.com&#34;)
  *             .location(&#34;us-central1&#34;)
+ *             .hostUri(&#34;https://bbs.com&#34;)
  *             .secrets(BitbucketServerConfigSecretsArgs.builder()
  *                 .adminAccessTokenVersionName(&#34;projects/myProject/secrets/mybbspat/versions/1&#34;)
  *                 .readAccessTokenVersionName(&#34;projects/myProject/secrets/mybbspat/versions/1&#34;)
  *                 .webhookSecretVersionName(&#34;projects/myProject/secrets/mybbspat/versions/1&#34;)
  *                 .build())
  *             .username(&#34;test&#34;)
+ *             .apiKey(&#34;&lt;api-key&gt;&#34;)
  *             .build());
  * 
  *     }
@@ -75,8 +75,8 @@ import javax.annotation.Nullable;
  * import com.pulumi.core.Output;
  * import com.pulumi.gcp.cloudbuild.BitbucketServerConfig;
  * import com.pulumi.gcp.cloudbuild.BitbucketServerConfigArgs;
- * import com.pulumi.gcp.cloudbuild.inputs.BitbucketServerConfigConnectedRepositoryArgs;
  * import com.pulumi.gcp.cloudbuild.inputs.BitbucketServerConfigSecretsArgs;
+ * import com.pulumi.gcp.cloudbuild.inputs.BitbucketServerConfigConnectedRepositoryArgs;
  * import java.util.List;
  * import java.util.ArrayList;
  * import java.util.Map;
@@ -91,8 +91,16 @@ import javax.annotation.Nullable;
  * 
  *     public static void stack(Context ctx) {
  *         var bbs_config_with_repos = new BitbucketServerConfig(&#34;bbs-config-with-repos&#34;, BitbucketServerConfigArgs.builder()        
- *             .apiKey(&#34;&lt;api-key&gt;&#34;)
  *             .configId(&#34;bbs-config&#34;)
+ *             .location(&#34;us-central1&#34;)
+ *             .hostUri(&#34;https://bbs.com&#34;)
+ *             .secrets(BitbucketServerConfigSecretsArgs.builder()
+ *                 .adminAccessTokenVersionName(&#34;projects/myProject/secrets/mybbspat/versions/1&#34;)
+ *                 .readAccessTokenVersionName(&#34;projects/myProject/secrets/mybbspat/versions/1&#34;)
+ *                 .webhookSecretVersionName(&#34;projects/myProject/secrets/mybbspat/versions/1&#34;)
+ *                 .build())
+ *             .username(&#34;test&#34;)
+ *             .apiKey(&#34;&lt;api-key&gt;&#34;)
  *             .connectedRepositories(            
  *                 BitbucketServerConfigConnectedRepositoryArgs.builder()
  *                     .projectKey(&#34;DEV&#34;)
@@ -102,14 +110,6 @@ import javax.annotation.Nullable;
  *                     .projectKey(&#34;PROD&#34;)
  *                     .repoSlug(&#34;repo1&#34;)
  *                     .build())
- *             .hostUri(&#34;https://bbs.com&#34;)
- *             .location(&#34;us-central1&#34;)
- *             .secrets(BitbucketServerConfigSecretsArgs.builder()
- *                 .adminAccessTokenVersionName(&#34;projects/myProject/secrets/mybbspat/versions/1&#34;)
- *                 .readAccessTokenVersionName(&#34;projects/myProject/secrets/mybbspat/versions/1&#34;)
- *                 .webhookSecretVersionName(&#34;projects/myProject/secrets/mybbspat/versions/1&#34;)
- *                 .build())
- *             .username(&#34;test&#34;)
  *             .build());
  * 
  *     }

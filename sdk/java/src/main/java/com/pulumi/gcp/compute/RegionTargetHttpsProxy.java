@@ -28,7 +28,6 @@ import javax.annotation.Nullable;
  * 
  * ## Example Usage
  * ### Region Target Https Proxy Basic
- * 
  * ```java
  * package generated_program;
  * 
@@ -61,49 +60,58 @@ import javax.annotation.Nullable;
  *     }
  * 
  *     public static void stack(Context ctx) {
- *         var defaultRegionSslCertificate = new RegionSslCertificate(&#34;defaultRegionSslCertificate&#34;, RegionSslCertificateArgs.builder()        
+ *         var defaultResource = new RegionSslCertificate(&#34;defaultResource&#34;, RegionSslCertificateArgs.builder()        
  *             .region(&#34;us-central1&#34;)
- *             .privateKey(Files.readString(Paths.get(&#34;path/to/private.key&#34;)))
- *             .certificate(Files.readString(Paths.get(&#34;path/to/certificate.crt&#34;)))
+ *             .name(&#34;my-certificate&#34;)
+ *             .privateKey(StdFunctions.file(FileArgs.builder()
+ *                 .input(&#34;path/to/private.key&#34;)
+ *                 .build()).result())
+ *             .certificate(StdFunctions.file(FileArgs.builder()
+ *                 .input(&#34;path/to/certificate.crt&#34;)
+ *                 .build()).result())
  *             .build());
  * 
- *         var defaultRegionHealthCheck = new RegionHealthCheck(&#34;defaultRegionHealthCheck&#34;, RegionHealthCheckArgs.builder()        
+ *         var defaultResource4 = new RegionHealthCheck(&#34;defaultResource4&#34;, RegionHealthCheckArgs.builder()        
  *             .region(&#34;us-central1&#34;)
+ *             .name(&#34;http-health-check&#34;)
  *             .httpHealthCheck(RegionHealthCheckHttpHealthCheckArgs.builder()
  *                 .port(80)
  *                 .build())
  *             .build());
  * 
- *         var defaultRegionBackendService = new RegionBackendService(&#34;defaultRegionBackendService&#34;, RegionBackendServiceArgs.builder()        
+ *         var defaultResource3 = new RegionBackendService(&#34;defaultResource3&#34;, RegionBackendServiceArgs.builder()        
  *             .region(&#34;us-central1&#34;)
+ *             .name(&#34;backend-service&#34;)
  *             .protocol(&#34;HTTP&#34;)
  *             .loadBalancingScheme(&#34;INTERNAL_MANAGED&#34;)
  *             .timeoutSec(10)
- *             .healthChecks(defaultRegionHealthCheck.id())
+ *             .healthChecks(defaultResource4.id())
  *             .build());
  * 
- *         var defaultRegionUrlMap = new RegionUrlMap(&#34;defaultRegionUrlMap&#34;, RegionUrlMapArgs.builder()        
+ *         var defaultResource2 = new RegionUrlMap(&#34;defaultResource2&#34;, RegionUrlMapArgs.builder()        
  *             .region(&#34;us-central1&#34;)
+ *             .name(&#34;url-map&#34;)
  *             .description(&#34;a description&#34;)
- *             .defaultService(defaultRegionBackendService.id())
+ *             .defaultService(defaultResource3.id())
  *             .hostRules(RegionUrlMapHostRuleArgs.builder()
  *                 .hosts(&#34;mysite.com&#34;)
  *                 .pathMatcher(&#34;allpaths&#34;)
  *                 .build())
  *             .pathMatchers(RegionUrlMapPathMatcherArgs.builder()
  *                 .name(&#34;allpaths&#34;)
- *                 .defaultService(defaultRegionBackendService.id())
+ *                 .defaultService(defaultResource3.id())
  *                 .pathRules(RegionUrlMapPathMatcherPathRuleArgs.builder()
  *                     .paths(&#34;/*&#34;)
- *                     .service(defaultRegionBackendService.id())
+ *                     .service(defaultResource3.id())
  *                     .build())
  *                 .build())
  *             .build());
  * 
- *         var defaultRegionTargetHttpsProxy = new RegionTargetHttpsProxy(&#34;defaultRegionTargetHttpsProxy&#34;, RegionTargetHttpsProxyArgs.builder()        
+ *         var default_ = new RegionTargetHttpsProxy(&#34;default&#34;, RegionTargetHttpsProxyArgs.builder()        
  *             .region(&#34;us-central1&#34;)
- *             .urlMap(defaultRegionUrlMap.id())
- *             .sslCertificates(defaultRegionSslCertificate.id())
+ *             .name(&#34;test-proxy&#34;)
+ *             .urlMap(defaultResource2.id())
+ *             .sslCertificates(defaultResource.id())
  *             .build());
  * 
  *     }

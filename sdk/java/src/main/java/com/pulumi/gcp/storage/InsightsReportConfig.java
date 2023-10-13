@@ -65,6 +65,7 @@ import javax.annotation.Nullable;
  *         final var project = OrganizationsFunctions.getProject();
  * 
  *         var reportBucket = new Bucket(&#34;reportBucket&#34;, BucketArgs.builder()        
+ *             .name(&#34;my-bucket&#34;)
  *             .location(&#34;us-central1&#34;)
  *             .forceDestroy(true)
  *             .uniformBucketLevelAccess(true)
