@@ -1,0 +1,105 @@
+{
+  "lockfile_version": "1",
+  "packages": {
+    "dotnet-sdk@6.0.": {
+      "last_modified": "2023-11-02T13:29:18Z",
+      "resolved": "github:NixOS/nixpkgs/b644d97bda6dae837d577e28383c10aa51e5e2d2#dotnet-sdk",
+      "source": "devbox-search",
+      "version": "6.0.416",
+      "systems": {
+        "aarch64-darwin": {
+          "store_path": "/nix/store/w9yxacsbckc2q5w01ryaxc26nb3r51nk-dotnet-sdk-6.0.416"
+        },
+        "aarch64-linux": {
+          "store_path": "/nix/store/4ba86dxp475rlrsannz3havh6g0yldh9-dotnet-sdk-6.0.416"
+        },
+        "x86_64-darwin": {
+          "store_path": "/nix/store/vrr55z6xsis3chp0q1323ychn80lvs6k-dotnet-sdk-6.0.416"
+        },
+        "x86_64-linux": {
+          "store_path": "/nix/store/l916xm0yz41xygxbwlrqcy1wn4x1hcy5-dotnet-sdk-6.0.416"
+        }
+      }
+    },
+    "go@1.21.": {
+      "last_modified": "2023-10-25T20:49:13Z",
+      "resolved": "github:NixOS/nixpkgs/75a52265bda7fd25e06e3a67dee3f0354e73243c#go",
+      "source": "devbox-search",
+      "version": "1.21.3",
+      "systems": {
+        "aarch64-darwin": {
+          "store_path": "/nix/store/1fxz1flmv4a4m5pvjmmzxlaznjzybjcp-go-1.21.3"
+        },
+        "aarch64-linux": {
+          "store_path": "/nix/store/iyaywzzkhm1pi5ysd83ai9pdpic9b9ny-go-1.21.3"
+        },
+        "x86_64-darwin": {
+          "store_path": "/nix/store/yqqhrzr15819draxsyqrn2hf5c22ffhk-go-1.21.3"
+        },
+        "x86_64-linux": {
+          "store_path": "/nix/store/dwmb0qcai52d0zkgpm6f5ifx2a8yvsdg-go-1.21.3"
+        }
+      }
+    },
+    "gradle_7@7.6": {
+      "last_modified": "2023-10-25T20:49:13Z",
+      "resolved": "github:NixOS/nixpkgs/75a52265bda7fd25e06e3a67dee3f0354e73243c#gradle_7",
+      "source": "devbox-search",
+      "version": "7.6.3",
+      "systems": {
+        "aarch64-darwin": {
+          "store_path": "/nix/store/gds8nah2m9kh83cgsywccdmnmr4066vb-gradle-7.6.3"
+        },
+        "aarch64-linux": {
+          "store_path": "/nix/store/1xld4hzdl9f9390damwnv0m4m3k7zc6a-gradle-7.6.3"
+        },
+        "x86_64-darwin": {
+          "store_path": "/nix/store/mznf39xvw1w6rlajr59wi1pszbzmdmw7-gradle-7.6.3"
+        },
+        "x86_64-linux": {
+          "store_path": "/nix/store/12hidckq1n809wg50jps5rspkvahp3nl-gradle-7.6.3"
+        }
+      }
+    },
+    "nodejs@20.": {
+      "last_modified": "2023-10-25T20:49:13Z",
+      "resolved": "github:NixOS/nixpkgs/75a52265bda7fd25e06e3a67dee3f0354e73243c#nodejs_20",
+      "source": "devbox-search",
+      "version": "20.9.0",
+      "systems": {
+        "aarch64-darwin": {
+          "store_path": "/nix/store/r8ppkdpxlmlv4magszy4xl816yf1s859-nodejs-20.9.0"
+        },
+        "aarch64-linux": {
+          "store_path": "/nix/store/j0diijav3hh37amjl67wnq5n3f782ipn-nodejs-20.9.0"
+        },
+        "x86_64-darwin": {
+          "store_path": "/nix/store/zxh8gvmynd5mzx9hf5bhidb4yy0k4g2s-nodejs-20.9.0"
+        },
+        "x86_64-linux": {
+          "store_path": "/nix/store/17g2kfxglsl3rncfasqrxqs2g3bjin3k-nodejs-20.9.0"
+        }
+      }
+    },
+    "python3@3.9": {
+      "last_modified": "2022-09-12T23:24:01Z",
+      "resolved": "github:NixOS/nixpkgs/994df04c3c700fe9edb1b69b82ba3c627e5e04ff#python39",
+      "source": "devbox-search",
+      "version": "3.9.13",
+      "systems": {
+        "aarch64-darwin": {
+          "store_path": "/nix/store/h3g3jbk4wsxv87kr2nbj40ki2in6dj4n-python3-3.9.13"
+        },
+        "aarch64-linux": {
+          "store_path": "/nix/store/llx7b8x9d2zyndgsigpksrisd09ai8xy-python3-3.9.13"
+        },
+        "x86_64-darwin": {
+          "store_path": "/nix/store/x3d2qq53xcc7c663zknnya0a7492alag-python3-3.9.13"
+        },
+        "x86_64-linux": {
+          "store_path": "/nix/store/553d7c4xcwp9j1a1gb9cb1s9ry3x1pi9-python3-3.9.13"
+        }
+      }
+    }
+  }
+}
