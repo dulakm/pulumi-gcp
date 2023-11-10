@@ -1,6 +1,7 @@
 // Copyright 2016-2017, Pulumi Corporation.  All rights reserved.
-//go:build nodejs || all
-// +build nodejs all
+
+//go:build !dotnet && !go && !python && !java && !yaml
+// +build !dotnet,!go,!python,!java,!yaml
 
 package examples
 
